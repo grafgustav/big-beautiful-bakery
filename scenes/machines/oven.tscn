@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://2dn2djqsl2ai"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_x7fwc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8xrr"]
+atlas = ExtResource("1_x7fwc")
+region = Rect2(0, 1160, 400, 440)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkhf2"]
+atlas = ExtResource("1_x7fwc")
+region = Rect2(0, 720, 400, 440)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kr600"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8xrr")
+}],
+"loop": true,
+"name": &"baking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkhf2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvm8k"]
+size = Vector2(407, 372.973)
+
+[node name="Oven" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -12)
+sprite_frames = SubResource("SpriteFrames_kr600")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, -17)
+rotation = 0.127409
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_fvm8k")

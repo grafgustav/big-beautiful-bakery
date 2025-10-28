@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=4 uid="uid://dojt8sa5f1s8i"]
+
+[ext_resource type="TileSet" uid="uid://cykqtghw1ppcl" path="res://assets/everything.tres" id="1_72ix8"]
+[ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/oven.tscn" id="2_y0acb"]
+[ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="3_j4d2a"]
+[ext_resource type="PackedScene" uid="uid://druyrnvfcppjb" path="res://scenes/items/dough.tscn" id="4_j4d2a"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="Base Layer" type="TileMapLayer" parent="TileMap"]
+tile_map_data = PackedByteArray("AAD//wwAAAAHAAYAAAABAAgAAAAHAAYAAAADAAQAAAAHAAYAAAAFAAAAAAAHAAYAAAAHAPz/AAAHAAYAAAAIAPn/AAAHAAYAAAAKAPn/AAAJAAYAAAAMAP3/AAAJAAYAAAAOAAEAAAAJAAYAAAAJAAUAAAAHAAQAAAAHAAkAAAAHAAQAAAAFAA0AAAAHAAQAAAADABEAAAAHAAQAAAABABUAAAAHAAQAAAD//xkAAAAHAAQAAAD9/x0AAAAHAAQAAAD//yEAAAALAAQAAAABAB0AAAALAAQAAAADABkAAAALAAQAAAAFABUAAAALAAQAAAAHABEAAAALAAQAAAAJAA0AAAALAAQAAAALAAkAAAALAAQAAAANAA0AAAAHAAQAAAALABEAAAAHAAQAAAAJABUAAAAHAAQAAAAHABkAAAAHAAQAAAAFAB0AAAAHAAQAAAADACEAAAAHAAQAAAAPABEAAAALAAQAAAANABUAAAALAAQAAAALABkAAAALAAQAAAAJAB0AAAALAAQAAAAHACEAAAALAAQAAAALACEAAAAHAAQAAAANAB0AAAAHAAQAAAAPABkAAAAHAAQAAAA=")
+tile_set = ExtResource("1_72ix8")
+
+[node name="Oven" parent="." instance=ExtResource("2_y0acb")]
+position = Vector2(939, 222)
+
+[node name="Table" parent="." instance=ExtResource("3_j4d2a")]
+position = Vector2(494, 298)
+
+[node name="Table2" parent="." instance=ExtResource("3_j4d2a")]
+position = Vector2(188, 451)
+
+[node name="Dough" parent="." instance=ExtResource("4_j4d2a")]
+position = Vector2(140, 337)

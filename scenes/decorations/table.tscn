@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cugsh4h2qrgi"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_340np"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayp3k"]
+atlas = ExtResource("1_340np")
+region = Rect2(480, 960, 480, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tr6dn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayp3k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlcbx"]
+size = Vector2(307.52, 230.161)
+
+[node name="Table" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tr6dn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.0829848, -122.093)
+rotation = -0.479966
+scale = Vector2(1, 1)
+skew = -0.642281
+shape = SubResource("RectangleShape2D_hlcbx")
