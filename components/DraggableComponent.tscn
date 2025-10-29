@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://30lngnnp0lw1"]
+
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="1_jqdsv"]
+
+[node name="DraggableComponent" type="Area2D"]
+script = ExtResource("1_jqdsv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

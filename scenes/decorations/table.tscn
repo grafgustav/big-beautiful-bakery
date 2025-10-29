@@ -30,6 +30,5 @@ sprite_frames = SubResource("SpriteFrames_tr6dn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0.0829848, -122.093)
 rotation = -0.479966
-scale = Vector2(1, 1)
 skew = -0.642281
 shape = SubResource("RectangleShape2D_hlcbx")

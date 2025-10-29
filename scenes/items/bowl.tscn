@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bx0gdhwflybwu"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_82ox0"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_ot2fw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
+atlas = ExtResource("1_82ox0")
+region = Rect2(81.1699, 8.01817, 78.4961, 73.7387)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0q186"]
+radius = 47.0425
+
+[node name="Bowl" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2ce6h")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+script = ExtResource("2_ot2fw")
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+shape = SubResource("CircleShape2D_0q186")
