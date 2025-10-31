@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cugsh4h2qrgi"]
+[gd_scene load_steps=6 format=3 uid="uid://cugsh4h2qrgi"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_340np"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="2_ayp3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayp3k"]
 atlas = ExtResource("1_340np")
@@ -28,6 +29,15 @@ sprite_frames = SubResource("SpriteFrames_tr6dn")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.0829848, -122.093)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_hlcbx")
+
+[node name="DroppableComponent" parent="." instance=ExtResource("2_ayp3k")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
 position = Vector2(0.0829848, -122.093)
 rotation = -0.479966
 skew = -0.642281
