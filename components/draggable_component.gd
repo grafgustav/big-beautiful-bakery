@@ -1,3 +1,4 @@
+#helloooo
 class_name DraggableComponent
 extends Area2D
 
