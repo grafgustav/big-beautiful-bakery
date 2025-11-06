@@ -1,4 +1,3 @@
-#helloooo
 class_name DraggableComponent
 extends Area2D
 
@@ -17,6 +16,7 @@ static var static_object_dragged : Node2D
 
 
 func _ready() -> void:
+	# merge commit test
 	
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
