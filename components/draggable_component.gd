@@ -2,7 +2,7 @@ class_name DraggableComponent
 extends Area2D
 
 var parent_ref : Node2D
-
+#hier noch ein süßer kommiii
 var is_draggable : bool = false
 var is_droppable : bool = false
 
