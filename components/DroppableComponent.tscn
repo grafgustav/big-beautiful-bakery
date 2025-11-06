@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crqxl6j3dk0ap"]
+
+[ext_resource type="Script" uid="uid://d1xw1k7gp0kbw" path="res://components/droppable_component.gd" id="1_q2yy8"]
+
+[node name="DroppableComponent" type="Area2D"]
+script = ExtResource("1_q2yy8")

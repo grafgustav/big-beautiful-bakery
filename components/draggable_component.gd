@@ -11,6 +11,9 @@ var initial_position : Vector2
 
 var droppable_body_ref : Node2D
 
+# use static resource variable instead of global autoload script variable?
+static var static_object_dragged : Node2D
+
 
 func _ready() -> void:
 	
@@ -39,7 +42,7 @@ func _process(delta: float) -> void:
 
 func _process_dropping() -> void:
 	if droppable_body_ref is DroppableComponent:
-		pass
+		pass # TODO: Implement Droppables
 	var tween = get_tree().create_tween()
 	if is_droppable:
 		tween.tween_property(parent_ref, "global_position", droppable_body_ref.global_position, 0.2).set_ease(Tween.EASE_OUT)
@@ -48,17 +51,17 @@ func _process_dropping() -> void:
 	
 
 func _on_mouse_entered() -> void:
-	if Global.dragged_object:
+	if static_object_dragged:
 		return
-	Global.dragged_object = self
+	static_object_dragged = self
 	is_draggable = true
 	parent_ref.scale = Vector2(1.1, 1.1)
 	scale = Vector2(1.5, 1.5) # when moving the cursor too quickly, we leave the hitbox and lose the dragged object :(
 
 
 func _on_mouse_exited() -> void:
-	if Global.dragged_object == self:
-		Global.dragged_object = null
+	if static_object_dragged == self:
+		static_object_dragged = null
 	is_draggable = false
 	parent_ref.scale = Vector2(1, 1)
 	scale = Vector2(1, 1)
@@ -76,7 +79,24 @@ func _on_body_exited(body: Node2D) -> void:
 	droppable_body_ref = null
 
 
+# actually: maybe get shape with highest overlap instead, inputting a list of shapes?
+# Area2D -> [CollisionShape2D]
+func _get_nearest_droppable_shape(droppable_area : Area2D, colliding_area : Node2D) -> CollisionShape2D:
+	var droppable_shapes = droppable_area.find_children("*", "CollisionShape2D")
+	if droppable_shapes.size() == 1:
+		return droppable_shapes[0]
+	var winner_overlap : float = 0.0
+	var winner_shape : CollisionShape2D = null
+	# get all children that are shapes
+	var all_shapes = droppable_area.get
+	#for cur_shape in 
+	
+	# calculate overlap of children (save only highest and value)
+	
+	# return child with highest overlap
+	return null
+
+
 func _has_body_droppable_component(body: Node2D) -> bool:
-	var child = body.find_child("DroppableComponent")
-	print("body has children: ", child)
+	var child = body.get_parent().find_child("DroppableComponent")
 	return child != null

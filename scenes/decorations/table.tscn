@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cugsh4h2qrgi"]
+[gd_scene load_steps=8 format=3 uid="uid://cugsh4h2qrgi"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_340np"]
 [ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="2_ayp3k"]
@@ -19,7 +19,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlcbx"]
-size = Vector2(307.52, 230.161)
+size = Vector2(303.245, 230.161)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayp3k"]
+size = Vector2(126.152, 131.855)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tr6dn"]
+size = Vector2(126.152, 131.855)
 
 [node name="Table" type="Node2D"]
 
@@ -35,10 +41,20 @@ skew = -0.642281
 shape = SubResource("RectangleShape2D_hlcbx")
 
 [node name="DroppableComponent" parent="." instance=ExtResource("2_ayp3k")]
-unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 2
+snap_to_grid = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
-position = Vector2(0.0829848, -122.093)
+position = Vector2(-108, -100)
 rotation = -0.479966
 skew = -0.642281
-shape = SubResource("RectangleShape2D_hlcbx")
+shape = SubResource("RectangleShape2D_ayp3k")
+debug_color = Color(0.810352, 0.340509, 0.601936, 0.42)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(114, -143)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_tr6dn")
+debug_color = Color(0.810352, 0.340509, 0.601936, 0.42)

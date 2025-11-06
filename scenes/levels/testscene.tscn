@@ -13,4 +13,4 @@ position = Vector2(258, 506)
 position = Vector2(834, 272)
 
 [node name="Bowl" parent="." instance=ExtResource("3_82gfa")]
-position = Vector2(514, 126)
+position = Vector2(550, 165)
