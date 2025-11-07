@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg47780yhctmo"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_g3iwr"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="2_f1d10"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayp3k"]
+atlas = ExtResource("1_g3iwr")
+region = Rect2(480, 960, 480, 480)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tr6dn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayp3k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlcbx"]
+size = Vector2(303.245, 230.161)
+
+[node name="VanishingTable" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tr6dn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.0829848, -122.093)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_hlcbx")
+
+[node name="DroppableComponent" parent="." instance=ExtResource("2_f1d10")]
+collision_layer = 2
+collision_mask = 2
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(0.0829848, -122.093)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_hlcbx")
+debug_color = Color(0.652011, 0.511365, 0.249223, 0.42)

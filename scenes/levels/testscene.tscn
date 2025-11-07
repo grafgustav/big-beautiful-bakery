@@ -1,16 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpeis6nj6gml3"]
+[gd_scene load_steps=6 format=3 uid="uid://cpeis6nj6gml3"]
 
 [ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="1_uuksk"]
 [ext_resource type="PackedScene" uid="uid://druyrnvfcppjb" path="res://scenes/items/dough.tscn" id="2_82gfa"]
 [ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="3_82gfa"]
+[ext_resource type="PackedScene" uid="uid://b7bdnlasgrrej" path="res://scenes/decorations/freedroptable.tscn" id="4_04qq0"]
+[ext_resource type="PackedScene" uid="uid://cg47780yhctmo" path="res://scenes/decorations/vanishingtable.tscn" id="5_effjq"]
 
 [node name="Testscene" type="Node2D"]
 
 [node name="Table" parent="." instance=ExtResource("1_uuksk")]
-position = Vector2(258, 506)
+position = Vector2(220, 262)
+
+[node name="FreedropTable" parent="." instance=ExtResource("4_04qq0")]
+position = Vector2(885, 553)
+
+[node name="VanishingTable" parent="." instance=ExtResource("5_effjq")]
+position = Vector2(327, 560)
 
 [node name="Dough" parent="." instance=ExtResource("2_82gfa")]
-position = Vector2(834, 272)
+position = Vector2(970, 128)
 
 [node name="Bowl" parent="." instance=ExtResource("3_82gfa")]
-position = Vector2(550, 165)
+position = Vector2(641, 123)
