@@ -39,9 +39,6 @@ func _process(delta: float) -> void:
 
 
 func _process_dropping() -> void:
-	if droppable_body_ref:
-		print(_has_body_droppable_component(droppable_body_ref))
-		
 	if droppable_body_ref == null:
 		var tween = get_tree().create_tween()
 		tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
@@ -87,12 +84,10 @@ func _get_max_intersection_collision_shape(dings: CollisionShape2D, collisions :
 
 
 func shape_to_polygon(shape: CollisionShape2D) -> PackedVector2Array:
-	print("Checking shape.shape: ", shape.shape)
 	var poly := PackedVector2Array()
 	var t := shape.global_transform
 	if shape.shape is RectangleShape2D:
 			var s = shape.shape.size * 0.5
-			print(s)
 			poly.append(t * Vector2(-s.x, -s.y))
 			poly.append(t * Vector2(s.x, -s.y))
 			poly.append(t * Vector2(s.x, s.y))
@@ -151,7 +146,6 @@ func _on_mouse_exited() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("Body entered: ", body.get_parent().name)
 	if _has_body_droppable_component(body.get_parent()):
 		droppable_body_ref = body.get_parent()
 
