@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://domowe0ekukcp"]
+
+[ext_resource type="Script" uid="uid://dsl5x6ocy0man" path="res://ui/ui_canvas_layer.gd" id="1_dytaf"]
+
+[node name="DebugOverlay" type="CanvasLayer"]
+script = ExtResource("1_dytaf")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CoordinatesLabel" type="Label" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "(x, y)"

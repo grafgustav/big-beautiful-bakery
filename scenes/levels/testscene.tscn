@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpeis6nj6gml3"]
+[gd_scene load_steps=7 format=3 uid="uid://cpeis6nj6gml3"]
 
 [ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="1_uuksk"]
 [ext_resource type="PackedScene" uid="uid://druyrnvfcppjb" path="res://scenes/items/dough.tscn" id="2_82gfa"]
 [ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="3_82gfa"]
 [ext_resource type="PackedScene" uid="uid://b7bdnlasgrrej" path="res://scenes/decorations/freedroptable.tscn" id="4_04qq0"]
 [ext_resource type="PackedScene" uid="uid://cg47780yhctmo" path="res://scenes/decorations/vanishingtable.tscn" id="5_effjq"]
+[ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="6_wyavn"]
 
 [node name="Testscene" type="Node2D"]
 
@@ -22,3 +23,5 @@ position = Vector2(970, 128)
 
 [node name="Bowl" parent="." instance=ExtResource("3_82gfa")]
 position = Vector2(641, 123)
+
+[node name="DebugOverlay" parent="." instance=ExtResource("6_wyavn")]
