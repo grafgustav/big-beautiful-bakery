@@ -16,8 +16,8 @@ static var static_object_dragged : Node2D
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 	
 	var parent = self.get_parent()
 	if parent && parent is Node2D:
@@ -45,6 +45,7 @@ func _process_dropping() -> void:
 		return
 
 	if _has_body_droppable_component(droppable_body_ref):
+		print("had droppable component")
 		var droppable_component = _get_droppable_component(droppable_body_ref)
 		match droppable_component.dropping_type:
 			Types.DroppableTypes.FREEDROP:
@@ -94,7 +95,7 @@ func shape_to_polygon(shape: CollisionShape2D) -> PackedVector2Array:
 			poly.append(t * Vector2(-s.x, s.y))
 	elif shape.shape is CircleShape2D:
 			var r = shape.shape.radius
-			var segments := 16  # increase for smoother circle
+			var segments := 16
 			for i in range(segments):
 				var angle := TAU * i / segments
 				var local_point = Vector2(cos(angle), sin(angle)) * r
@@ -134,7 +135,9 @@ func _on_mouse_entered() -> void:
 	static_object_dragged = self
 	is_draggable = true
 	parent_ref.scale = Vector2(1.1, 1.1)
-	scale = Vector2(1.5, 1.5) # when moving the cursor too quickly, we leave the hitbox and lose the dragged object :(
+	# when moving the cursor too quickly, we leave the hitbox and lose the dragged object :(
+	# so I scale the hitbox of the cursor, but maybe there are better solutions...
+	scale = Vector2(1.5, 1.5) 
 
 
 func _on_mouse_exited() -> void:
@@ -145,21 +148,22 @@ func _on_mouse_exited() -> void:
 	scale = Vector2(1, 1)
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_entered(body: Node2D) -> void:
+	print("Body entered: ", body.name)
+	print("Body Parent: ", body.get_parent().name)
+	body.get_parent().print_tree()
 	if _has_body_droppable_component(body.get_parent()):
 		droppable_body_ref = body.get_parent()
 
 
-func _on_body_exited(body: Node2D) -> void:
+func _on_area_exited(body: Node2D) -> void:
 	# reset values without condition to be safe?
 	droppable_body_ref = null
 
 
-func _get_rect_overlap() -> float:
-	# TODO: Implement
-	return 0.0
-
-
+# I don't think we need this, because of the mask we KNOW it is a droppable component, no?
+# except, actually, we use the same mask and layer for both droppables and draggables
+# also an idea was to design your own bakery later, that's when this modular system comes in handy
 func _has_body_droppable_component(body: Node2D) -> bool:
 	var child = body.find_child("DroppableComponent")
 	return child != null
@@ -168,4 +172,3 @@ func _has_body_droppable_component(body: Node2D) -> bool:
 func _get_droppable_component(body: Node2D) -> DroppableComponent:
 	var child = body.find_child("DroppableComponent")
 	return child
-	

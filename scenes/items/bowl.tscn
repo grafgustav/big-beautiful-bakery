@@ -16,6 +16,8 @@ radius = 47.0425
 texture = SubResource("AtlasTexture_2ce6h")
 
 [node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("2_ot2fw")
 metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 

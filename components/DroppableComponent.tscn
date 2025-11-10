@@ -3,5 +3,7 @@
 [ext_resource type="Script" uid="uid://d1xw1k7gp0kbw" path="res://components/droppable_component.gd" id="1_q2yy8"]
 
 [node name="DroppableComponent" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_q2yy8")
 dropping_type = 1
