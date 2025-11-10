@@ -2,7 +2,6 @@ class_name DraggableComponent
 extends Area2D
 
 var parent_ref : Node2D
-#hier noch ein süßer kommiii
 var is_draggable : bool = false
 
 var position_offset : Vector2
@@ -15,8 +14,6 @@ static var static_object_dragged : Node2D
 
 
 func _ready() -> void:
-	# merge commit test
-	
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
 	body_entered.connect(_on_body_entered)
@@ -42,9 +39,6 @@ func _process(delta: float) -> void:
 
 
 func _process_dropping() -> void:
-	# DEBUGS
-	print("Processing the DROPPPP")
-	print(droppable_body_ref)
 	if droppable_body_ref:
 		print(_has_body_droppable_component(droppable_body_ref))
 		
@@ -55,30 +49,30 @@ func _process_dropping() -> void:
 
 	if _has_body_droppable_component(droppable_body_ref):
 		var droppable_component = _get_droppable_component(droppable_body_ref)
-		print("Is Droppable Component")
 		match droppable_component.dropping_type:
 			Types.DroppableTypes.FREEDROP:
-				print("Free dropping")
 				global_position = get_global_mouse_position() - position_offset
 			Types.DroppableTypes.VANISHING:
-				print("Vanishing drop")
 				var tween = get_tree().create_tween()
 				tween.tween_property(parent_ref, "scale", Vector2(0.1, 0.1), 0.2).set_ease(Tween.EASE_OUT)
 				await tween.finished
 				parent_ref.queue_free()
 			Types.DroppableTypes.GRIDSNAP:
-				print("Snapping to grid")
-				_get_grid_snap(droppable_component)
+				var tween = get_tree().create_tween()
+				tween.tween_property(parent_ref, "global_position", _get_grid_snap(droppable_component), 0.2).set_ease(Tween.EASE_OUT)
 
 
 func _get_grid_snap(body: DroppableComponent) -> Vector2:
 	var collision_shapes_to_collide_with : Array = body.find_children("*", "CollisionShape2D")
-	print("Collision shapes found: ", collision_shapes_to_collide_with.size())
 	var own_collision_shape = find_child("CollisionShape2D")
-	print("Collision shape: ", own_collision_shape)
 	var max_collision_shape = _get_max_intersection_collision_shape(own_collision_shape, collision_shapes_to_collide_with)
-	print("Max Collision shape: ", max_collision_shape)
-	return Vector2(0,0)
+	var snap_point = _calculate_snapping_point(max_collision_shape)
+	return snap_point
+
+
+func _calculate_snapping_point(shape: CollisionShape2D) -> Vector2:
+	# calculates the center point of the collisionshape
+	return shape.global_position
 
 
 func _get_max_intersection_collision_shape(dings: CollisionShape2D, collisions : Array) -> CollisionShape2D:
@@ -108,10 +102,11 @@ func shape_to_polygon(shape: CollisionShape2D) -> PackedVector2Array:
 			var segments := 16  # increase for smoother circle
 			for i in range(segments):
 				var angle := TAU * i / segments
-				poly.append(t * Vector2(cos(angle), sin(angle)) * r)
+				var local_point = Vector2(cos(angle), sin(angle)) * r
+				var world_point = t.origin + t.basis_xform(local_point)
+				poly.append(world_point)
 	else:
-			print("Shape type not supported for intersection calculation: ", shape.shape)
-	print("Returning poly: ", poly)
+		print("Shape type not supported for intersection calculation: ", shape.shape)
 	return poly
 
 
