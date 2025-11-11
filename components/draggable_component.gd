@@ -24,7 +24,7 @@ func _ready() -> void:
 		parent_ref = parent
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_draggable:
 		# snapback functionality needs initial position
 		if Input.is_action_just_pressed("dragging"):
@@ -42,9 +42,7 @@ func _process_dropping() -> void:
 	if droppable_body_ref == null:
 		var tween = get_tree().create_tween()
 		tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
-		return
-
-	if _has_body_droppable_component(droppable_body_ref):
+	else:
 		print("had droppable component")
 		var droppable_component = _get_droppable_component(droppable_body_ref)
 		match droppable_component.dropping_type:
@@ -156,8 +154,9 @@ func _on_area_entered(body: Node2D) -> void:
 		droppable_body_ref = body.get_parent()
 
 
-func _on_area_exited(body: Node2D) -> void:
+func _on_area_exited(_body: Node2D) -> void:
 	# reset values without condition to be safe?
+	print("Body exited: ", _body.name)
 	droppable_body_ref = null
 
 

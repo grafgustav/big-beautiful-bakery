@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Big Beautiful Bakery"
-run/main_scene="uid://dojt8sa5f1s8i"
+run/main_scene="uid://cpeis6nj6gml3"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
@@ -30,3 +30,4 @@ dragging={
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
