@@ -19,6 +19,7 @@ texture = SubResource("AtlasTexture_2ce6h")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_ot2fw")
+item = 4
 metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]

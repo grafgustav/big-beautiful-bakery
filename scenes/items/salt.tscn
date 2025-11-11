@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://5w5gauinwouh"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_5n3kr"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_uynaq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
+atlas = ExtResource("1_5n3kr")
+region = Rect2(724.663, 4.71389, 70.0319, 74.8204)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_doocn"]
+size = Vector2(72, 77)
+
+[node name="Salt" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2ce6h")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_uynaq")
+item = 1
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_doocn")

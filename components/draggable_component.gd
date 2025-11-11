@@ -1,6 +1,8 @@
 class_name DraggableComponent
 extends Area2D
 
+@export var item : Types.Items
+
 var parent_ref : Node2D
 var is_draggable : bool = false
 
@@ -40,11 +42,14 @@ func _process(_delta: float) -> void:
 
 func _process_dropping() -> void:
 	if droppable_body_ref == null:
-		var tween = get_tree().create_tween()
-		tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
+		_snap_back_to_initial_position()
 	else:
-		print("had droppable component")
+		#print("has droppable component")
 		var droppable_component = _get_droppable_component(droppable_body_ref)
+		var dropped: bool = droppable_component.drop_item(item)
+		if !dropped:
+			_snap_back_to_initial_position()
+			return
 		match droppable_component.dropping_type:
 			Types.DroppableTypes.FREEDROP:
 				global_position = get_global_mouse_position() - position_offset
@@ -56,6 +61,11 @@ func _process_dropping() -> void:
 			Types.DroppableTypes.GRIDSNAP:
 				var tween = get_tree().create_tween()
 				tween.tween_property(parent_ref, "global_position", _get_grid_snap(droppable_component), 0.2).set_ease(Tween.EASE_OUT)
+
+
+func _snap_back_to_initial_position() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
 
 
 func _get_grid_snap(body: DroppableComponent) -> Vector2:
@@ -147,16 +157,16 @@ func _on_mouse_exited() -> void:
 
 
 func _on_area_entered(body: Node2D) -> void:
-	print("Body entered: ", body.name)
-	print("Body Parent: ", body.get_parent().name)
-	body.get_parent().print_tree()
+	#print("Body entered: ", body.name)
+	#print("Body Parent: ", body.get_parent().name)
+	#body.get_parent().print_tree()
 	if _has_body_droppable_component(body.get_parent()):
 		droppable_body_ref = body.get_parent()
 
 
 func _on_area_exited(_body: Node2D) -> void:
 	# reset values without condition to be safe?
-	print("Body exited: ", _body.name)
+	#print("Body exited: ", _body.name)
 	droppable_body_ref = null
 
 

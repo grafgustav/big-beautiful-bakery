@@ -1,0 +1,134 @@
+[gd_scene load_steps=20 format=3 uid="uid://bnby6prigmdk8"]
+
+[ext_resource type="Script" uid="uid://yjerjgk5gsvt" path="res://scenes/machines/mixer.gd" id="1_8175o"]
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_d3qk4"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="2_8175o"]
+[ext_resource type="Script" uid="uid://chijxmvuljpuv" path="res://scenes/machines/mixer_state_machine.gd" id="4_oxnw4"]
+[ext_resource type="Script" uid="uid://b48gvvneiwu31" path="res://scenes/machines/idle_state.gd" id="5_hvgv4"]
+[ext_resource type="Script" uid="uid://dh8wjyg3aldru" path="res://scenes/machines/salt_loaded_state.gd" id="6_62h8b"]
+[ext_resource type="Script" uid="uid://t4novlykm3a3" path="res://scenes/machines/mixing_state.gd" id="6_hkuiv"]
+[ext_resource type="Script" uid="uid://cgg2go6wda6s3" path="res://scenes/machines/flour_loaded_state.gd" id="7_af24a"]
+[ext_resource type="Script" uid="uid://dxxxa4bngofok" path="res://scenes/machines/water_loaded_state.gd" id="8_6dcph"]
+[ext_resource type="Script" uid="uid://bu76qa3k63cww" path="res://scenes/machines/finished_state.gd" id="8_62h8b"]
+[ext_resource type="Script" uid="uid://bdiggodhxubf5" path="res://scenes/machines/salt_water_loaded_state.gd" id="9_ex77r"]
+[ext_resource type="Script" uid="uid://bnjbx72j1v735" path="res://scenes/machines/salt_flour_loaded_state.gd" id="10_53l8s"]
+[ext_resource type="Script" uid="uid://bxed0rtqggl1v" path="res://scenes/machines/flour_water_loaded_state.gd" id="11_kt4gh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxnw4"]
+atlas = ExtResource("1_d3qk4")
+region = Rect2(720, 80, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvgv4"]
+atlas = ExtResource("1_d3qk4")
+region = Rect2(960, 80, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3qk4"]
+atlas = ExtResource("1_d3qk4")
+region = Rect2(480, 80, 240, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8175o"]
+atlas = ExtResource("1_d3qk4")
+region = Rect2(720, 80, 240, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kr600"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxnw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvgv4")
+}],
+"loop": true,
+"name": &"finished",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3qk4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8175o")
+}],
+"loop": true,
+"name": &"loaded",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxnw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvgv4")
+}],
+"loop": true,
+"name": &"mixing",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8xrr"]
+size = Vector2(198.294, 175.164)
+
+[node name="Mixer" type="Node2D"]
+script = ExtResource("1_8175o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(4, -12)
+sprite_frames = SubResource("SpriteFrames_kr600")
+animation = &"finished"
+
+[node name="DroppableComponent" parent="." instance=ExtResource("2_8175o")]
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(-18.5, 0.499998)
+rotation = -0.371755
+skew = 0.418879
+shape = SubResource("RectangleShape2D_u8xrr")
+debug_color = Color(0.783328, 0.379291, 0.560879, 0.42)
+
+[node name="MixerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+unique_name_in_owner = true
+script = ExtResource("4_oxnw4")
+starting_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("5_hvgv4")
+animation = "idle"
+
+[node name="SaltLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("6_62h8b")
+animation = "loaded"
+
+[node name="FlourLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("7_af24a")
+animation = "loaded"
+
+[node name="WaterLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("8_6dcph")
+animation = "loaded"
+
+[node name="SaltWaterLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("9_ex77r")
+animation = "loaded"
+
+[node name="SaltFlourLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("10_53l8s")
+
+[node name="FlourWaterLoadedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("11_kt4gh")
+animation = "loaded"
+
+[node name="MixingState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("6_hkuiv")
+animation = "mixing"
+
+[node name="FinishedState" type="Node" parent="MixerStateMachine"]
+script = ExtResource("8_62h8b")
+animation = "finished"

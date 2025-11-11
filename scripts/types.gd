@@ -3,3 +3,5 @@ class_name Types
 # it implicitly extends RefCounted
 
 enum DroppableTypes {VANISHING, GRIDSNAP, FREEDROP}
+
+enum Items { NULL, SALT, WATER, FLOUR, BOWL, DOUGH }
