@@ -11,15 +11,14 @@ var progress_bar : ProgressBar
 
 
 func enter() -> void:
-	super() # play animation
-	# construct new timer and start
+	super()
+	
 	timer = _create_timer(countdown_time)
 	progress_bar = _create_progress_bar(countdown_time)
 	timer.start()
 
 
 func exit() -> void:
-	# deconstruct timer
 	timer.queue_free()
 	progress_bar.queue_free()
 	timer = null

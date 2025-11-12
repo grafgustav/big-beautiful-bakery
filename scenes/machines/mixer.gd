@@ -20,8 +20,5 @@ func _physics_process(_delta: float) -> void:
 	state_machine.physics_update()
 
 
-
-
-
 func drop_item(item: Types.Items) -> bool:
 	return state_machine.drop_item(item)
