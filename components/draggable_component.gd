@@ -4,7 +4,8 @@ extends Area2D
 @export var item : Types.Items
 
 var parent_ref : Node2D
-var is_draggable : bool = false
+var is_draggable : bool = false # if it is possible to drag the object
+var is_dragging : bool = false # if the object is currently being dragged
 
 var position_offset : Vector2
 var initial_position : Vector2
@@ -31,6 +32,7 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("dragging"):
 			initial_position = parent_ref.global_position
 			position_offset = get_global_mouse_position() - parent_ref.global_position
+			is_dragging = true
 		if Input.is_action_pressed("dragging"):
 			parent_ref.global_position = get_global_mouse_position() - position_offset
 		if Input.is_action_just_released("dragging"):
@@ -38,10 +40,10 @@ func _process(_delta: float) -> void:
 
 
 func _process_dropping() -> void:
+	is_dragging = false
 	if droppable_body_ref == null:
 		_snap_back_to_initial_position()
 	else:
-		#print("has droppable component")
 		var droppable_component = _get_droppable_component(droppable_body_ref)
 		var dropped: bool = droppable_component.drop_item(item)
 		if !dropped:
@@ -110,7 +112,7 @@ func shape_to_polygon(shape: CollisionShape2D) -> PackedVector2Array:
 				var world_point = t.origin + t.basis_xform(local_point)
 				poly.append(world_point)
 	else:
-		print("Shape type not supported for intersection calculation: ", shape.shape)
+		push_error("Shape type not supported for intersection calculation: ", shape.shape)
 	return poly
 
 
@@ -149,6 +151,8 @@ func _on_mouse_entered() -> void:
 
 
 func _on_mouse_exited() -> void:
+	if is_dragging:
+		return
 	if static_object_dragged == self:
 		static_object_dragged = null
 	is_draggable = false
@@ -157,16 +161,12 @@ func _on_mouse_exited() -> void:
 
 
 func _on_area_entered(body: Node2D) -> void:
-	#print("Body entered: ", body.name)
-	#print("Body Parent: ", body.get_parent().name)
-	#body.get_parent().print_tree()
 	if _has_body_droppable_component(body.get_parent()):
 		droppable_body_ref = body.get_parent()
 
 
 func _on_area_exited(_body: Node2D) -> void:
 	# reset values without condition to be safe?
-	#print("Body exited: ", _body.name)
 	droppable_body_ref = null
 
 
