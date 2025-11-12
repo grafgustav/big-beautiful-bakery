@@ -5,7 +5,7 @@ extends MixerState
 @export var countdown_time : int = 1
 
 var timer : Timer
-var progress_bar : ProgressBar
+var prog_bar : ProgressBar
 
 @export var finishedState : MixerState
 
@@ -14,32 +14,32 @@ func enter() -> void:
 	super()
 	
 	timer = _create_timer(countdown_time)
-	progress_bar = _create_progress_bar(countdown_time)
+	prog_bar = _create_progress_bar(countdown_time)
 	timer.start()
 
 
 func exit() -> void:
 	timer.queue_free()
-	progress_bar.queue_free()
+	prog_bar.queue_free()
 	timer = null
-	progress_bar = null
+	prog_bar = null
 
 
 func physics_update() -> MixerState:
 	if timer:
-		progress_bar.value = timer.time_left
+		prog_bar.value = timer.time_left
 		if timer.is_stopped():
 			return finishedState
 	return null
 
 
 func _create_timer(duration: int) -> Timer:
-	var timer = Timer.new()
-	timer.wait_time = duration
-	timer.one_shot = true
-	timer.start()
-	parent_ref.add_child(timer)
-	return timer
+	var timer_instance = Timer.new()
+	timer_instance.wait_time = duration
+	timer_instance.one_shot = true
+	parent_ref.add_child(timer_instance)
+	timer_instance.start()
+	return timer_instance
 
 
 func _create_progress_bar(duration: int) -> ProgressBar:
