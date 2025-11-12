@@ -49,6 +49,7 @@ func exit() -> void:
 	if extractable_component:
 		extractable_component.queue_free()
 		extractable_component = null
+		extracted = false
 
 
 func update() -> MixerState:

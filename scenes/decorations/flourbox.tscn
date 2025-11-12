@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://br1rb5hvti52b"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_2ega0"]
+[ext_resource type="PackedScene" uid="uid://cved2gg3n0lhn" path="res://components/ExtractableComponent.tscn" id="2_siadm"]
+[ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="3_nqvwf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mnpr"]
+atlas = ExtResource("1_2ega0")
+region = Rect2(479.836, 1439.22, 159.337, 162.251)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olid"]
+size = Vector2(157, 162)
+
+[node name="Flourbox" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_0mnpr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_8olid")
+
+[node name="ExtractableComponent" parent="." instance=ExtResource("2_siadm")]
+position = Vector2(-10, 31)
+extractable_item = ExtResource("3_nqvwf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ExtractableComponent"]
+position = Vector2(9.5, -32)
+shape = SubResource("RectangleShape2D_8olid")

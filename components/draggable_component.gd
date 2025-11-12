@@ -28,14 +28,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if is_draggable:
-		# snapback functionality needs initial position
 		if Input.is_action_just_pressed("dragging"):
 			initial_position = parent_ref.global_position
 			position_offset = get_global_mouse_position() - parent_ref.global_position
-		# following the cursor
 		if Input.is_action_pressed("dragging"):
 			parent_ref.global_position = get_global_mouse_position() - position_offset
-		# logic to either snap back, snap to grid, vanish etc.
 		if Input.is_action_just_released("dragging"):
 			_process_dropping()
 
@@ -64,8 +61,11 @@ func _process_dropping() -> void:
 
 
 func _snap_back_to_initial_position() -> void:
-	var tween = get_tree().create_tween()
-	tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
+	if initial_position:
+		var tween = get_tree().create_tween()
+		tween.tween_property(parent_ref, "global_position", initial_position, 0.2).set_ease(Tween.EASE_OUT)
+	else:
+		parent_ref.queue_free()
 
 
 func _get_grid_snap(body: DroppableComponent) -> Vector2:

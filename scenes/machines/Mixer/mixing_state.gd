@@ -2,7 +2,7 @@ class_name MixingState
 extends MixerState
 
 
-@export var countdown_time : int = 5
+@export var countdown_time : int = 1
 
 var timer : Timer
 var progress_bar : ProgressBar

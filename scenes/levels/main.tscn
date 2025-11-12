@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=4 uid="uid://dojt8sa5f1s8i"]
 
 [ext_resource type="TileSet" uid="uid://cykqtghw1ppcl" path="res://assets/everything.tres" id="1_72ix8"]
-[ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/oven.tscn" id="2_y0acb"]
+[ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/Oven/oven.tscn" id="2_y0acb"]
 [ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="3_j4d2a"]
-[ext_resource type="PackedScene" uid="uid://bnby6prigmdk8" path="res://scenes/machines/mixer.tscn" id="4_j4d2a"]
+[ext_resource type="PackedScene" uid="uid://bnby6prigmdk8" path="res://scenes/machines/Mixer/mixer.tscn" id="4_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://b7bdnlasgrrej" path="res://scenes/decorations/freedroptable.tscn" id="5_u81e1"]
 [ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="6_vkq25"]
 [ext_resource type="PackedScene" uid="uid://5w5gauinwouh" path="res://scenes/items/salt.tscn" id="7_7lrji"]
