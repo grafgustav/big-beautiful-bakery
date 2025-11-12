@@ -2,12 +2,12 @@ class_name MixingState
 extends MixerState
 
 
-@export var countdown_time : int = 10
+@export var countdown_time : int = 5
 
 var timer : Timer
 var progress_bar : ProgressBar
 
-@onready var finishedState := $"../FinishedState"
+@export var finishedState : MixerState
 
 
 func enter() -> void:
@@ -45,6 +45,7 @@ func _create_timer(duration: int) -> Timer:
 
 func _create_progress_bar(duration: int) -> ProgressBar:
 	# Create and configure the progress bar
+	# TODO: Center progress bar above parent object
 	var progress_bar = ProgressBar.new()
 	progress_bar.min_value = 0
 	progress_bar.max_value = duration

@@ -39,8 +39,6 @@ func drop_item(item: Types.Items) -> bool:
 	var new_state = current_state.drop_item(item)
 	if new_state:
 		change_state(new_state)
-		print("Dropping Item returns true")
 		return true
 	else:
-		print("Dropping Item returns false")
 		return false

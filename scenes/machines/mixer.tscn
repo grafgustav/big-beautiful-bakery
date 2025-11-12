@@ -98,35 +98,62 @@ unique_name_in_owner = true
 script = ExtResource("4_oxnw4")
 starting_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="MixerStateMachine"]
+[node name="IdleState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("5_hvgv4")
 animation = "idle"
+input_criteria = {
+1: NodePath("../SaltLoadedState"),
+2: NodePath("../WaterLoadedState"),
+3: NodePath("../FlourLoadedState")
+}
 
-[node name="SaltLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="SaltLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("6_62h8b")
 animation = "loaded"
+input_criteria = {
+2: NodePath("../SaltWaterLoadedState"),
+3: NodePath("../SaltFlourLoadedState")
+}
 
-[node name="FlourLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="FlourLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("7_af24a")
 animation = "loaded"
+input_criteria = {
+1: NodePath("../SaltFlourLoadedState"),
+2: NodePath("../FlourWaterLoadedState")
+}
 
-[node name="WaterLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="WaterLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("8_6dcph")
 animation = "loaded"
+input_criteria = {
+1: NodePath("../SaltWaterLoadedState"),
+3: NodePath("../FlourWaterLoadedState")
+}
 
-[node name="SaltWaterLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="SaltWaterLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("9_ex77r")
 animation = "loaded"
+input_criteria = {
+3: NodePath("../MixingState")
+}
 
-[node name="SaltFlourLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="SaltFlourLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("10_53l8s")
+input_criteria = {
+2: NodePath("../MixingState")
+}
 
-[node name="FlourWaterLoadedState" type="Node" parent="MixerStateMachine"]
+[node name="FlourWaterLoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("input_criteria")]
 script = ExtResource("11_kt4gh")
 animation = "loaded"
+input_criteria = {
+1: NodePath("../MixingState")
+}
 
-[node name="MixingState" type="Node" parent="MixerStateMachine"]
+[node name="MixingState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("finishedState")]
 script = ExtResource("6_hkuiv")
+finishedState = NodePath("../FinishedState")
 animation = "mixing"
 
 [node name="FinishedState" type="Node" parent="MixerStateMachine"]

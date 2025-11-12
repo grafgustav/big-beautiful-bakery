@@ -6,7 +6,7 @@ extends MixerState
 var mixingState := $"../MixingState"
 
 
-func drop_item(item: Types.Items) -> MixingState:
+func drop_item(item: Types.Items) -> MixerState:
 	print("Dropping item: ", item)
 	match item:
 		Types.Items.SALT:
