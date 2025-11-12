@@ -25,5 +25,9 @@ func physics_update() -> MixerState:
 	return null
 
 
+func process_input(event: InputEvent) -> void:
+	pass
+
+
 func drop_item(item: Types.Items) -> MixerState:
 	return input_criteria.get(item)

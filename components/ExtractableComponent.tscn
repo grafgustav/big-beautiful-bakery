@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cved2gg3n0lhn"]
+
+[ext_resource type="Script" uid="uid://dln40kcqob2kd" path="res://components/extractable_component.gd" id="1_imxvd"]
+
+[node name="ExtractableComponent" type="Area2D"]
+script = ExtResource("1_imxvd")

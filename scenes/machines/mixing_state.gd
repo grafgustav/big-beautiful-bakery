@@ -16,8 +16,8 @@ func enter() -> void:
 	timer = _create_timer(countdown_time)
 	progress_bar = _create_progress_bar(countdown_time)
 	timer.start()
-	
-	
+
+
 func exit() -> void:
 	# deconstruct timer
 	timer.queue_free()
