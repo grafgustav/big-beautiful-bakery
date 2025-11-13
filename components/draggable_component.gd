@@ -13,7 +13,7 @@ var initial_position : Vector2
 var droppable_body_ref : Node2D
 
 # use static resource variable instead of global autoload script variable?
-static var static_object_dragged : Node2D
+static var static_object_dragged : Node2D # the object that is currently being dragged
 
 
 func _ready() -> void:
@@ -162,9 +162,6 @@ func _on_area_exited(body: Node2D) -> void:
 		droppable_body_ref = null
 
 
-# I don't think we need this, because of the mask we KNOW it is a droppable component, no?
-# except, actually, we use the same mask and layer for both droppables and draggables
-# also an idea was to design your own bakery later, that's when this modular system comes in handy
 func _has_body_droppable_component(body: Node2D) -> bool:
 	var child = body.find_child("DroppableComponent")
 	return child != null
@@ -173,3 +170,7 @@ func _has_body_droppable_component(body: Node2D) -> bool:
 func _get_droppable_component(body: Node2D) -> DroppableComponent:
 	var child = body.find_child("DroppableComponent")
 	return child
+
+
+func set_initial_position(pos: Vector2) -> void:
+	initial_position = pos
