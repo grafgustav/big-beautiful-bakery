@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://uic38qo4lrne"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_ex8ep"]
+[ext_resource type="PackedScene" uid="uid://cved2gg3n0lhn" path="res://components/ExtractableComponent.tscn" id="2_uxcw3"]
+[ext_resource type="PackedScene" uid="uid://cgosrxmr1qx8p" path="res://scenes/items/mold.tscn" id="3_3vq2t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxcw3"]
+atlas = ExtResource("1_ex8ep")
+region = Rect2(0, 80, 240, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vq2t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxcw3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vq2t"]
+size = Vector2(206, 140)
+
+[node name="BreadDisplay" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3vq2t")
+
+[node name="ExtractableComponent" parent="." instance=ExtResource("2_uxcw3")]
+extractable_item = ExtResource("3_3vq2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExtractableComponent"]
+position = Vector2(-18, -14)
+shape = SubResource("RectangleShape2D_3vq2t")

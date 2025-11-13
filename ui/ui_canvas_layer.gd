@@ -1,3 +1,4 @@
+class_name DebugCanvasLayer
 extends CanvasLayer
 
 @onready var mouse_label: Label = %CoordinatesLabel

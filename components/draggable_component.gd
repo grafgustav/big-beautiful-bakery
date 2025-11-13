@@ -74,13 +74,8 @@ func _get_grid_snap(body: DroppableComponent) -> Vector2:
 	var collision_shapes_to_collide_with : Array = body.find_children("*", "CollisionShape2D")
 	var own_collision_shape = find_child("CollisionShape2D")
 	var max_collision_shape = _get_max_intersection_collision_shape(own_collision_shape, collision_shapes_to_collide_with)
-	var snap_point = _calculate_snapping_point(max_collision_shape)
+	var snap_point = max_collision_shape.global_position
 	return snap_point
-
-
-func _calculate_snapping_point(shape: CollisionShape2D) -> Vector2:
-	# calculates the center point of the collisionshape
-	return shape.global_position
 
 
 func _get_max_intersection_collision_shape(dings: CollisionShape2D, collisions : Array) -> CollisionShape2D:
@@ -145,9 +140,6 @@ func _on_mouse_entered() -> void:
 	static_object_dragged = self
 	is_draggable = true
 	parent_ref.scale = Vector2(1.1, 1.1)
-	# when moving the cursor too quickly, we leave the hitbox and lose the dragged object :(
-	# so I scale the hitbox of the cursor, but maybe there are better solutions...
-	scale = Vector2(1.5, 1.5) 
 
 
 func _on_mouse_exited() -> void:
@@ -157,7 +149,6 @@ func _on_mouse_exited() -> void:
 		static_object_dragged = null
 	is_draggable = false
 	parent_ref.scale = Vector2(1, 1)
-	scale = Vector2(1, 1)
 
 
 func _on_area_entered(body: Node2D) -> void:
@@ -165,9 +156,10 @@ func _on_area_entered(body: Node2D) -> void:
 		droppable_body_ref = body.get_parent()
 
 
-func _on_area_exited(_body: Node2D) -> void:
+func _on_area_exited(body: Node2D) -> void:
 	# reset values without condition to be safe?
-	droppable_body_ref = null
+	if _has_body_droppable_component(body.get_parent()):
+		droppable_body_ref = null
 
 
 # I don't think we need this, because of the mask we KNOW it is a droppable component, no?

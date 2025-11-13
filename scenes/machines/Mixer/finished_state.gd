@@ -41,8 +41,6 @@ func enter() -> void:
 	
 	if extractable_component.has_signal("extracted"):
 		extractable_component.connect("extracted", _on_extracted)
-	
-	print("Extraction Component successfully added to parent node")
 
 
 func exit() -> void:

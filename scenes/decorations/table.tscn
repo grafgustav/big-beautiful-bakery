@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cugsh4h2qrgi"]
+[gd_scene load_steps=9 format=3 uid="uid://cugsh4h2qrgi"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_340np"]
 [ext_resource type="Script" uid="uid://d1xw1k7gp0kbw" path="res://components/droppable_component.gd" id="2_ayp3k"]
@@ -22,7 +22,13 @@ animations = [{
 size = Vector2(303.245, 230.161)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tr6dn"]
-size = Vector2(146.372, 226.531)
+size = Vector2(146.372, 102.134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayp3k"]
+size = Vector2(146.372, 105.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q844s"]
+size = Vector2(146.372, 116.149)
 
 [node name="Table" type="Node2D"]
 
@@ -45,13 +51,25 @@ dropping_type = 1
 metadata/_custom_type_script = "uid://d1xw1k7gp0kbw"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
-position = Vector2(-67.8557, -85.0879)
+position = Vector2(-119.97, -110.169)
 rotation = -0.479966
 skew = -0.642281
 shape = SubResource("RectangleShape2D_tr6dn")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableComponent"]
-position = Vector2(66, -156)
+position = Vector2(-25, -64)
 rotation = -0.479966
 skew = -0.642281
 shape = SubResource("RectangleShape2D_tr6dn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(11.4143, -182.27)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_ayp3k")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(115.731, -132.066)
+rotation = -0.479966
+skew = -0.642281
+shape = SubResource("RectangleShape2D_q844s")
