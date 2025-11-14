@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://cjy7dndw23ytp"]
+
+[ext_resource type="PackedScene" uid="uid://5w5gauinwouh" path="res://scenes/items/salt.tscn" id="1_fg7ed"]
+[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_iyl7s"]
+
+[resource]
+script = ExtResource("1_iyl7s")
+id = &"salt"
+display_name = "Salt"
+scene = ExtResource("1_fg7ed")
+metadata/_custom_type_script = "uid://ctp3xpf7hidtv"

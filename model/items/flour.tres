@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c4q7vt0mqv4qx"]
+
+[ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="1_4vqtp"]
+[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_fgrbk"]
+
+[resource]
+script = ExtResource("1_fgrbk")
+id = &"flour"
+display_name = "Flour"
+scene = ExtResource("1_4vqtp")
+metadata/_custom_type_script = "uid://ctp3xpf7hidtv"
