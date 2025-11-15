@@ -1,2 +1,5 @@
 class_name LoadedState
-extends MixingState
+extends MixerState
+
+
+@export var mixing_state : MixerState

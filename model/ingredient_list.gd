@@ -12,3 +12,11 @@ func count(ingredient: IngredientData) -> int:
 
 func append(ingredient: IngredientData) -> void:
 	ingredient_list.append(ingredient)
+
+
+func is_empty() -> bool:
+	return ingredient_list.is_empty()
+
+
+func _to_string() -> String:
+	return str(ingredient_list)

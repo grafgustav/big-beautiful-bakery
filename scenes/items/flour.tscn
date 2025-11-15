@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bporuw6mtvu54"]
+[gd_scene load_steps=7 format=3 uid="uid://bporuw6mtvu54"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_doocn"]
+[ext_resource type="PackedScene" uid="uid://0a35iyl4bgs" path="res://components/IngredientComponent.tscn" id="1_immeo"]
 [ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_4h1lp"]
+[ext_resource type="Resource" uid="uid://c4q7vt0mqv4qx" path="res://model/items/flour.tres" id="2_8pfpo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
 atlas = ExtResource("1_doocn")
@@ -11,6 +13,9 @@ region = Rect2(165.177, 5.07918, 70.0319, 75.4189)
 size = Vector2(72, 77)
 
 [node name="Flour" type="Node2D"]
+
+[node name="IngredientComponent" parent="." instance=ExtResource("1_immeo")]
+ingredient = ExtResource("2_8pfpo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_2ce6h")

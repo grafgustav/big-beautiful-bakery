@@ -39,13 +39,24 @@ func _process(_delta: float) -> void:
 			_process_dropping()
 
 
+func _get_ingredient() -> IngredientData:
+	var in_comp = parent_ref.find_child("IngredientComponent") as IngredientComponent
+	print("IngredientComp: ", in_comp)
+	if in_comp:
+		print("Incomp Ingredient: ", in_comp.ingredient)
+		return in_comp.ingredient
+	else:
+		push_error("Parent does not contain an Ingredient Component")
+		return null
+
+
 func _process_dropping() -> void:
 	is_dragging = false
 	if droppable_body_ref == null:
 		_snap_back_to_initial_position()
 	else:
 		var droppable_component = _get_droppable_component(droppable_body_ref)
-		var dropped: bool = droppable_component.drop_item(item)
+		var dropped: bool = droppable_component.drop_ingredient(_get_ingredient())
 		if !dropped:
 			_snap_back_to_initial_position()
 			return

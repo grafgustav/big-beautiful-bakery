@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://druyrnvfcppjb"]
+[gd_scene load_steps=8 format=3 uid="uid://druyrnvfcppjb"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_7ok2f"]
 [ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_hl5ja"]
+[ext_resource type="Script" uid="uid://bs7c7j6a55ksw" path="res://components/ingredient_component.gd" id="3_55jcw"]
+[ext_resource type="Resource" uid="uid://biwbgfnbmx25m" path="res://model/items/dough.tres" id="4_lpoee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hl5ja"]
 atlas = ExtResource("1_7ok2f")
@@ -36,3 +38,8 @@ metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
 position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_volpc")
+
+[node name="IngredientComponent" type="Node" parent="."]
+script = ExtResource("3_55jcw")
+ingredient = ExtResource("4_lpoee")
+metadata/_custom_type_script = "uid://bs7c7j6a55ksw"

@@ -22,7 +22,7 @@ func is_free_dropping() -> bool:
 	return dropping_type == Types.DroppableTypes.FREEDROP
 
 
-func drop_item(item : Types.Items) -> bool:
-	if parent_ref.has_method("drop_item"):
-		return parent_ref.drop_item(item)
+func drop_ingredient(ingredient: IngredientData) -> bool:
+	if parent_ref.has_method("drop_ingredient"):
+		return parent_ref.drop_ingredient(ingredient)
 	return true

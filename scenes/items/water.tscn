@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnc2ulmpid2yh"]
+[gd_scene load_steps=7 format=3 uid="uid://bnc2ulmpid2yh"]
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_jqrsk"]
 [ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_heg7y"]
+[ext_resource type="Script" uid="uid://bs7c7j6a55ksw" path="res://components/ingredient_component.gd" id="3_oxtad"]
+[ext_resource type="Resource" uid="uid://dbvxkbxx060be" path="res://model/items/water.tres" id="4_3nosp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
 atlas = ExtResource("1_jqrsk")
@@ -25,3 +27,8 @@ metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_doocn")
+
+[node name="IngredientComponent" type="Node" parent="."]
+script = ExtResource("3_oxtad")
+ingredient = ExtResource("4_3nosp")
+metadata/_custom_type_script = "uid://bs7c7j6a55ksw"

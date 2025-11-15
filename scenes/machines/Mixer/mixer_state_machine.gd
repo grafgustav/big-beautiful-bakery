@@ -33,13 +33,3 @@ func physics_update() -> void:
 	var new_state = current_state.physics_update()
 	if new_state:
 		change_state(new_state)
-
-
-func drop_item(item: Types.Items) -> bool:
-	# TODO: use recipes and models and ingredient_lists
-	var new_state = current_state.drop_item(item)
-	if new_state:
-		change_state(new_state)
-		return true
-	else:
-		return false

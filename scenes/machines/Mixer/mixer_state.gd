@@ -29,5 +29,5 @@ func process_input(event: InputEvent) -> void:
 	pass
 
 
-func drop_item(item: Types.Items) -> MixerState:
-	return input_criteria.get(item)
+func drop_ingredient(ingredient: IngredientData) -> void:
+	pass

@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dbvxkbxx060be"]
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://dbvxkbxx060be"]
 
-[ext_resource type="PackedScene" uid="uid://bnc2ulmpid2yh" path="res://scenes/items/water.tscn" id="1_5a43r"]
-[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_o4p0u"]
+[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_kwgsp"]
 
 [resource]
-script = ExtResource("1_o4p0u")
+script = ExtResource("1_kwgsp")
 id = &"water"
 display_name = "Water"
-scene = ExtResource("1_5a43r")
 metadata/_custom_type_script = "uid://ctp3xpf7hidtv"
