@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://scripts/global.gd"
+RecipeManager="*res://scripts/recipe_manager.gd"
+IngredientFactory="*res://scripts/ingredient_factory.gd"
 
 [input]
 

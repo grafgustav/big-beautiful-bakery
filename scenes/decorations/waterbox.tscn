@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_8kg0l"]
 [ext_resource type="PackedScene" uid="uid://cved2gg3n0lhn" path="res://components/ExtractableComponent.tscn" id="2_0rwx2"]
-[ext_resource type="PackedScene" uid="uid://bnc2ulmpid2yh" path="res://scenes/items/water.tscn" id="3_8kg0l"]
+[ext_resource type="Resource" uid="uid://dbvxkbxx060be" path="res://model/items/water.tres" id="3_8kg0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mnpr"]
 atlas = ExtResource("1_8kg0l")
@@ -11,7 +11,7 @@ region = Rect2(799.038, 1439.22, 161.28, 162.251)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8olid"]
 size = Vector2(157, 162)
 
-[node name="Flourbox" type="Node2D"]
+[node name="Waterbox" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_0mnpr")
@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_8olid")
 
 [node name="ExtractableComponent" parent="." instance=ExtResource("2_0rwx2")]
 position = Vector2(-10, 31)
-extractable_item = ExtResource("3_8kg0l")
+extractable_ingredient = ExtResource("3_8kg0l")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ExtractableComponent"]
 position = Vector2(9.5, -32)

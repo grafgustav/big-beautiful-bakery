@@ -23,11 +23,3 @@ func update() -> MixerState:
 
 func physics_update() -> MixerState:
 	return null
-
-
-func process_input(event: InputEvent) -> void:
-	pass
-
-
-func drop_ingredient(ingredient: IngredientData) -> void:
-	pass

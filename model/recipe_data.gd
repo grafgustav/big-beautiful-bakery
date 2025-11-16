@@ -10,8 +10,3 @@ extends Resource
 @export var outputs : Array[IngredientAmount]
 
 @export var processing_time : float
-
-
-class IngredientAmount extends Resource:
-	@export var ingredient: IngredientData
-	@export var amount: int

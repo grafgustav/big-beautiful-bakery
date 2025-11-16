@@ -6,4 +6,5 @@
 script = ExtResource("2_i0ylp")
 id = &"flour"
 display_name = "Flour"
+scene_path = "res://scenes/items/flour.tscn"
 metadata/_custom_type_script = "uid://ctp3xpf7hidtv"

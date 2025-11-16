@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_botfb"]
 [ext_resource type="PackedScene" uid="uid://cved2gg3n0lhn" path="res://components/ExtractableComponent.tscn" id="2_rsfrt"]
-[ext_resource type="PackedScene" uid="uid://5w5gauinwouh" path="res://scenes/items/salt.tscn" id="3_botfb"]
+[ext_resource type="Resource" uid="uid://ckas3iu3oebuq" path="res://model/items/salt.tres" id="3_botfb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0mnpr"]
 atlas = ExtResource("1_botfb")
@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_8olid")
 
 [node name="ExtractableComponent" parent="." instance=ExtResource("2_rsfrt")]
 position = Vector2(-10, 31)
-extractable_item = ExtResource("3_botfb")
+extractable_ingredient = ExtResource("3_botfb")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ExtractableComponent"]
 position = Vector2(9.5, -32)

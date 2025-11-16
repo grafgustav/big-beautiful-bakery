@@ -4,7 +4,7 @@ extends Area2D
 
 signal extracted
 
-@export var extractable_item : PackedScene
+@export var extractable_ingredient : IngredientData
 var _dragged_item : Node2D = null
 var is_extractable : bool = false
 
@@ -19,18 +19,22 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 		_start_drag()
 
 
+func _get_scene_node() -> Node:
+	return IngredientFactory.instantiate_from_model(extractable_ingredient)
+
+
 func _start_drag() -> void:
-	if extractable_item == null:
-		push_error("No extractable_item defined for ExtractableComponent.")
+	if extractable_ingredient == null:
+		push_error("No extractable_ingredient defined for ExtractableComponent.")
 		return
 	
 	if DraggableComponent.static_object_dragged:
 		print("Already dragging some object")
 		return
 
-	_dragged_item = extractable_item.instantiate() as Node2D
+	_dragged_item = _get_scene_node()
 	if not _dragged_item:
-		push_error("extractable_item must be a Node2D scene.")
+		push_error("extractable_ingredient must be a Node2D scene.")
 		return
 
 	get_tree().current_scene.add_child(_dragged_item)

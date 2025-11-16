@@ -1,13 +1,55 @@
-class_name RecipeManager
+class_name RecipeManagerClass
 extends Node
 
 @export var all_recipes: Array[RecipeData] = []
 
 
-# Returns recipes where all requirements are fully met
+func _ready() -> void:
+	_load_recipes("res://model/recipes/")
+	print("Loaded ", all_recipes.size(), " recipes")
+
+
+func _load_recipes(path: String) -> void:
+	var dir := DirAccess.open(path)
+	if dir == null:
+		push_error("Recipe directory not found: " + path)
+		return
+
+	dir.list_dir_begin()
+	var filename := dir.get_next()
+
+	while filename != "":
+		if not dir.current_is_dir():
+			if filename.ends_with(".tres") or filename.ends_with(".res"):
+				var full_path := path + filename
+				var res := ResourceLoader.load(full_path)
+
+				if res is RecipeData:
+					all_recipes.append(res)
+				else:
+					print("Skipped non-recipe: ", full_path)
+		filename = dir.get_next()
+
+	dir.list_dir_end()
+
+
+func get_junk_recipe() -> RecipeData:
+	# TODO: Make this more elegant and with scene?
+	var rec: RecipeData = RecipeData.new()
+	rec.recipe_id = "junk"
+	rec.display_name = "Junk"
+	return rec
+
+
+func get_first_completed_or_junk_recipe(ingredient_list: IngredientsList) -> RecipeData:
+	var completed_recipes := get_fully_completed_recipes(ingredient_list)
+	if completed_recipes.size() == 0:
+		return get_junk_recipe()
+	return completed_recipes[0]
+
+
 func get_fully_completed_recipes(ingredient_list: IngredientsList) -> Array[RecipeData]:
 	var completed: Array[RecipeData] = []
-	
 	for recipe in all_recipes:
 		if _is_recipe_complete(recipe, ingredient_list):
 			completed.append(recipe)

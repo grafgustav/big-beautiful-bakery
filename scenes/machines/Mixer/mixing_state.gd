@@ -2,8 +2,6 @@ class_name MixingState
 extends MixerState
 
 
-@export var countdown_time : int = 1
-
 var timer : Timer
 var prog_bar : ProgressBar
 
@@ -12,6 +10,7 @@ var prog_bar : ProgressBar
 
 func enter() -> void:
 	super()
+	var countdown_time = parent_ref.recipe.processing_time
 	
 	timer = _create_timer(countdown_time)
 	prog_bar = _create_progress_bar(countdown_time)

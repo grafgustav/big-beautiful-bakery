@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bnby6prigmdk8"]
+[gd_scene load_steps=17 format=3 uid="uid://bnby6prigmdk8"]
 
 [ext_resource type="Script" uid="uid://yjerjgk5gsvt" path="res://scenes/machines/Mixer/mixer.gd" id="1_8175o"]
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_d3qk4"]
@@ -67,6 +67,9 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7idcq"]
+size = Vector2(198.294, 175.164)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8xrr"]
 size = Vector2(198.294, 175.164)
 
@@ -80,6 +83,15 @@ sprite_frames = SubResource("SpriteFrames_kr600")
 animation = &"finished"
 frame = 1
 frame_progress = 0.355271
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ClickArea"]
+position = Vector2(-18.5, 0.499998)
+rotation = -0.371755
+skew = 0.418879
+shape = SubResource("RectangleShape2D_7idcq")
+debug_color = Color(0.783328, 0.379291, 0.560879, 0.42)
 
 [node name="DroppableComponent" parent="." instance=ExtResource("2_8175o")]
 dropping_type = 0
@@ -101,9 +113,9 @@ script = ExtResource("5_hvgv4")
 loadedState = NodePath("../LoadedState")
 animation = "idle"
 input_criteria = {
-1: NodePath(""),
-2: NodePath(""),
-3: NodePath("")
+1: null,
+2: null,
+3: null
 }
 
 [node name="LoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("mixing_state")]
@@ -121,3 +133,6 @@ script = ExtResource("8_62h8b")
 idle_state = NodePath("../IdleState")
 process_result = ExtResource("5_to63m")
 animation = "finished"
+
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_click_area_mouse_exited"]
