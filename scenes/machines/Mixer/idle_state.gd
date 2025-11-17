@@ -1,11 +1,11 @@
 class_name IdleState
-extends MixerState
+extends MachineState
 
 
-@export var loadedState : MixerState
+@export var loadedState : MachineState
 
 
-func update() -> MixerState:
+func update() -> MachineState:
 	if !parent_ref.has_empty_ingredient_list():
 		return loadedState
 	return null

@@ -1,11 +1,11 @@
 class_name MixingState
-extends MixerState
+extends MachineState
 
 
 var timer : Timer
 var prog_bar : ProgressBar
 
-@export var finishedState : MixerState
+@export var finishedState : MachineState
 
 
 func enter() -> void:
@@ -24,7 +24,7 @@ func exit() -> void:
 	prog_bar = null
 
 
-func physics_update() -> MixerState:
+func physics_update() -> MachineState:
 	if timer:
 		prog_bar.value = timer.time_left
 		if timer.is_stopped():
@@ -33,6 +33,7 @@ func physics_update() -> MixerState:
 
 
 func _create_timer(duration: int) -> Timer:
+	# TODO: Find bug why sometimes timer does not get set (botched dough)
 	var timer_instance = Timer.new()
 	timer_instance.wait_time = duration
 	timer_instance.one_shot = true

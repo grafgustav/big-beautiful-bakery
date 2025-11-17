@@ -1,20 +1,20 @@
-class_name MixerStateMachine
+class_name MachineStateMachine
 extends Node
 
 
-@export var starting_state : MixerState
-var current_state : MixerState
+@export var starting_state : MachineState
+var current_state : MachineState
 
 
 func init(parent_ref : Node2D, animation_player : AnimatedSprite2D) -> void:
 	for child in get_children():
-		if child is MixerState:
+		if child is MachineState:
 			child.parent_ref = parent_ref
 			child.animation_player = animation_player
 	change_state(starting_state)
 
 
-func change_state(new_state : MixerState) -> void:
+func change_state(new_state : MachineState) -> void:
 	print("Changing state from ", current_state, " to ", new_state)
 	if current_state:
 		current_state.exit()

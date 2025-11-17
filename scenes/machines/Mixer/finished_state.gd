@@ -1,11 +1,11 @@
 class_name FinishedState
-extends MixerState
+extends MachineState
 
 
 var extractable_scene := preload("res://components/ExtractableComponent.tscn")
 var extractable_component: ExtractableComponent
 
-@export var idle_state: MixerState
+@export var idle_state: MachineState
 
 var output_list_expanded: Array[IngredientData] = []
 var output_list_expanded_size: int = -1
@@ -61,7 +61,7 @@ func exit() -> void:
 		extraction_counter = -1
 
 
-func update() -> MixerState:
+func update() -> MachineState:
 	if extraction_counter == output_list_expanded_size:
 		_clean_parent_data()
 		return idle_state

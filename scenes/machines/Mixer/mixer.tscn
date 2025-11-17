@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://yjerjgk5gsvt" path="res://scenes/machines/Mixer/mixer.gd" id="1_8175o"]
 [ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_d3qk4"]
 [ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="2_8175o"]
-[ext_resource type="Script" uid="uid://chijxmvuljpuv" path="res://scenes/machines/Mixer/mixer_state_machine.gd" id="4_oxnw4"]
+[ext_resource type="Script" uid="uid://cyxhycxs5spi8" path="res://scripts/machine_state_machine.gd" id="4_akecu"]
 [ext_resource type="Script" uid="uid://b48gvvneiwu31" path="res://scenes/machines/Mixer/idle_state.gd" id="5_hvgv4"]
 [ext_resource type="Script" uid="uid://bmqeq8ppsqwsk" path="res://scenes/machines/Mixer/loaded_state.gd" id="6_1be3e"]
 [ext_resource type="Script" uid="uid://t4novlykm3a3" path="res://scenes/machines/Mixer/mixing_state.gd" id="6_hkuiv"]
@@ -104,18 +104,13 @@ debug_color = Color(0.783328, 0.379291, 0.560879, 0.42)
 
 [node name="MixerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
-script = ExtResource("4_oxnw4")
+script = ExtResource("4_akecu")
 starting_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("loadedState", "input_criteria")]
+[node name="IdleState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("loadedState")]
 script = ExtResource("5_hvgv4")
 loadedState = NodePath("../LoadedState")
 animation = "idle"
-input_criteria = {
-1: null,
-2: null,
-3: null
-}
 
 [node name="LoadedState" type="Node" parent="MixerStateMachine" node_paths=PackedStringArray("mixing_state")]
 script = ExtResource("6_1be3e")

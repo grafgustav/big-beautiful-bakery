@@ -1,11 +1,10 @@
-class_name MixerState
+class_name MachineState
 extends Node
 
 
 @export var animation : String
-@export var input_criteria : Dictionary[Types.Items, MixerState] = {}
 
-var parent_ref : Mixer
+var parent_ref : Node
 var animation_player : AnimatedSprite2D
 
 
@@ -17,9 +16,9 @@ func exit() -> void:
 	pass
 
 
-func update() -> MixerState:
+func update() -> MachineState:
 	return null
 
 
-func physics_update() -> MixerState:
+func physics_update() -> MachineState:
 	return null

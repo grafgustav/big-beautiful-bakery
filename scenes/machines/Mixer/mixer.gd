@@ -3,7 +3,7 @@ extends Node2D
 
 
 var animation_player : AnimatedSprite2D
-var state_machine : MixerStateMachine
+var state_machine : MachineStateMachine
 var ingredient_list : IngredientsList
 var is_clickable : bool = false
 var recipe : RecipeData = null

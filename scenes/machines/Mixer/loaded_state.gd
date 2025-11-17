@@ -1,11 +1,11 @@
 class_name LoadedState
-extends MixerState
+extends MachineState
 
 
-@export var mixing_state : MixerState
+@export var mixing_state : MachineState
 
 
-func update() -> MixerState:
+func update() -> MachineState:
 	if !parent_ref.is_clickable:
 		return null
 	
