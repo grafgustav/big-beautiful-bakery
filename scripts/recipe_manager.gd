@@ -38,6 +38,7 @@ func get_junk_recipe() -> RecipeData:
 	var rec: RecipeData = RecipeData.new()
 	rec.recipe_id = "junk"
 	rec.display_name = "Junk"
+	rec.processing_time = randf() * 5
 	return rec
 
 

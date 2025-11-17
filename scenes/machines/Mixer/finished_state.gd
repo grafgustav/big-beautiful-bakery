@@ -6,8 +6,10 @@ var extractable_scene := preload("res://components/ExtractableComponent.tscn")
 var extractable_component: ExtractableComponent
 
 @export var idle_state: MixerState
-@export var process_result: PackedScene
-var extracted: bool = false
+
+var output_list_expanded: Array[IngredientData] = []
+var output_list_expanded_size: int = -1
+var extraction_counter: int = -1
 
 
 func enter() -> void:
@@ -22,7 +24,11 @@ func enter() -> void:
 		push_error("Extractable component could not be instantiated")
 		return
 	
-	extractable_component.extractable_item = process_result
+	output_list_expanded = parent_ref.recipe.expand_outputs()
+	output_list_expanded_size = output_list_expanded.size()
+	extraction_counter = 0
+	
+	_set_extraction_model()
 	
 	parent_ref.add_child(extractable_component)
 	extractable_component.global_position = parent_ref.global_position
@@ -43,21 +49,33 @@ func enter() -> void:
 		extractable_component.connect("extracted", _on_extracted)
 
 
+func _set_extraction_model() -> void:
+	var ingredient_data_extracted = output_list_expanded[extraction_counter]
+	extractable_component.extractable_ingredient = ingredient_data_extracted
+
+
 func exit() -> void:
 	if extractable_component:
 		extractable_component.queue_free()
 		extractable_component = null
-		extracted = false
+		extraction_counter = -1
 
 
 func update() -> MixerState:
-	if extracted:
+	if extraction_counter == output_list_expanded_size:
+		_clean_parent_data()
 		return idle_state
 	return null
 
 
+func _clean_parent_data() -> void:
+	parent_ref.ingredient_list.clear()
+	parent_ref.recipe = null
+
 func _on_extracted() -> void:
-	extracted = true
+	extraction_counter += 1
+	if extraction_counter < output_list_expanded_size:
+		_set_extraction_model()
 
 
 func _find_parents_collision_shape() -> CollisionShape2D:

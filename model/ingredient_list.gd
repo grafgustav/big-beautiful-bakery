@@ -6,6 +6,10 @@ extends Resource
 var ingredient_list : Array[IngredientData] = []
 
 
+func clear() -> void:
+	ingredient_list = []
+
+
 func count(ingredient: IngredientData) -> int:
 	return ingredient_list.count(ingredient)
 

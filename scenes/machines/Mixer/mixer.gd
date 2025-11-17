@@ -28,8 +28,6 @@ func drop_ingredient(ingredient: IngredientData) -> bool:
 	# TODO: Can any machine accept ANY input and then just have rubbish products?
 	# currently yes.
 	ingredient_list.append(ingredient)
-	print("Ingredient dropped, list:")
-	print(ingredient_list)
 	return true # ingredient accepted
 
 
@@ -38,9 +36,8 @@ func has_empty_ingredient_list() -> bool:
 
 
 func find_recipe_to_process() -> RecipeData:
-	var reci = RecipeManager.get_fully_completed_recipes(ingredient_list)
-	print("Recipes: ", reci)
-	return reci[0]
+	var reci = RecipeManager.get_first_completed_or_junk_recipe(ingredient_list)
+	return reci
 
 
 func _on_click_area_mouse_entered() -> void:

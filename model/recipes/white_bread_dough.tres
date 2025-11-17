@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=11 format=3 uid="uid://ba6mmuph0ww5m"]
+
+[ext_resource type="Script" uid="uid://blopsghs5kldc" path="res://model/ingredient_amount.gd" id="1_i2i4h"]
+[ext_resource type="Resource" uid="uid://c4q7vt0mqv4qx" path="res://model/items/flour.tres" id="2_4nmhc"]
+[ext_resource type="Resource" uid="uid://ckas3iu3oebuq" path="res://model/items/salt.tres" id="3_4nmhc"]
+[ext_resource type="Script" uid="uid://cq36dbgsunse6" path="res://model/recipe_data.gd" id="3_tg70f"]
+[ext_resource type="Resource" uid="uid://dbvxkbxx060be" path="res://model/items/water.tres" id="4_tg70f"]
+[ext_resource type="Resource" uid="uid://biwbgfnbmx25m" path="res://model/items/dough.tres" id="5_eal38"]
+
+[sub_resource type="Resource" id="Resource_4yms3"]
+script = ExtResource("1_i2i4h")
+ingredient = ExtResource("2_4nmhc")
+amount = 2
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_adn08"]
+script = ExtResource("1_i2i4h")
+ingredient = ExtResource("3_4nmhc")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_iyhy6"]
+script = ExtResource("1_i2i4h")
+ingredient = ExtResource("4_tg70f")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_wr1d6"]
+script = ExtResource("1_i2i4h")
+ingredient = ExtResource("5_eal38")
+amount = 2
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[resource]
+script = ExtResource("3_tg70f")
+recipe_id = &"white_bread_dough"
+display_name = "White Bread Dough"
+inputs = Array[ExtResource("1_i2i4h")]([SubResource("Resource_4yms3"), SubResource("Resource_adn08"), SubResource("Resource_iyhy6")])
+outputs = Array[ExtResource("1_i2i4h")]([SubResource("Resource_wr1d6")])
+processing_time = 2.5
+metadata/_custom_type_script = "uid://cq36dbgsunse6"
