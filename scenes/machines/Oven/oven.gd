@@ -40,6 +40,7 @@ func has_empty_ingredient_list() -> bool:
 
 func find_recipe_to_process() -> RecipeData:
 	var reci = RecipeManager.get_first_completed_or_junk_recipe_for_machine_type(ingredient_list, machine_type)
+	print("Recipe: ", reci)
 	return reci
 
 

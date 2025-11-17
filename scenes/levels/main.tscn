@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/Oven/oven.tscn" id="2_y0acb"]
 [ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="3_j4d2a"]
 [ext_resource type="PackedScene" uid="uid://bnby6prigmdk8" path="res://scenes/machines/Mixer/mixer.tscn" id="4_j4d2a"]
-[ext_resource type="PackedScene" uid="uid://b7bdnlasgrrej" path="res://scenes/decorations/freedroptable.tscn" id="5_u81e1"]
-[ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="6_vkq25"]
-[ext_resource type="PackedScene" uid="uid://5w5gauinwouh" path="res://scenes/items/salt.tscn" id="7_7lrji"]
-[ext_resource type="PackedScene" uid="uid://bnc2ulmpid2yh" path="res://scenes/items/water.tscn" id="8_rssyh"]
+[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbox.tscn" id="5_vkq25"]
+[ext_resource type="PackedScene" uid="uid://w6bl0vp268s1" path="res://scenes/decorations/saltbox.tscn" id="6_7lrji"]
+[ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="7_rssyh"]
+[ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="8_hwp66"]
 
 [node name="Main" type="Node2D"]
 
@@ -18,22 +18,46 @@ tile_map_data = PackedByteArray("AAD//wwAAAAHAAYAAAABAAgAAAAHAAYAAAADAAQAAAAHAAY
 tile_set = ExtResource("1_72ix8")
 
 [node name="Oven" parent="." instance=ExtResource("2_y0acb")]
-position = Vector2(939, 222)
+position = Vector2(1016, 157)
 
 [node name="Table" parent="." instance=ExtResource("3_j4d2a")]
-position = Vector2(494, 298)
+position = Vector2(543, 239)
+
+[node name="Table2" parent="." instance=ExtResource("3_j4d2a")]
+position = Vector2(245, 391)
 
 [node name="Mixer" parent="." instance=ExtResource("4_j4d2a")]
-position = Vector2(515, 121)
+position = Vector2(560, 64)
 
-[node name="FreedropTable" parent="." instance=ExtResource("5_u81e1")]
-position = Vector2(199, 453)
+[node name="Flourbox" parent="." instance=ExtResource("5_vkq25")]
+position = Vector2(1065, 449)
 
-[node name="Flour" parent="." instance=ExtResource("6_vkq25")]
-position = Vector2(233, 255)
+[node name="Flourbox2" parent="." instance=ExtResource("6_7lrji")]
+position = Vector2(909, 514)
 
-[node name="Salt" parent="." instance=ExtResource("7_7lrji")]
-position = Vector2(151, 293)
+[node name="Waterbox" parent="." instance=ExtResource("7_rssyh")]
+position = Vector2(742, 576)
 
-[node name="Water" parent="." instance=ExtResource("8_rssyh")]
-position = Vector2(65, 337)
+[node name="WholeWheatFlour" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(143, 252)
+
+[node name="WholeWheatFlour2" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(84, 294)
+
+[node name="WholeWheatFlour3" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(280, 159)
+
+[node name="WholeWheatFlour4" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(243, 183)
+
+[node name="WholeWheatFlour5" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(205, 219)
+
+[node name="WholeWheatFlour6" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(183, 253)
+
+[node name="WholeWheatFlour7" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(130, 277)
+
+[node name="WholeWheatFlour8" parent="." instance=ExtResource("8_hwp66")]
+position = Vector2(80, 286)

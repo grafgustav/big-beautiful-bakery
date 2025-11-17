@@ -63,7 +63,6 @@ debug_color = Color(0.783328, 0.379291, 0.560879, 0.42)
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="ClickArea"]
 position = Vector2(-55.5, 17)
 rotation = 0.406662
-scale = Vector2(1, 1)
 skew = -0.390954
 shape = SubResource("RectangleShape2D_u8xrr")
 debug_color = Color(0.783328, 0.379291, 0.560879, 0.42)

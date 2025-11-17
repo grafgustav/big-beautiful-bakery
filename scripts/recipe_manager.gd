@@ -2,6 +2,7 @@ class_name RecipeManagerClass
 extends Node
 
 @export var all_recipes: Array[RecipeData] = []
+var excluded_dirs: Array[String] = ["botched"]
 
 
 func _ready() -> void:
@@ -15,10 +16,12 @@ func _load_recipes(path: String) -> void:
 		push_error("Recipe directory not found: " + path)
 		return
 
+	# TODO: Make this iterate through sub dirs
 	dir.list_dir_begin()
 	var filename := dir.get_next()
 
 	while filename != "":
+		print("Filename: ", filename)
 		if not dir.current_is_dir():
 			if filename.ends_with(".tres") or filename.ends_with(".res"):
 				var full_path := path + filename
@@ -34,14 +37,14 @@ func _load_recipes(path: String) -> void:
 
 
 func get_junk_recipe_by_machine_type(machine_type: Types.MachineTypes) -> RecipeData:
-	var junk_rec: RecipeData = preload("res://model/recipes/botched_mixing.tres")
+	var junk_rec: RecipeData = preload("res://model/recipes/botched/botched_mixing.tres")
 	match(machine_type):
 		Types.MachineTypes.MIXING:
-			junk_rec = preload("res://model/recipes/botched_mixing.tres")
+			junk_rec = preload("res://model/recipes/botched/botched_mixing.tres")
 		Types.MachineTypes.BAKING:
-			junk_rec = preload("res://model/recipes/botched_baking.tres")
+			junk_rec = preload("res://model/recipes/botched/botched_baking.tres")
 		_:
-			junk_rec = preload("res://model/recipes/botched_mixing.tres")
+			junk_rec = preload("res://model/recipes/botched/botched_mixing.tres")
 	junk_rec.processing_time = randf() * 5
 	return junk_rec
 
@@ -52,9 +55,10 @@ func get_first_completed_or_junk_recipe_for_machine_type(
 ) -> RecipeData:
 	var filtered_recipes := get_filtered_recipes_by_machine_type(machine_type)
 	filtered_recipes = filtered_recipes.filter(func(r: RecipeData): return _is_recipe_complete(r, ingredient_list))
-	if filtered_recipes.size() <= 1:
+	print("Filtered Recipes: ", filtered_recipes)
+	if filtered_recipes.size() <= 0:
 		return get_junk_recipe_by_machine_type(machine_type)
-	return filtered_recipes[1]
+	return filtered_recipes[0]
 
 
 func get_first_completed_or_junk_recipe(ingredient_list: IngredientsList) -> RecipeData:
