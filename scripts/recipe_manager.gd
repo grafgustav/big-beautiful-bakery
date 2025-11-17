@@ -34,19 +34,16 @@ func _load_recipes(path: String) -> void:
 
 
 func get_junk_recipe() -> RecipeData:
-	# TODO: Make this more elegant and with scene?
-	var rec: RecipeData = RecipeData.new()
-	rec.recipe_id = "junk"
-	rec.display_name = "Junk"
-	rec.processing_time = randf() * 5
-	return rec
+	var junk_rec: RecipeData = preload("res://model/recipes/botched_recipe.tres")
+	junk_rec.processing_time = randf() * 5
+	return junk_rec
 
 
 func get_first_completed_or_junk_recipe(ingredient_list: IngredientsList) -> RecipeData:
 	var completed_recipes := get_fully_completed_recipes(ingredient_list)
-	if completed_recipes.size() == 0:
+	if completed_recipes.size() <= 1:
 		return get_junk_recipe()
-	return completed_recipes[0]
+	return completed_recipes[1]
 
 
 func get_fully_completed_recipes(ingredient_list: IngredientsList) -> Array[RecipeData]:

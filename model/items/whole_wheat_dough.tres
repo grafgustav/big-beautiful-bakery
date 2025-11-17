@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://c1x2dyx5nghfr"]
+
+[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_lxd7y"]
+
+[resource]
+script = ExtResource("1_lxd7y")
+id = &"whole_wheat_dough"
+display_name = "Whole Wheat Dough"
+scene_path = "res://scenes/items/whole_wheat_dough.tscn"
+metadata/_custom_type_script = "uid://ctp3xpf7hidtv"

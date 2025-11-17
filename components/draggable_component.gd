@@ -41,9 +41,7 @@ func _process(_delta: float) -> void:
 
 func _get_ingredient() -> IngredientData:
 	var in_comp = parent_ref.find_child("IngredientComponent") as IngredientComponent
-	print("IngredientComp: ", in_comp)
 	if in_comp:
-		print("Incomp Ingredient: ", in_comp.ingredient)
 		return in_comp.ingredient
 	else:
 		push_error("Parent does not contain an Ingredient Component")

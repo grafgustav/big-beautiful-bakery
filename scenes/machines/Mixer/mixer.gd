@@ -28,6 +28,7 @@ func drop_ingredient(ingredient: IngredientData) -> bool:
 	# TODO: Can any machine accept ANY input and then just have rubbish products?
 	# currently yes.
 	ingredient_list.append(ingredient)
+	print("Ingredient List: ", ingredient_list)
 	return true # ingredient accepted
 
 

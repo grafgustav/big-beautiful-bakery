@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbvtk4xox8kjp"]
+
+[ext_resource type="PackedScene" uid="uid://0a35iyl4bgs" path="res://components/IngredientComponent.tscn" id="1_bq72n"]
+[ext_resource type="Resource" uid="uid://bhxiw7cf03ofc" path="res://model/items/botched_dough.tres" id="2_bq72n"]
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="3_jqkji"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="4_6tvmo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
+atlas = ExtResource("3_jqkji")
+region = Rect2(804.91, 5.07918, 71.5, 75.4189)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okoix"]
+size = Vector2(72, 64)
+
+[node name="BotchedDough" type="Node2D"]
+
+[node name="IngredientComponent" parent="." instance=ExtResource("1_bq72n")]
+ingredient = ExtResource("2_bq72n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2ce6h")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_6tvmo")
+item = 3
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_okoix")

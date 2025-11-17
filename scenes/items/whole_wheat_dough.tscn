@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2c320shf77qm"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_pimpw"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_882nt"]
+[ext_resource type="Script" uid="uid://bs7c7j6a55ksw" path="res://components/ingredient_component.gd" id="3_cxuok"]
+[ext_resource type="Resource" uid="uid://c1x2dyx5nghfr" path="res://model/items/whole_wheat_dough.tres" id="4_pimpw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pimpw"]
+atlas = ExtResource("1_pimpw")
+region = Rect2(880, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_volpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pimpw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_volpc"]
+radius = 39.0128
+
+[node name="WholeWheatDough" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_volpc")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_882nt")
+item = 4
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_volpc")
+
+[node name="IngredientComponent" type="Node" parent="."]
+script = ExtResource("3_cxuok")
+ingredient = ExtResource("4_pimpw")
+metadata/_custom_type_script = "uid://bs7c7j6a55ksw"
