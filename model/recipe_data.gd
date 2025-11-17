@@ -6,6 +6,8 @@ extends Resource
 
 @export var icon : Texture2D
 
+@export var machine_type : Types.MachineTypes = Types.MachineTypes.ALL
+
 @export var inputs : Array[IngredientAmount]
 @export var outputs : Array[IngredientAmount]
 
@@ -22,3 +24,7 @@ func expand_outputs() -> Array[IngredientData]:
 		for i in ingredient_amount.amount:
 			expanded.append(ingredient_amount.ingredient)
 	return expanded
+
+
+func is_machine_type(t: Types.MachineTypes) -> bool:
+	return machine_type == Types.MachineTypes.ALL || machine_type == t

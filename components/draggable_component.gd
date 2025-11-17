@@ -1,7 +1,6 @@
 class_name DraggableComponent
 extends Area2D
 
-@export var item : Types.Items
 
 var parent_ref : Node2D
 var is_draggable : bool = false # if it is possible to drag the object

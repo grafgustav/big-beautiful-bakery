@@ -4,4 +4,4 @@ class_name Types
 
 enum DroppableTypes {VANISHING, GRIDSNAP, FREEDROP}
 
-enum Items { NULL, SALT, WATER, FLOUR, BOWL, DOUGH }
+enum MachineTypes {ALL, MIXING, BAKING}

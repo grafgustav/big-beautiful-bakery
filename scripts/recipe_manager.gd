@@ -39,6 +39,17 @@ func get_junk_recipe() -> RecipeData:
 	return junk_rec
 
 
+func get_first_completed_or_junk_recipe_for_machine_type(
+	ingredient_list: IngredientsList,
+	machine_type: Types.MachineTypes
+) -> RecipeData:
+	var filtered_recipes := get_filtered_recipes_by_machine_type(machine_type)
+	filtered_recipes = filtered_recipes.filter(func(r: RecipeData): return _is_recipe_complete(r, ingredient_list))
+	if filtered_recipes.size() <= 1:
+		return get_junk_recipe()
+	return filtered_recipes[1]
+
+
 func get_first_completed_or_junk_recipe(ingredient_list: IngredientsList) -> RecipeData:
 	var completed_recipes := get_fully_completed_recipes(ingredient_list)
 	if completed_recipes.size() <= 1:
@@ -52,6 +63,10 @@ func get_fully_completed_recipes(ingredient_list: IngredientsList) -> Array[Reci
 		if _is_recipe_complete(recipe, ingredient_list):
 			completed.append(recipe)
 	return completed
+
+
+func get_filtered_recipes_by_machine_type(machine_type: Types.MachineTypes) -> Array[RecipeData]:
+	return all_recipes.filter(func(r: RecipeData): return r.is_machine_type(machine_type))
 
 
 func _is_recipe_complete(recipe: RecipeData, ingredient_list: IngredientsList) -> bool:

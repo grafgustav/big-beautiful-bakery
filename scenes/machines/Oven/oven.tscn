@@ -32,7 +32,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_dkhf2")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
@@ -46,6 +46,7 @@ script = ExtResource("1_lwtoq")
 unique_name_in_owner = true
 position = Vector2(4, -12)
 sprite_frames = SubResource("SpriteFrames_kr600")
+animation = &"idle"
 
 [node name="DroppableComponent" parent="." instance=ExtResource("2_u8xrr")]
 dropping_type = 0
@@ -76,21 +77,25 @@ metadata/_custom_type_script = "uid://cyxhycxs5spi8"
 [node name="IdleState" type="Node" parent="BakingStateMachine" node_paths=PackedStringArray("loadedState")]
 script = ExtResource("4_lwtoq")
 loadedState = NodePath("../LoadedState")
+animation = "idle"
 metadata/_custom_type_script = "uid://b48gvvneiwu31"
 
 [node name="LoadedState" type="Node" parent="BakingStateMachine" node_paths=PackedStringArray("processing_state")]
 script = ExtResource("5_l4tmt")
 processing_state = NodePath("../ProcessingState")
+animation = "idle"
 metadata/_custom_type_script = "uid://bmqeq8ppsqwsk"
 
 [node name="ProcessingState" type="Node" parent="BakingStateMachine" node_paths=PackedStringArray("finishedState")]
 script = ExtResource("6_koafb")
 finishedState = NodePath("../FinishedState")
+animation = "baking"
 metadata/_custom_type_script = "uid://t4novlykm3a3"
 
 [node name="FinishedState" type="Node" parent="BakingStateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_rod6h")
 idle_state = NodePath("../IdleState")
+animation = "idle"
 metadata/_custom_type_script = "uid://bu76qa3k63cww"
 
 [connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]

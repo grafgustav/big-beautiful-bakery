@@ -8,6 +8,7 @@ var ingredient_list : IngredientsList
 var is_clickable : bool = false
 var recipe : RecipeData = null
 
+var machine_type: Types.MachineTypes = Types.MachineTypes.MIXING
 
 func _ready() -> void:
 	animation_player = %AnimatedSprite2D
@@ -37,7 +38,7 @@ func has_empty_ingredient_list() -> bool:
 
 
 func find_recipe_to_process() -> RecipeData:
-	var reci = RecipeManager.get_first_completed_or_junk_recipe(ingredient_list)
+	var reci = RecipeManager.get_first_completed_or_junk_recipe_for_machine_type(ingredient_list, machine_type)
 	return reci
 
 
