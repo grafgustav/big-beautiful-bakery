@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://on8b140p78ns"]
+
+[ext_resource type="PackedScene" uid="uid://0a35iyl4bgs" path="res://components/IngredientComponent.tscn" id="1_hmxut"]
+[ext_resource type="Resource" uid="uid://c7osu5k31r7sj" path="res://model/items/burnt_ingredients.tres" id="2_hmxut"]
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="3_17ov4"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="4_1atvn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ce6h"]
+atlas = ExtResource("3_17ov4")
+region = Rect2(1040.34, 19.788, 79.5, 60.7101)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okoix"]
+size = Vector2(81, 64)
+
+[node name="BurntIngredients" type="Node2D"]
+
+[node name="IngredientComponent" parent="." instance=ExtResource("1_hmxut")]
+ingredient = ExtResource("2_hmxut")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2ce6h")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_1atvn")
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(1.5, 6)
+shape = SubResource("RectangleShape2D_okoix")

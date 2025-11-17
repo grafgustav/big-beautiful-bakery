@@ -33,8 +33,15 @@ func _load_recipes(path: String) -> void:
 	dir.list_dir_end()
 
 
-func get_junk_recipe() -> RecipeData:
-	var junk_rec: RecipeData = preload("res://model/recipes/botched_recipe.tres")
+func get_junk_recipe_by_machine_type(machine_type: Types.MachineTypes) -> RecipeData:
+	var junk_rec: RecipeData = preload("res://model/recipes/botched_mixing.tres")
+	match(machine_type):
+		Types.MachineTypes.MIXING:
+			junk_rec = preload("res://model/recipes/botched_mixing.tres")
+		Types.MachineTypes.BAKING:
+			junk_rec = preload("res://model/recipes/botched_baking.tres")
+		_:
+			junk_rec = preload("res://model/recipes/botched_mixing.tres")
 	junk_rec.processing_time = randf() * 5
 	return junk_rec
 
@@ -46,14 +53,14 @@ func get_first_completed_or_junk_recipe_for_machine_type(
 	var filtered_recipes := get_filtered_recipes_by_machine_type(machine_type)
 	filtered_recipes = filtered_recipes.filter(func(r: RecipeData): return _is_recipe_complete(r, ingredient_list))
 	if filtered_recipes.size() <= 1:
-		return get_junk_recipe()
+		return get_junk_recipe_by_machine_type(machine_type)
 	return filtered_recipes[1]
 
 
 func get_first_completed_or_junk_recipe(ingredient_list: IngredientsList) -> RecipeData:
 	var completed_recipes := get_fully_completed_recipes(ingredient_list)
 	if completed_recipes.size() <= 1:
-		return get_junk_recipe()
+		return get_junk_recipe_by_machine_type(Types.MachineTypes.ALL)
 	return completed_recipes[1]
 
 

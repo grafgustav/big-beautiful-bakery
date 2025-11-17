@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IngredientData" load_steps=2 format=3 uid="uid://c7osu5k31r7sj"]
+
+[ext_resource type="Script" uid="uid://ctp3xpf7hidtv" path="res://model/ingredient_data.gd" id="1_cmhha"]
+
+[resource]
+script = ExtResource("1_cmhha")
+id = &"burnt_ingredients"
+display_name = "Burnt Ingredients"
+scene_path = "res://scenes/items/burnt_ingredients.tscn"
+metadata/_custom_type_script = "uid://ctp3xpf7hidtv"

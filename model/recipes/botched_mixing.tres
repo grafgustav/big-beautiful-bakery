@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=5 format=3 uid="uid://dbu51ciiol7wk"]
+
+[ext_resource type="Script" uid="uid://blopsghs5kldc" path="res://model/ingredient_amount.gd" id="1_6hgny"]
+[ext_resource type="Resource" uid="uid://bhxiw7cf03ofc" path="res://model/items/botched_dough.tres" id="2_v6m24"]
+[ext_resource type="Script" uid="uid://cq36dbgsunse6" path="res://model/recipe_data.gd" id="3_l6bfx"]
+
+[sub_resource type="Resource" id="Resource_xde2d"]
+script = ExtResource("1_6hgny")
+ingredient = ExtResource("2_v6m24")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[resource]
+script = ExtResource("3_l6bfx")
+recipe_id = &"botched_recipe"
+display_name = "Botched Recipe"
+machine_type = 1
+inputs = Array[ExtResource("1_6hgny")]([])
+outputs = Array[ExtResource("1_6hgny")]([SubResource("Resource_xde2d")])
+processing_time = 1.0
+metadata/_custom_type_script = "uid://cq36dbgsunse6"

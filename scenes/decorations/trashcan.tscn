@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cecoy5a7h1yng"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_jeuqq"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="3_jeuqq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mnpr"]
+atlas = ExtResource("1_jeuqq")
+region = Rect2(959.844, 1439.22, 160, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olid"]
+size = Vector2(157, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkt2r"]
+size = Vector2(157, 144)
+
+[node name="Trashcan" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_0mnpr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_8olid")
+
+[node name="DroppableComponent" parent="." instance=ExtResource("3_jeuqq")]
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(-0.5, 5)
+shape = SubResource("RectangleShape2D_kkt2r")
