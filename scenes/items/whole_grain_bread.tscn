@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwf1xu3eijqwu"]
+
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_54tpp"]
+[ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_86d2p"]
+[ext_resource type="Script" uid="uid://bs7c7j6a55ksw" path="res://components/ingredient_component.gd" id="3_rlsyi"]
+[ext_resource type="Resource" uid="uid://drnuovphh8uxo" path="res://model/items/white_bread.tres" id="4_8ic3t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54tpp"]
+atlas = ExtResource("1_54tpp")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_volpc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54tpp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6n3t"]
+size = Vector2(69, 83)
+
+[node name="WhiteBread" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_volpc")
+
+[node name="DraggableComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_86d2p")
+metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(6.5, 0.5)
+shape = SubResource("RectangleShape2D_b6n3t")
+
+[node name="IngredientComponent" type="Node" parent="."]
+script = ExtResource("3_rlsyi")
+ingredient = ExtResource("4_8ic3t")
+metadata/_custom_type_script = "uid://bs7c7j6a55ksw"

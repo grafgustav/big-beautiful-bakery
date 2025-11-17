@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=7 format=3 uid="uid://buisyqxe1r01h"]
+
+[ext_resource type="Script" uid="uid://blopsghs5kldc" path="res://model/ingredient_amount.gd" id="1_0r0e1"]
+[ext_resource type="Script" uid="uid://cq36dbgsunse6" path="res://model/recipe_data.gd" id="2_3yhqw"]
+[ext_resource type="Resource" uid="uid://biwbgfnbmx25m" path="res://model/items/dough.tres" id="2_fjxxf"]
+[ext_resource type="Resource" uid="uid://drnuovphh8uxo" path="res://model/items/white_bread.tres" id="3_fjxxf"]
+
+[sub_resource type="Resource" id="Resource_5ponf"]
+script = ExtResource("1_0r0e1")
+ingredient = ExtResource("2_fjxxf")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_npr6m"]
+script = ExtResource("1_0r0e1")
+ingredient = ExtResource("3_fjxxf")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[resource]
+script = ExtResource("2_3yhqw")
+recipe_id = &"baked_white_bread"
+display_name = "White Bread"
+machine_type = 2
+inputs = Array[ExtResource("1_0r0e1")]([SubResource("Resource_5ponf")])
+outputs = Array[ExtResource("1_0r0e1")]([SubResource("Resource_npr6m")])
+processing_time = 5.0
+metadata/_custom_type_script = "uid://cq36dbgsunse6"
