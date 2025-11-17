@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://uic38qo4lrne"]
+
+[ext_resource type="Script" uid="uid://b4yqjsmnomu0n" path="res://scenes/decorations/bread_display.gd" id="1_3vq2t"]
+[ext_resource type="Texture2D" uid="uid://c1x4x0kw8kvcc" path="res://assets/everything.png" id="1_ex8ep"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="3_pesag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxcw3"]
+atlas = ExtResource("1_ex8ep")
+region = Rect2(0, 80, 240, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vq2t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxcw3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vq2t"]
+size = Vector2(206, 145)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_586me"]
+size = Vector2(206, 145)
+
+[node name="BreadDisplay" type="Node2D"]
+script = ExtResource("1_3vq2t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3vq2t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-21, -13.5)
+shape = SubResource("RectangleShape2D_3vq2t")
+
+[node name="DroppableComponent" parent="." instance=ExtResource("3_pesag")]
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(-21, -13.5)
+shape = SubResource("RectangleShape2D_586me")
