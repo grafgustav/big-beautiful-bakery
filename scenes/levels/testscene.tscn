@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpeis6nj6gml3"]
+[gd_scene load_steps=13 format=3 uid="uid://cpeis6nj6gml3"]
 
 [ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="3_82gfa"]
 [ext_resource type="PackedScene" uid="uid://b7bdnlasgrrej" path="res://scenes/decorations/freedroptable.tscn" id="4_04qq0"]
@@ -11,14 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://w6bl0vp268s1" path="res://scenes/decorations/saltbox.tscn" id="9_75udb"]
 [ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="10_gy8k0"]
 [ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="11_gy8k0"]
+[ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/Oven/oven.tscn" id="12_7opwp"]
 
 [node name="Testscene" type="Node2D"]
 
 [node name="FreedropTable" parent="." instance=ExtResource("4_04qq0")]
-position = Vector2(265, 263)
+position = Vector2(87, 225)
 
 [node name="Mixer" parent="." instance=ExtResource("7_kgl7r")]
-position = Vector2(1023, 143)
+position = Vector2(568, 144)
+
+[node name="Oven" parent="." instance=ExtResource("12_7opwp")]
+position = Vector2(1069, 169)
 
 [node name="Bowl" parent="." instance=ExtResource("3_82gfa")]
 position = Vector2(1088, 592)

@@ -40,6 +40,7 @@ func enter() -> void:
 		cloned_shape.position = parent_collision_shape.position
 		cloned_shape.rotation = parent_collision_shape.rotation
 		cloned_shape.scale = parent_collision_shape.scale
+		cloned_shape.skew = parent_collision_shape.skew
 		extractable_component.add_child(cloned_shape)
 	else:
 		push_error("No appropriate parent collision shape found")
@@ -71,6 +72,7 @@ func update() -> MachineState:
 func _clean_parent_data() -> void:
 	parent_ref.ingredient_list.clear()
 	parent_ref.recipe = null
+
 
 func _on_extracted() -> void:
 	extraction_counter += 1

@@ -1,4 +1,4 @@
-class_name MixingState
+class_name ProcessingState
 extends MachineState
 
 
@@ -39,6 +39,7 @@ func _create_timer(duration: int) -> Timer:
 	timer_instance.one_shot = true
 	parent_ref.add_child(timer_instance)
 	timer_instance.start()
+	
 	return timer_instance
 
 
