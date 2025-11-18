@@ -8,5 +8,5 @@ extends Node2D
 
 func drop_ingredient(ingredient: IngredientData) -> bool:
 	print("Selling item: ", ingredient)
-	PlayerManager.earn_money(ingredient.price)
+	PlayerManager.earn_money(ingredient.price || 0)
 	return true

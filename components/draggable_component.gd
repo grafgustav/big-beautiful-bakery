@@ -9,7 +9,8 @@ var is_dragging : bool = false # if the object is currently being dragged
 var position_offset : Vector2
 var initial_position : Vector2
 
-var droppable_body_ref : Node2D
+# make it a list or dict
+var hovered_droppable_bodies: Array[Node2D]
 
 # use static resource variable instead of global autoload script variable?
 static var static_object_dragged : Node2D # the object that is currently being dragged
@@ -20,6 +21,8 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
+	
+	hovered_droppable_bodies = []
 	
 	var parent = self.get_parent()
 	if parent && parent is Node2D:
@@ -49,10 +52,11 @@ func _get_ingredient() -> IngredientData:
 
 func _process_dropping() -> void:
 	is_dragging = false
-	if droppable_body_ref == null:
+	if hovered_droppable_bodies.is_empty():
 		_snap_back_to_initial_position()
 	else:
-		var droppable_component = _get_droppable_component(droppable_body_ref)
+		var closest_droppable_body = _get_closest_droppable_body(hovered_droppable_bodies)
+		var droppable_component = _get_droppable_component(closest_droppable_body)
 		var dropped: bool = droppable_component.drop_ingredient(_get_ingredient())
 		if !dropped:
 			_snap_back_to_initial_position()
@@ -68,6 +72,18 @@ func _process_dropping() -> void:
 			Types.DroppableTypes.GRIDSNAP:
 				var tween = get_tree().create_tween()
 				tween.tween_property(parent_ref, "global_position", _get_grid_snap(droppable_component), 0.2).set_ease(Tween.EASE_OUT)
+
+
+func _get_closest_droppable_body(bodies: Array[Node2D]) -> Node2D:
+	# TODO: Evaluate, if this is even necessary
+	# get the bodies droppable children
+	
+	# get their collision shapes
+	
+	# get max collision shape intersection
+	
+	# return the original body of that...
+	return bodies[0]
 
 
 func _snap_back_to_initial_position() -> void:
@@ -160,14 +176,18 @@ func _on_mouse_exited() -> void:
 
 
 func _on_area_entered(body: Node2D) -> void:
+	# auch hier muss man eigentlich schnittmengen berechnen
+	print("Area entered: ", body)
 	if _has_body_droppable_component(body.get_parent()):
-		droppable_body_ref = body.get_parent()
+		print("Is droppable -> Setting body_ref")
+		hovered_droppable_bodies.append(body.get_parent())
+		print("Hovered bodies: ", hovered_droppable_bodies)
 
 
 func _on_area_exited(body: Node2D) -> void:
-	# reset values without condition to be safe?
-	if _has_body_droppable_component(body.get_parent()):
-		droppable_body_ref = null
+	print("Area exited: ", body)
+	hovered_droppable_bodies.erase(body.get_parent())
+	print("Hovered bodies: ", hovered_droppable_bodies)
 
 
 func _has_body_droppable_component(body: Node2D) -> bool:
