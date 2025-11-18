@@ -32,8 +32,7 @@ func physics_update() -> MachineState:
 	return null
 
 
-func _create_timer(duration: int) -> Timer:
-	# TODO: Find bug why sometimes timer does not get set (botched dough)
+func _create_timer(duration: float) -> Timer:
 	var timer_instance = Timer.new()
 	timer_instance.wait_time = duration
 	timer_instance.one_shot = true
