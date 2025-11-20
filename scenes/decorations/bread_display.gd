@@ -7,6 +7,7 @@ extends Node2D
 
 
 func drop_ingredient(ingredient: IngredientData) -> bool:
-	print("Selling item: ", ingredient)
-	PlayerManager.earn_money(ingredient.price || 0)
+	print("Selling item: ", ingredient, " for ", ingredient.price)
+	var profit := ingredient.price if ingredient.price else 0
+	PlayerManager.earn_money(profit)
 	return true

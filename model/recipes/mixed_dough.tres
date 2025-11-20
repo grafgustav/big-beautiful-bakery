@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=15 format=3 uid="uid://dvra42gi5vfce"]
+
+[ext_resource type="Script" uid="uid://blopsghs5kldc" path="res://model/ingredient_amount.gd" id="1_aww8x"]
+[ext_resource type="Resource" uid="uid://c4q7vt0mqv4qx" path="res://model/items/flour.tres" id="2_4wtb5"]
+[ext_resource type="Script" uid="uid://cq36dbgsunse6" path="res://model/recipe_data.gd" id="2_8pir0"]
+[ext_resource type="Resource" uid="uid://bnd6kyfmtbxo5" path="res://model/items/whole_wheat_flour.tres" id="3_jjwox"]
+[ext_resource type="Resource" uid="uid://ckas3iu3oebuq" path="res://model/items/salt.tres" id="4_l5m6w"]
+[ext_resource type="Resource" uid="uid://dbvxkbxx060be" path="res://model/items/water.tres" id="5_bjvyp"]
+[ext_resource type="Resource" uid="uid://biwbgfnbmx25m" path="res://model/items/dough.tres" id="6_l5m6w"]
+[ext_resource type="Resource" uid="uid://c1x2dyx5nghfr" path="res://model/items/whole_wheat_dough.tres" id="7_bjvyp"]
+
+[sub_resource type="Resource" id="Resource_ihokb"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("2_4wtb5")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_0i3jn"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("3_jjwox")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_4kvb3"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("4_l5m6w")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_8w4x7"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("5_bjvyp")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_vbbvp"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("6_l5m6w")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[sub_resource type="Resource" id="Resource_xkwd1"]
+script = ExtResource("1_aww8x")
+ingredient = ExtResource("7_bjvyp")
+amount = 1
+metadata/_custom_type_script = "uid://blopsghs5kldc"
+
+[resource]
+script = ExtResource("2_8pir0")
+recipe_id = &"mixed_dough"
+display_name = "Mixed Dough"
+machine_type = 1
+inputs = Array[ExtResource("1_aww8x")]([SubResource("Resource_ihokb"), SubResource("Resource_0i3jn"), SubResource("Resource_4kvb3"), SubResource("Resource_8w4x7")])
+outputs = Array[ExtResource("1_aww8x")]([SubResource("Resource_vbbvp"), SubResource("Resource_xkwd1")])
+processing_time = 3.0
+metadata/_custom_type_script = "uid://cq36dbgsunse6"
