@@ -13,6 +13,8 @@ extends Resource
 
 @export var processing_time : float
 
+@export var xp_earned : int
+
 
 func _to_string() -> String:
 	return display_name

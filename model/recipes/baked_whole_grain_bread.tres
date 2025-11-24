@@ -25,4 +25,5 @@ machine_type = 2
 inputs = Array[ExtResource("1_cj84j")]([SubResource("Resource_5ponf")])
 outputs = Array[ExtResource("1_cj84j")]([SubResource("Resource_npr6m")])
 processing_time = 5.0
+xp_earned = 15
 metadata/_custom_type_script = "uid://cq36dbgsunse6"

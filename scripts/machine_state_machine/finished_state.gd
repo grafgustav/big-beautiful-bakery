@@ -2,6 +2,8 @@ class_name FinishedState
 extends MachineState
 
 
+signal recipe_finished(recipe: RecipeData)
+
 var extractable_scene := preload("res://components/ExtractableComponent.tscn")
 var extractable_component: ExtractableComponent
 
@@ -12,8 +14,14 @@ var output_list_expanded_size: int = -1
 var extraction_counter: int = -1
 
 
+func _ready() -> void:
+	PlayerManager.connect_to_recipe_finished_event(self)
+
+
 func enter() -> void:
 	super()
+	
+	recipe_finished.emit(parent_ref.recipe)
 	
 	if !parent_ref:
 		push_error("No parent ref set!")

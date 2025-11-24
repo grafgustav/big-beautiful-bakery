@@ -13,7 +13,7 @@ var initial_position : Vector2
 var hovered_droppable_bodies: Array[Node2D]
 
 # use static resource variable instead of global autoload script variable?
-static var static_object_dragged : Node2D # the object that is currently being dragged
+static var static_object_dragged : Node2D # the object that is currently being dragged or hovered
 
 
 func _ready() -> void:
