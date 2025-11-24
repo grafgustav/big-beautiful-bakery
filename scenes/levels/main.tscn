@@ -54,11 +54,5 @@ position = Vector2(243, 183)
 [node name="WholeWheatFlour5" parent="." instance=ExtResource("8_hwp66")]
 position = Vector2(205, 219)
 
-[node name="WholeWheatFlour6" parent="." instance=ExtResource("8_hwp66")]
-position = Vector2(183, 253)
-
-[node name="WholeWheatFlour7" parent="." instance=ExtResource("8_hwp66")]
-position = Vector2(130, 277)
-
 [node name="WholeWheatFlour8" parent="." instance=ExtResource("8_hwp66")]
 position = Vector2(80, 286)

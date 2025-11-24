@@ -33,3 +33,7 @@ func physics_update() -> void:
 	var new_state = current_state.physics_update()
 	if new_state:
 		change_state(new_state)
+
+
+func drop_ingredient(ingredient: IngredientData) -> bool:
+	return current_state.drop_ingredient(ingredient)

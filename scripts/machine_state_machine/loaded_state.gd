@@ -16,3 +16,8 @@ func update() -> MachineState:
 			return processing_state
 			
 	return null
+
+
+func drop_ingredient(ingredient: IngredientData) -> bool:
+	parent_ref.add_ingredient(ingredient)
+	return true

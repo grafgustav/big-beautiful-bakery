@@ -22,3 +22,7 @@ func update() -> MachineState:
 
 func physics_update() -> MachineState:
 	return null
+
+
+func drop_ingredient(ingredient: IngredientData) -> bool:
+	return false

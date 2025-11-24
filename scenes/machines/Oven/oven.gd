@@ -27,11 +27,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func drop_ingredient(ingredient: IngredientData) -> bool:
-	# TODO: Can any machine accept ANY input and then just have rubbish products?
-	# currently yes.
+	return state_machine.drop_ingredient(ingredient)
+
+
+func add_ingredient(ingredient: IngredientData) -> void:
 	ingredient_list.append(ingredient)
 	print("Ingredient List: ", ingredient_list)
-	return true # ingredient accepted
 
 
 func has_empty_ingredient_list() -> bool:

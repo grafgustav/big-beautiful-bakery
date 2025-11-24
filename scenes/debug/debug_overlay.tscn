@@ -21,3 +21,8 @@ text = "(x, y)"
 unique_name_in_owner = true
 layout_mode = 2
 text = "$$$"
+
+[node name="XPLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$$$"
