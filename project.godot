@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Big Beautiful Bakery"
-run/main_scene="uid://cpeis6nj6gml3"
+run/main_scene="uid://ckiwcoxw7ijeu"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,7 @@ Global="*res://scripts/global.gd"
 RecipeManager="*res://scripts/recipe_manager.gd"
 IngredientFactory="*res://scripts/ingredient_factory.gd"
 PlayerManager="*res://scripts/player_manager.gd"
+GameManager="*res://scripts/game_manager.gd"
 
 [input]
 
