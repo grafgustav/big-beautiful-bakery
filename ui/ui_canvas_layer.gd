@@ -10,3 +10,8 @@ func _process(_delta):
 	mouse_label.text = "(%.1f, %.1f)" % [global_pos.x, global_pos.y]
 	money_label.text = str(PlayerManager.money, "$")
 	xp_label.text = str(PlayerManager.xp, "XP")
+
+
+func _on_bau_button_pressed() -> void:
+	print("Switching to BAUMODUS!")
+	GameManager.switch_to_building_mode()

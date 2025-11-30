@@ -26,3 +26,17 @@ text = "$$$"
 unique_name_in_owner = true
 layout_mode = 2
 text = "$$$"
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="BauButton" type="Button" parent="PanelContainer2"]
+layout_mode = 2
+text = "BAU"
+
+[connection signal="pressed" from="PanelContainer2/BauButton" to="." method="_on_bau_button_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ckiwcoxw7ijeu"]
 
 [ext_resource type="Script" uid="uid://dwlqsow75ef31" path="res://main_menu.gd" id="1_t7e0r"]
-[ext_resource type="PackedScene" uid="uid://dojt8sa5f1s8i" path="res://scenes/levels/main.tscn" id="2_wk0pr"]
+[ext_resource type="PackedScene" uid="uid://dojt8sa5f1s8i" path="res://scenes/levels/bakery.tscn" id="2_wk0pr"]
 [ext_resource type="PackedScene" uid="uid://cpeis6nj6gml3" path="res://scenes/levels/testscene.tscn" id="3_rmr83"]
 
 [node name="MainMenu" type="Control"]
@@ -15,7 +15,7 @@ script = ExtResource("1_t7e0r")
 main_scene = ExtResource("2_wk0pr")
 test_scene = ExtResource("3_rmr83")
 
-[node name="BG" type="CanvasLayer" parent="."]
+[node name="BG" type="Node2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="BG"]
 anchors_preset = 15
