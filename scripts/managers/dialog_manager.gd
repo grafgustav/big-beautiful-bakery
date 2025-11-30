@@ -2,7 +2,6 @@ class_name DialogManagerClass
 extends Node
 
 # handles dialog creation
-# notifies listeners
 var confirm_dialog: Control = preload("res://ui/confirm_dialog.tscn").instantiate()
 var func_to_execute: Callable
 
@@ -32,4 +31,3 @@ func _execute_confirm_action() -> void:
 	if func_to_execute:
 		func_to_execute.call()
 	hide_confirm_dialog()
-	
