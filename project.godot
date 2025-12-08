@@ -24,6 +24,13 @@ PlayerManager="*res://scripts/managers/player_manager.gd"
 GameManager="*res://scripts/managers/game_manager.gd"
 DialogManager="*res://scripts/managers/dialog_manager.gd"
 
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=640
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [input]
 
 dragging={
