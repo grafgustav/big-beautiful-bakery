@@ -1,24 +1,16 @@
-[gd_scene load_steps=9 format=4 uid="uid://dkveqshs4lfvb"]
+[gd_scene load_steps=11 format=4 uid="uid://dkveqshs4lfvb"]
 
 [ext_resource type="Script" uid="uid://e7gfpbmy8xdh" path="res://top_view_test/top_view_grid_test.gd" id="1_e22iy"]
 [ext_resource type="Texture2D" uid="uid://d0e84awflh5eo" path="res://assets/aseprite/topdown_experiment.png" id="1_o3alp"]
 [ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="4_8u02p"]
 [ext_resource type="Script" uid="uid://d1klec5au4eih" path="res://top_view_test/top_view_grid.gd" id="4_br204"]
 [ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="5_br204"]
+[ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="6_jpcr0"]
+[ext_resource type="PackedScene" uid="uid://bsrvf4efo3r1o" path="res://top_view_test/thing.tscn" id="7_htdx3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yijdv"]
 texture = ExtResource("1_o3alp")
 texture_region_size = Vector2i(80, 80)
-10:0/size_in_atlas = Vector2i(5, 10)
-10:0/0 = 0
-0:10/size_in_atlas = Vector2i(5, 5)
-0:10/0 = 0
-5:10/size_in_atlas = Vector2i(5, 5)
-5:10/0 = 0
-10:10/size_in_atlas = Vector2i(5, 5)
-10:10/0 = 0
-15:0/size_in_atlas = Vector2i(10, 10)
-15:0/0 = 0
 0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
 1:0/size_in_atlas = Vector2i(1, 2)
@@ -85,5 +77,11 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "BAU"
+
+[node name="Bowl" parent="." instance=ExtResource("6_jpcr0")]
+position = Vector2(481, 402)
+
+[node name="Thing" parent="." instance=ExtResource("7_htdx3")]
+position = Vector2(813, 405)
 
 [connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]

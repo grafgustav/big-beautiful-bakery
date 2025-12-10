@@ -2,6 +2,11 @@ class_name DraggableComponent
 extends Area2D
 
 
+signal drag_started
+signal drag_moved
+signal drag_stopped
+
+
 var parent_ref : Node2D
 var is_draggable : bool = false # if it is possible to drag the object
 var is_dragging : bool = false # if the object is currently being dragged
@@ -11,6 +16,9 @@ var initial_position : Vector2
 
 # make it a list or dict
 var hovered_droppable_bodies: Array[Node2D]
+
+# in case there is a placeable sibling
+var placeable_sibling: PlaceableComponent
 
 # use static resource variable instead of global autoload script variable?
 static var static_object_dragged : Node2D # the object that is currently being dragged or hovered
@@ -27,6 +35,8 @@ func _ready() -> void:
 	var parent = self.get_parent()
 	if parent && parent is Node2D:
 		parent_ref = parent
+	
+	placeable_sibling = _find_placeable_sibling()
 
 
 func _process(_delta: float) -> void:
@@ -202,3 +212,11 @@ func _get_droppable_component(body: Node2D) -> DroppableComponent:
 
 func set_initial_position(pos: Vector2) -> void:
 	initial_position = pos
+
+
+func _find_placeable_sibling() -> PlaceableComponent:
+	var candidates = get_parent().find_children("*", "PlaceableComponent")
+	print("Placeable Candidates found: ", candidates)
+	if candidates.is_empty():
+		return null
+	return candidates.front()
