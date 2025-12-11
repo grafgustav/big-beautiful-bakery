@@ -42,6 +42,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_draggable:
 		if Input.is_action_just_pressed("dragging"):
+			drag_started.emit()
 			initial_position = parent_ref.global_position
 			position_offset = get_global_mouse_position() - parent_ref.global_position
 			is_dragging = true
