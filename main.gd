@@ -19,6 +19,9 @@ var test_scene: Node
 var build_mode: bool = false
 var ingredient_nodes: Array[Node] = []
 
+var current_scene: Node
+var current_ui: Node
+
 @export var bakery_packed_scene: PackedScene
 @export var main_menu_packed_scene: PackedScene
 @export var test_packed_scene: PackedScene
@@ -52,8 +55,11 @@ func add_scene_to_tree(scene: Node, par: Node) -> void:
 func hide_all_scenes() -> void:
 	# hides all scenes
 	bakery_scene.hide()
+	bakery_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	test_scene.hide()
+	test_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	main_menu_scene.hide()
+	main_menu_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 func _input(event):
@@ -71,22 +77,29 @@ func connect_to_events() -> void:
 func start_up_application() -> void:
 	print("Starting up application")
 	# load player data from persistence
-	main_menu_scene.show()
+	_change_to_main_menu_scene()
+	current_scene = main_menu_scene
 
 
 func _change_to_bakery_scene() -> void:
 	hide_all_scenes()
 	bakery_scene.show()
+	bakery_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	current_scene = bakery_scene
 
 
 func _change_to_test_scene() -> void:
 	hide_all_scenes()
 	test_scene.show()
+	test_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	current_scene = test_scene
 
 
 func _change_to_main_menu_scene() -> void:
 	hide_all_scenes()
 	main_menu_scene.show()
+	main_menu_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	current_scene = main_menu_scene
 
 
 func toggle_build_mode() -> void:
@@ -103,6 +116,12 @@ func toggle_build_mode() -> void:
 
 
 func _get_ingredient_nodes() -> Array[Node]:
+	# current_scene is root node
+	print("Current scene: ", current_scene)
+	var all_children = current_scene.get_children()
+	print("All children:")
+	for child in all_children:
+		print(child)
 	return []
 
 

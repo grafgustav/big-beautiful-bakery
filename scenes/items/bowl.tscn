@@ -8,7 +8,7 @@ atlas = ExtResource("1_82ox0")
 region = Rect2(81.1699, 8.01817, 78.4961, 73.7387)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0q186"]
-radius = 111.018
+radius = 41.0122
 
 [node name="Bowl" type="Node2D"]
 
@@ -19,8 +19,8 @@ texture = SubResource("AtlasTexture_2ce6h")
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_ot2fw")
-item = 4
 metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_0q186")
