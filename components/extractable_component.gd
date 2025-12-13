@@ -5,7 +5,6 @@ extends Area2D
 signal extracted
 
 @export var extractable_ingredient : IngredientData
-var _dragged_item : Node2D = null
 var is_extractable : bool = false
 
 
@@ -28,11 +27,11 @@ func _start_drag() -> void:
 		push_error("No extractable_ingredient defined for ExtractableComponent.")
 		return
 	
-	if DraggableComponent.static_object_dragged:
+	if DragManager.is_dragging():
 		print("Already dragging some object")
 		return
 
-	_dragged_item = _get_scene_node()
+	var _dragged_item = _get_scene_node()
 	if not _dragged_item:
 		push_error("extractable_ingredient must be a Node2D scene.")
 		return
@@ -40,8 +39,7 @@ func _start_drag() -> void:
 	get_tree().current_scene.add_child(_dragged_item)
 	_dragged_item.global_position = get_global_mouse_position()
 	var drag_comp := _dragged_item.find_child("DraggableComponent")
-	if drag_comp.has_method("set_initial_position"):
-		drag_comp.set_initial_position(get_global_mouse_position())
+	DragManager.init_extracted_draggable(drag_comp)
 	
 	extracted.emit()
 
