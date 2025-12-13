@@ -16,10 +16,14 @@ var grid_batch_size: Vector2
 # data grid -> keep data and track occupancy
 var grid: Array = []
 
+var tilemap: TileMapLayer
+var draw_tile: bool = false
+
 
 func _ready() -> void:
 	# init values
 	view_grid = %TopViewGrid
+	tilemap = %TileMapLayer
 	grid_width = view_grid.h_size
 	grid_height = view_grid.v_size
 	var col_shape: CollisionShape2D = view_grid.find_child("CollisionShape2D")
@@ -33,7 +37,7 @@ func _ready() -> void:
 	_print_2d_array(grid)
 	
 	# init view grid with collision boxes
-	var d_comp = _init_view_grid(grid_width, grid_height)
+	# var d_comp = _init_view_grid(grid_width, grid_height)
 	# status quo: one big collision shape that covers the entire grid area
 	# status wanted: each cell has their own collision shape (and thus is a grid snap droppable)
 	# first try: build the grid and track clicks, then map to data grid and track clicks as increment
@@ -41,9 +45,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("dragging"):
+	if false: #event.is_action_pressed("dragging"):
 		print("Dragging just pressed")
-		_increment_data_cell(_map_pos_to_data_grid(get_viewport().get_mouse_position()))
+		var mouse_pos := get_viewport().get_mouse_position()
+		_increment_data_cell(_map_pos_to_data_grid(mouse_pos))
 
 
 func _increment_data_cell(vec: Vector2) -> void:

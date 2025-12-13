@@ -17,8 +17,8 @@ func _ready() -> void:
 	_validate_size()
 	var coll_box: CollisionShape2D = find_child("CollisionShape2D")
 	var new_rect: Rect2
-	rect_box = coll_box.shape.get_rect()
-	rect_size = rect_box.size
+	var coll_box_rect = coll_box.shape.get_rect()
+	rect_size = coll_box_rect.size
 	new_rect.size = rect_size
 	new_rect.position = coll_box.position - rect_size / 2
 	rect_box = new_rect

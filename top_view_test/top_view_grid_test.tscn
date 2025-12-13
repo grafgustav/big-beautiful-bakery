@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dkveqshs4lfvb"]
+[gd_scene load_steps=13 format=4 uid="uid://dkveqshs4lfvb"]
 
 [ext_resource type="Script" uid="uid://e7gfpbmy8xdh" path="res://top_view_test/top_view_grid_test.gd" id="1_e22iy"]
 [ext_resource type="Texture2D" uid="uid://d0e84awflh5eo" path="res://assets/aseprite/topdown_experiment.png" id="1_o3alp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="5_br204"]
 [ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="6_jpcr0"]
 [ext_resource type="PackedScene" uid="uid://bsrvf4efo3r1o" path="res://top_view_test/thing.tscn" id="7_htdx3"]
+[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbox.tscn" id="8_6pw3u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yijdv"]
 texture = ExtResource("1_o3alp")
@@ -27,8 +28,11 @@ texture_region_size = Vector2i(80, 80)
 tile_size = Vector2i(40, 40)
 sources/0 = SubResource("TileSetAtlasSource_yijdv")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e22iy"]
-size = Vector2(1200, 480)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htdx3"]
+size = Vector2(180, 182)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pw3u"]
+size = Vector2(63, 60)
 
 [node name="TopViewGridTest" type="Node2D"]
 script = ExtResource("1_e22iy")
@@ -36,6 +40,7 @@ script = ExtResource("1_e22iy")
 [node name="DebugOverlay" parent="." instance=ExtResource("4_8u02p")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+unique_name_in_owner = true
 position = Vector2(-20, -20)
 tile_map_data = PackedByteArray("AAARAAIAAAABAAAAAAAWAAIAAAABAAAAAAABAAIAAAAAAAAAAAADAAIAAAABAAAAAAAFAAIAAAABAAAAAAAGAAIAAAABAAAAAAAHAAIAAAABAAAAAAAIAAIAAAABAAAAAAAJAAIAAAABAAAAAAAKAAIAAAABAAAAAAALAAIAAAABAAAAAAAMAAIAAAABAAAAAAANAAIAAAABAAAAAAAOAAIAAAABAAAAAAAPAAIAAAABAAAAAAAQAAIAAAABAAAAAAASAAIAAAABAAAAAAATAAIAAAABAAAAAAAUAAIAAAABAAAAAAAVAAIAAAABAAAAAAAXAAIAAAABAAAAAAAYAAIAAAABAAAAAAAZAAIAAAABAAAAAAAbAAIAAAABAAAAAAAcAAIAAAACAAAAAAABAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAALAAUAAAAAAAIAAAANAAUAAAAAAAIAAAAPAAUAAAAAAAIAAAARAAUAAAAAAAIAAAATAAUAAAAAAAIAAAAVAAUAAAAAAAIAAAAXAAUAAAAAAAIAAAAZAAUAAAAAAAIAAAAbAAUAAAAAAAIAAAAdAAUAAAAAAAIAAAABAAcAAAAAAAIAAAADAAcAAAAAAAIAAAAFAAcAAAAAAAIAAAAHAAcAAAAAAAIAAAAJAAcAAAAAAAIAAAALAAcAAAAAAAIAAAANAAcAAAAAAAIAAAAPAAcAAAAAAAIAAAARAAcAAAAAAAIAAAATAAcAAAAAAAIAAAAVAAcAAAAAAAIAAAAXAAcAAAAAAAIAAAAZAAcAAAAAAAIAAAAbAAcAAAAAAAIAAAAdAAcAAAAAAAIAAAABAAkAAAAAAAIAAAADAAkAAAAAAAIAAAAFAAkAAAAAAAIAAAAHAAkAAAAAAAIAAAAJAAkAAAAAAAIAAAALAAkAAAAAAAIAAAANAAkAAAAAAAIAAAAPAAkAAAAAAAIAAAARAAkAAAAAAAIAAAATAAkAAAAAAAIAAAAVAAkAAAAAAAIAAAAXAAkAAAAAAAIAAAAZAAkAAAAAAAIAAAAbAAkAAAAAAAIAAAAdAAkAAAAAAAIAAAABAAsAAAAAAAIAAAABAA0AAAAAAAIAAAABAA8AAAAAAAIAAAADAAsAAAAAAAIAAAADAA0AAAAAAAIAAAADAA8AAAAAAAIAAAAFAAsAAAAAAAIAAAAFAA0AAAAAAAIAAAAFAA8AAAAAAAIAAAAHAAsAAAAAAAIAAAAHAA0AAAAAAAIAAAAHAA8AAAAAAAIAAAAJAAsAAAAAAAIAAAAJAA0AAAAAAAIAAAAJAA8AAAAAAAIAAAALAAsAAAAAAAIAAAALAA0AAAAAAAIAAAALAA8AAAAAAAIAAAANAAsAAAAAAAIAAAANAA0AAAAAAAIAAAANAA8AAAAAAAIAAAAPAAsAAAAAAAIAAAAPAA0AAAAAAAIAAAAPAA8AAAAAAAIAAAARAAsAAAAAAAIAAAARAA0AAAAAAAIAAAARAA8AAAAAAAIAAAATAAsAAAAAAAIAAAATAA0AAAAAAAIAAAATAA8AAAAAAAIAAAAVAAsAAAAAAAIAAAAVAA0AAAAAAAIAAAAVAA8AAAAAAAIAAAAXAAsAAAAAAAIAAAAXAA0AAAAAAAIAAAAXAA8AAAAAAAIAAAAZAAsAAAAAAAIAAAAZAA0AAAAAAAIAAAAZAA8AAAAAAAIAAAAbAAsAAAAAAAIAAAAbAA0AAAAAAAIAAAAbAA8AAAAAAAIAAAAdAAsAAAAAAAIAAAAdAA0AAAAAAAIAAAAdAA8AAAAAAAIAAAAdAAIAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_e22iy")
@@ -46,12 +51,6 @@ unique_name_in_owner = true
 script = ExtResource("4_br204")
 h_size = 15
 v_size = 6
-
-[node name="DroppableComponent" parent="TopViewGrid" instance=ExtResource("5_br204")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopViewGrid/DroppableComponent"]
-position = Vector2(600, 400)
-shape = SubResource("RectangleShape2D_e22iy")
 
 [node name="UI" type="Panel" parent="."]
 anchors_preset = 1
@@ -79,9 +78,53 @@ grow_vertical = 2
 text = "BAU"
 
 [node name="Bowl" parent="." instance=ExtResource("6_jpcr0")]
-position = Vector2(481, 402)
+position = Vector2(1069, 288)
 
 [node name="Thing" parent="." instance=ExtResource("7_htdx3")]
-position = Vector2(813, 405)
+position = Vector2(1071, 419)
+
+[node name="DroppableComponent" parent="." instance=ExtResource("5_br204")]
+position = Vector2(44, 212)
+dropping_type = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(54, 44)
+shape = SubResource("RectangleShape2D_htdx3")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="DroppableComponent2" parent="." instance=ExtResource("5_br204")]
+position = Vector2(122, 488)
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent2"]
+position = Vector2(-20, 27)
+shape = SubResource("RectangleShape2D_htdx3")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="DroppableComponent3" parent="." instance=ExtResource("5_br204")]
+position = Vector2(122, 488)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent3"]
+position = Vector2(290, -27)
+shape = SubResource("RectangleShape2D_6pw3u")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableComponent3"]
+position = Vector2(290, 47)
+shape = SubResource("RectangleShape2D_6pw3u")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="DroppableComponent3"]
+position = Vector2(214, -27)
+shape = SubResource("RectangleShape2D_6pw3u")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="DroppableComponent3"]
+position = Vector2(214, 46)
+shape = SubResource("RectangleShape2D_6pw3u")
+debug_color = Color(0.544584, 0.475725, 0.805351, 0.42)
+
+[node name="Flourbox" parent="." instance=ExtResource("8_6pw3u")]
+position = Vector2(859, 526)
 
 [connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
