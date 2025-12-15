@@ -8,12 +8,20 @@ var current_scene: Node
 var building_mode: bool = false
 
 
-func switch_to_building_mode() -> void:
-	building_mode = true
-	hide_all_ingredients()
+# PUBLIC FUNCTIONS
+func toggle_building_mode() -> void:
+	building_mode = !building_mode
+	if building_mode:
+		print("Building Mode switched on")
+		_draw_building_grid()
+		# _hide_all_ingredients()
+	else:
+		print("Building Mode switched off")
+		pass
 
 
-func hide_all_ingredients() -> void:
+# PRIVATE FUNCTIONS
+func _hide_all_ingredients() -> void:
 	print("Hiding all ingredients")
 	print("Parent: ", get_parent())
 	print("Siblings: ", get_parent().get_children())
@@ -24,3 +32,7 @@ func hide_all_ingredients() -> void:
 	for n in ingredient_components:
 		print("Hiding ", n)
 		n.get_parent().hide()
+
+
+func _draw_building_grid() -> void:
+	GridManager.draw_view_grid()

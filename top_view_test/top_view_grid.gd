@@ -1,5 +1,5 @@
 class_name TopViewGrid
-extends Node2D
+extends Area2D
 
 
 @export var h_size: int

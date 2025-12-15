@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsrvf4efo3r1o"]
+[gd_scene load_steps=6 format=3 uid="uid://bsrvf4efo3r1o"]
 
 [ext_resource type="Texture2D" uid="uid://d0e84awflh5eo" path="res://assets/aseprite/topdown_experiment.png" id="1_swu1f"]
 [ext_resource type="Script" uid="uid://cgjgn8ewci7cm" path="res://components/draggable_component.gd" id="2_prne0"]
@@ -10,9 +10,6 @@ region = Rect2(240, 16, 158.67, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fxjfs"]
 size = Vector2(159, 146)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_swu1f"]
-size = Vector2(140, 53)
 
 [node name="Thing" type="Node2D"]
 
@@ -27,11 +24,7 @@ metadata/_custom_type_script = "uid://cgjgn8ewci7cm"
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_fxjfs")
 
-[node name="PlaceableComponent" type="Area2D" parent="."]
+[node name="PlaceableComponent" type="Node2D" parent="."]
 script = ExtResource("3_prne0")
-grid_width = 2
-grid_height = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlaceableComponent"]
-position = Vector2(-1, 33.5)
-shape = SubResource("RectangleShape2D_swu1f")
+g_width = 2
+g_height = 1

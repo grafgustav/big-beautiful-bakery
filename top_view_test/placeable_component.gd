@@ -1,41 +1,21 @@
 class_name PlaceableComponent
-extends Area2D
+extends Node2D
 
 ## placeable component that adds a highlight box
+# Usage: The placeable component adds a grid occupancy to the scene
+# the "collision" is of the bottom-left corner of the object.
+# then we check the occupancy of the data array using the mapping function
+# then we draw a rectangle in red or green on the ground (z-index of tilemap +1)
 
-@export var grid_width: int
-@export var grid_height: int
-
-var rect_box: Rect2
-var rect_size: Vector2
-
-var border_color: Color = Color(1.0, 1.0, 1.0)
-var border_width: float = 4.0
+@export var g_width: int
+@export var g_height: int
 
 
 func _ready() -> void:
 	_validate_size()
-	var coll_box: CollisionShape2D = find_child("CollisionShape2D")
-	var new_rect: Rect2
-	rect_box = coll_box.shape.get_rect()
-	rect_size = rect_box.size
-	new_rect.size = rect_size
-	new_rect.position = coll_box.position - rect_size / 2
-	rect_box = new_rect
-	
-	print("Rect determined: Size: ", rect_size, "; position: ", rect_box.position)
-	print("Coll box pos: ", coll_box.position)
 
 
 func _validate_size() -> void:
-	if grid_width == 0 || grid_height == 0:
+	if g_width == 0 || g_height == 0:
 		print("Placeable Component has 0 size")
 		push_error("Placeable Component has 0 size")
-
-
-func _draw_highlight_box() -> void:
-	draw_rect(rect_box, border_color, false, border_width)
-
-
-func _draw() -> void:
-	_draw_highlight_box()

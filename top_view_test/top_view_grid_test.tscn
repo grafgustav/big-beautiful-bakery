@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://dkveqshs4lfvb"]
+[gd_scene load_steps=10 format=4 uid="uid://dkveqshs4lfvb"]
 
 [ext_resource type="Script" uid="uid://e7gfpbmy8xdh" path="res://top_view_test/top_view_grid_test.gd" id="1_e22iy"]
 [ext_resource type="Texture2D" uid="uid://d0e84awflh5eo" path="res://assets/aseprite/topdown_experiment.png" id="1_o3alp"]
 [ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="4_8u02p"]
-[ext_resource type="Script" uid="uid://d1klec5au4eih" path="res://top_view_test/top_view_grid.gd" id="4_br204"]
-[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="5_br204"]
+[ext_resource type="PackedScene" uid="uid://bd0qppj85fdij" path="res://components/grid_component.tscn" id="4_jpcr0"]
 [ext_resource type="PackedScene" uid="uid://bx0gdhwflybwu" path="res://scenes/items/bowl.tscn" id="6_jpcr0"]
 [ext_resource type="PackedScene" uid="uid://bsrvf4efo3r1o" path="res://top_view_test/thing.tscn" id="7_htdx3"]
 
@@ -27,7 +26,7 @@ texture_region_size = Vector2i(80, 80)
 tile_size = Vector2i(40, 40)
 sources/0 = SubResource("TileSetAtlasSource_yijdv")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e22iy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpcr0"]
 size = Vector2(1200, 480)
 
 [node name="TopViewGridTest" type="Node2D"]
@@ -41,17 +40,13 @@ tile_map_data = PackedByteArray("AAARAAIAAAABAAAAAAAWAAIAAAABAAAAAAABAAIAAAAAAAA
 tile_set = SubResource("TileSet_e22iy")
 rendering_quadrant_size = 80
 
-[node name="TopViewGrid" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_br204")
-h_size = 15
-v_size = 6
+[node name="GridComponent" parent="." instance=ExtResource("4_jpcr0")]
+grid_width = 15
+grid_height = 6
 
-[node name="DroppableComponent" parent="TopViewGrid" instance=ExtResource("5_br204")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopViewGrid/DroppableComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridComponent"]
 position = Vector2(600, 400)
-shape = SubResource("RectangleShape2D_e22iy")
+shape = SubResource("RectangleShape2D_jpcr0")
 
 [node name="UI" type="Panel" parent="."]
 anchors_preset = 1
@@ -82,6 +77,6 @@ text = "BAU"
 position = Vector2(481, 402)
 
 [node name="Thing" parent="." instance=ExtResource("7_htdx3")]
-position = Vector2(813, 405)
+position = Vector2(927, 316)
 
 [connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]

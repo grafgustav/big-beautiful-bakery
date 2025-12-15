@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd0qppj85fdij"]
+
+[ext_resource type="Script" uid="uid://d08ltfll8tuls" path="res://components/grid_component.gd" id="1_faray"]
+
+[node name="GridComponent" type="Area2D"]
+script = ExtResource("1_faray")
