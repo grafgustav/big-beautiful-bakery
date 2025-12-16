@@ -8,7 +8,7 @@ extends Node
 ## when a Droppable is hovered, those refs are also stored here
 ## to highlight a Droppable, 
 
-signal drag_cursor_moved(pos: Vector2)
+signal drag_cursor_moved(draggable: DraggableComponent)
 signal drag_stopped
 
 var drag_candidates: Array = []
@@ -21,7 +21,7 @@ var dragged_object_ref: DraggableComponent
 
 
 # NODE API
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# do nothing if no candidate
 	if drag_candidates.is_empty():
 		return
@@ -31,7 +31,7 @@ func _physics_process(delta: float) -> void:
 		init_dragging()
 	if Input.is_action_pressed("dragging"):
 		dragged_object_ref.move_to_pos(get_viewport().get_mouse_position(), true)
-		drag_cursor_moved.emit(get_viewport().get_mouse_position())
+		drag_cursor_moved.emit(dragged_object_ref)
 	if Input.is_action_just_released("dragging"):
 		_process_dropping()
 		drag_stopped.emit()
@@ -64,6 +64,7 @@ func is_dragging() -> bool:
 
 # PRIVATE FUNCTIONS
 func _process_dropping():
+	print("Drop candidates: ", drop_candidates)
 	if drop_candidates.is_empty():
 		dragged_object_ref.snap_back_to_initial_position()
 		dragged_object_ref = null
@@ -71,7 +72,7 @@ func _process_dropping():
 	
 	# choose a drop candidate and try dropping an ingredient
 	var top_candidate: DroppableComponent = _get_top_node(drop_candidates)
-	var ingredient_dropped: bool = top_candidate.drop_ingredient(_get_ingredient(dragged_object_ref))
+	var _ingredient_dropped: bool = top_candidate.drop_ingredient(_get_ingredient(dragged_object_ref))
 	# TODO: What to do with the returned bool?
 	
 	var vanishing: bool = false
@@ -139,6 +140,7 @@ func _mouse_exited_draggable(draggable: DraggableComponent) -> void:
 
 
 func _area_entered_droppable(draggable: DraggableComponent, droppable: DroppableComponent) -> void:
+	print("Droppable entered: ", droppable)
 	if draggable == dragged_object_ref:
 		drop_candidates.append(droppable)
 
