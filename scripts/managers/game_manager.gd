@@ -3,6 +3,7 @@ extends Node
 # manages the game state and the main game loop
 # switches between menu and game levels
 
+signal building_mode_switched(building_mode: bool)
 
 var current_scene: Node
 var building_mode: bool = false
@@ -13,11 +14,11 @@ func toggle_building_mode() -> void:
 	building_mode = !building_mode
 	if building_mode:
 		print("Building Mode switched on")
-		_draw_building_grid()
 		# _hide_all_ingredients()
 	else:
 		print("Building Mode switched off")
-		pass
+		# _show_all_ingredients()
+	building_mode_switched.emit(building_mode)
 
 
 # PRIVATE FUNCTIONS

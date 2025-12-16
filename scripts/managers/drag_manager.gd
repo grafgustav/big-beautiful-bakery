@@ -1,13 +1,15 @@
 class_name DragManagerClass
 extends Node
 
-
 ## this class provides all the functionality for the drag & drop
 ## all DraggableComponents register here, as well as DroppableComponents
 ## when an event is registered where a Draggable is being picked up
 ## the ref is stored here
 ## when a Droppable is hovered, those refs are also stored here
 ## to highlight a Droppable, 
+
+signal drag_cursor_moved(pos: Vector2)
+signal drag_stopped
 
 var drag_candidates: Array = []
 var drop_candidates: Array = []
@@ -29,8 +31,10 @@ func _physics_process(delta: float) -> void:
 		init_dragging()
 	if Input.is_action_pressed("dragging"):
 		dragged_object_ref.move_to_pos(get_viewport().get_mouse_position(), true)
+		drag_cursor_moved.emit(get_viewport().get_mouse_position())
 	if Input.is_action_just_released("dragging"):
 		_process_dropping()
+		drag_stopped.emit()
 
 
 # PUBLIC FUNCTIONS

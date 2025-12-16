@@ -1,9 +1,11 @@
 class_name DebugCanvasLayer
 extends CanvasLayer
 
+
 @onready var mouse_label: Label = %CoordinatesLabel
 @onready var money_label: Label = %MoneyLabel
 @onready var xp_label: Label = %XPLabel
+
 
 func _process(_delta):
 	var global_pos = get_viewport().get_mouse_position()
@@ -14,4 +16,4 @@ func _process(_delta):
 
 func _on_bau_button_pressed() -> void:
 	print("Switching to BAUMODUS!")
-	GameManager.switch_to_building_mode()
+	GameManager.toggle_building_mode()
