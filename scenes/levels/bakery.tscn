@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://dojt8sa5f1s8i"]
+[gd_scene load_steps=14 format=4 uid="uid://dojt8sa5f1s8i"]
 
 [ext_resource type="TileSet" uid="uid://cykqtghw1ppcl" path="res://assets/everything.tres" id="1_eee51"]
+[ext_resource type="PackedScene" uid="uid://bd0qppj85fdij" path="res://components/grid_component.tscn" id="2_0d7s7"]
 [ext_resource type="PackedScene" uid="uid://2dn2djqsl2ai" path="res://scenes/machines/Oven/oven.tscn" id="2_tc5dv"]
 [ext_resource type="PackedScene" uid="uid://ewiwy51rhgq1" path="res://scenes/decorations/statictable.tscn" id="3_0d7s7"]
 [ext_resource type="PackedScene" uid="uid://cugsh4h2qrgi" path="res://scenes/decorations/table.tscn" id="4_h0g3b"]
@@ -9,7 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://w6bl0vp268s1" path="res://scenes/decorations/saltbox.tscn" id="7_x25g8"]
 [ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="8_205qh"]
 [ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="9_vnap2"]
+[ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="10_0d7s7"]
 [ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="10_m8qb5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h0g3b"]
+size = Vector2(944.5, 691.792)
 
 [node name="Bakery" type="Node2D"]
 
@@ -23,13 +28,24 @@ tile_set = ExtResource("1_eee51")
 position = Vector2(1016, 157)
 
 [node name="Table" parent="." instance=ExtResource("3_0d7s7")]
-position = Vector2(543, 241)
+position = Vector2(537, 244)
 
 [node name="Table2" parent="." instance=ExtResource("4_h0g3b")]
 position = Vector2(245, 391)
 
 [node name="Mixer" parent="." instance=ExtResource("5_23qty")]
 position = Vector2(560, 64)
+
+[node name="GridComponent" parent="." instance=ExtResource("2_0d7s7")]
+grid_width = 10
+grid_height = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridComponent"]
+position = Vector2(683, 405)
+rotation = -0.467748
+scale = Vector2(1, 1)
+skew = -0.649262
+shape = SubResource("RectangleShape2D_h0g3b")
 
 [node name="Flourbox" parent="." instance=ExtResource("6_miq48")]
 position = Vector2(1065, 449)
@@ -39,6 +55,8 @@ position = Vector2(909, 514)
 
 [node name="Waterbox" parent="." instance=ExtResource("8_205qh")]
 position = Vector2(742, 576)
+
+[node name="DebugOverlay" parent="." instance=ExtResource("10_0d7s7")]
 
 [node name="WholeWheatFlour" parent="." instance=ExtResource("9_vnap2")]
 position = Vector2(143, 252)

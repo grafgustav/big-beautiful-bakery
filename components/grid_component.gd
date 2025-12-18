@@ -45,9 +45,26 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	if grid_drawn:
+		_draw_tests()
 		_draw_grid()
 		_draw_highlighted_cells()
 		_draw_invalid_cells()
+
+
+func _draw_tests() -> void:
+	var rect: Rect2
+	var pos: Vector2 = Vector2(0 + 0 * grid_batch_size.x, 0 + 0 * grid_batch_size.y)
+	rect.position = pos
+	rect.size = grid_batch_size
+	draw_rect(rect, GRID_COLOR, false, GRID_THICCCNESS)
+	
+	draw_set_transform_matrix(grid_transform)
+	# THE TRANSFORM ORIGIN IS THE CENTER OF THE COLLISION BOX WE DEFINED!!
+	pos = Vector2(0 + 0 * grid_batch_size.x, 0 + 0 * grid_batch_size.y)
+	rect.position = pos
+	rect.size = grid_batch_size
+	draw_rect(rect, GRID_COLOR, false, GRID_THICCCNESS)
+	
 
 
 # PUBLIC FUNCTIONS
@@ -92,11 +109,13 @@ func highlight_cell_world_coords(vec: Vector2, width: int = 1, height: int = 1) 
 
 func remove_highlighted_cell(vec: Vector2i) -> void:
 	highlighted_cells.erase(vec)
+	invalid_cells.erase(vec)
 	queue_redraw()
 
 
 func clear_highlighted_cells() -> void:
 	highlighted_cells.clear()
+	invalid_cells.clear()
 	queue_redraw()
 
 
@@ -105,7 +124,7 @@ func _init_grid() -> void:
 	print("Init Grid")
 	_init_view_grid(grid_width, grid_height)
 	_init_data_grid(grid_width, grid_height)
-	_print_data_grid()
+	# _print_data_grid()
 	print("Grid Init'ed")
 
 
@@ -124,25 +143,12 @@ func _init_view_grid(h_size: int, v_size: int) -> void:
 	print("Origin of grid: ", grid_start)
 	
 	var shape_size = rect.size / Vector2(h_size, v_size)
-	print("grid batch size: ", shape_size)
-	
-	# cut into pieces
-	for i in h_size:
-		for j in v_size:
-			# add new collision box with shape to component
-			var new_col_shape: CollisionShape2D = CollisionShape2D.new()
-			var new_shape: Shape2D = RectangleShape2D.new()
-			new_shape.size = shape_size
-			new_col_shape.shape = new_shape
-			var new_x = grid_start.x + i * shape_size.x + shape_size.x / 2
-			var new_y = grid_start.y + j * shape_size.y + shape_size.y / 2
-			new_col_shape.global_position = Vector2(new_x, new_y)
-			new_col_shape.debug_color = Color(1.0, 0.49, 1.0, 0.133)
-			# spawn new Collision Boxes as children with position calculated
-			add_child(new_col_shape)
-	# delete original one?
-	d_shape.queue_free()
+	print("Grid batch size: ", shape_size)
 	grid_batch_size = shape_size
+	
+	var transf: Transform2D = d_shape.get_global_transform()
+	transf.origin = transf * rect.position
+	grid_transform = transf
 
 
 func _increment_data_cell(vec: Vector2) -> void:
@@ -151,15 +157,13 @@ func _increment_data_cell(vec: Vector2) -> void:
 
 
 func _map_pos_to_data_grid(vec: Vector2) -> Vector2i:
-	print("Mapping ", vec)
 	var res: Vector2 = Vector2i()
-	var new_x = vec.x - grid_start.x
-	new_x /= grid_batch_size.x
-	var new_y = vec.y - grid_start.y
-	new_y /= grid_batch_size.y
+	vec = grid_transform.affine_inverse() * vec # get local point from global point
+	var new_x = vec.x / grid_batch_size.x
+	var new_y = vec.y / grid_batch_size.y
 	res.x = int(new_x)
 	res.y = int(new_y)
-	print("to ", res)
+	print("Translating ", vec, " to ", res)
 	return res
 
 
@@ -200,7 +204,7 @@ func _draw_grid() -> void:
 	for i in grid_width:
 		for j in grid_height:
 			var rect: Rect2
-			var pos: Vector2 = Vector2(grid_start.x + i * grid_batch_size.x, grid_start.y + j * grid_batch_size.y)
+			var pos: Vector2 = Vector2(i * grid_batch_size.x, j * grid_batch_size.y)
 			rect.position = pos
 			rect.size = grid_batch_size
 			draw_rect(rect, GRID_COLOR, false, GRID_THICCCNESS)
@@ -210,8 +214,8 @@ func _draw_highlighted_cells() -> void:
 	for cell in highlighted_cells:
 		var rect: Rect2
 		var pos: Vector2 = Vector2(
-			grid_start.x + cell.x * grid_batch_size.x,
-			grid_start.y + cell.y * grid_batch_size.y
+			cell.x * grid_batch_size.x,
+			cell.y * grid_batch_size.y
 		)
 		rect.position = pos
 		rect.size = grid_batch_size
@@ -222,15 +226,15 @@ func _draw_invalid_cells() -> void:
 	for cell in invalid_cells:
 		var rect: Rect2
 		var pos: Vector2 = Vector2(
-			grid_start.x + cell.x * grid_batch_size.x,
-			grid_start.y + cell.y * grid_batch_size.y
+			cell.x * grid_batch_size.x,
+			cell.y * grid_batch_size.y
 		)
 		rect.position = pos
 		rect.size = grid_batch_size
 		draw_rect(rect, INVALID_HIGHLIGHT, false, GRID_THICCCNESS)
 
 
-## checks for grid-coordinates, if they are within the borders
+## checks if vec is inside grid borders
 func _is_inside_grid(vec: Vector2i) -> bool:
 	if vec.x >= 0 && vec.y >= 0 && vec.x < grid_width && vec.y < grid_height:
 		return true

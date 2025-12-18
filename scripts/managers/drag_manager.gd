@@ -140,7 +140,7 @@ func _mouse_exited_draggable(draggable: DraggableComponent) -> void:
 
 
 func _area_entered_droppable(draggable: DraggableComponent, droppable: DroppableComponent) -> void:
-	print("Droppable entered: ", droppable)
+	# print("Droppable entered: ", droppable)
 	if draggable == dragged_object_ref:
 		drop_candidates.append(droppable)
 

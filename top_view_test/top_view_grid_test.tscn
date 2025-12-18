@@ -33,6 +33,7 @@ size = Vector2(1200, 480)
 size = Vector2(215, 220)
 
 [node name="TopViewGridTest" type="Node2D"]
+position = Vector2(-1, -1)
 
 [node name="DebugOverlay" parent="." instance=ExtResource("4_8u02p")]
 

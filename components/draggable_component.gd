@@ -83,7 +83,7 @@ func _has_body_droppable_component(body: Node2D) -> bool:
 func _on_mouse_entered() -> void:
 	mouse_entered_draggable.emit(self)
 	mouse_hovered = true
-	parent_ref.scale = Vector2(1.1, 1.1)
+	# parent_ref.scale = Vector2(1.1, 1.1)
 
 
 func _on_mouse_exited() -> void:
