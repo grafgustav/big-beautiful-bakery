@@ -25,6 +25,7 @@ GameManager="*res://scripts/managers/game_manager.gd"
 DialogManager="*res://scripts/managers/dialog_manager.gd"
 DragManager="*res://scripts/managers/drag_manager.gd"
 GridManager="*res://scripts/managers/grid_manager.gd"
+ItemManager="*res://scripts/managers/item_manager.gd"
 
 [display]
 

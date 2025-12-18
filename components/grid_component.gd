@@ -45,26 +45,9 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	if grid_drawn:
-		_draw_tests()
 		_draw_grid()
 		_draw_highlighted_cells()
 		_draw_invalid_cells()
-
-
-func _draw_tests() -> void:
-	var rect: Rect2
-	var pos: Vector2 = Vector2(0 + 0 * grid_batch_size.x, 0 + 0 * grid_batch_size.y)
-	rect.position = pos
-	rect.size = grid_batch_size
-	draw_rect(rect, GRID_COLOR, false, GRID_THICCCNESS)
-	
-	draw_set_transform_matrix(grid_transform)
-	# THE TRANSFORM ORIGIN IS THE CENTER OF THE COLLISION BOX WE DEFINED!!
-	pos = Vector2(0 + 0 * grid_batch_size.x, 0 + 0 * grid_batch_size.y)
-	rect.position = pos
-	rect.size = grid_batch_size
-	draw_rect(rect, GRID_COLOR, false, GRID_THICCCNESS)
-	
 
 
 # PUBLIC FUNCTIONS

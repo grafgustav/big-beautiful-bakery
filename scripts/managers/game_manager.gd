@@ -14,10 +14,10 @@ func toggle_building_mode() -> void:
 	building_mode = !building_mode
 	if building_mode:
 		print("Building Mode switched on")
-		# _hide_all_ingredients()
+		ItemManager.hide_all_ingredients()
 	else:
 		print("Building Mode switched off")
-		# _show_all_ingredients()
+		ItemManager.show_all_ingredients()
 	building_mode_switched.emit(building_mode)
 
 
