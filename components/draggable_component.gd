@@ -54,14 +54,14 @@ func set_position_offset() -> void:
 
 
 func move_to_pos(pos: Vector2, use_offset: bool) -> void:
-	var position = pos - position_offset if use_offset else pos
-	get_parent().global_position = position
+	var target = pos - position_offset if use_offset else pos
+	get_parent().global_position = target
 
 
 func tween_to_pos(pos: Vector2, use_offset: bool) -> void:
 	var tween = get_tree().create_tween()
-	var position = pos - position_offset if use_offset else pos
-	tween.tween_property(parent_ref, "global_position", position, 0.2).set_ease(Tween.EASE_OUT)
+	var target = pos - position_offset if use_offset else pos
+	tween.tween_property(parent_ref, "global_position", target, 0.2).set_ease(Tween.EASE_OUT)
 
 
 # PRIVATE FUNCTIONS
@@ -83,7 +83,7 @@ func _has_body_droppable_component(body: Node2D) -> bool:
 func _on_mouse_entered() -> void:
 	mouse_entered_draggable.emit(self)
 	mouse_hovered = true
-	parent_ref.scale = Vector2(1.1, 1.1)
+	# parent_ref.scale = Vector2(1.1, 1.1)
 
 
 func _on_mouse_exited() -> void:

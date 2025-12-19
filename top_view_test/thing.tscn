@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsrvf4efo3r1o"]
+
+[ext_resource type="Texture2D" uid="uid://d0e84awflh5eo" path="res://assets/aseprite/topdown_experiment.png" id="1_swu1f"]
+[ext_resource type="PackedScene" uid="uid://30lngnnp0lw1" path="res://components/DraggableComponent.tscn" id="2_prne0"]
+[ext_resource type="Script" uid="uid://c3fyamqrwcxvv" path="res://top_view_test/placeable_component.gd" id="3_prne0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cvyg"]
+atlas = ExtResource("1_swu1f")
+region = Rect2(240, 16, 158.67, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxjfs"]
+size = Vector2(159, 146)
+
+[node name="Thing" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_0cvyg")
+
+[node name="DraggableComponent" parent="." instance=ExtResource("2_prne0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_fxjfs")
+
+[node name="PlaceableComponent" type="Node2D" parent="."]
+script = ExtResource("3_prne0")
+g_width = 2
+g_height = 1

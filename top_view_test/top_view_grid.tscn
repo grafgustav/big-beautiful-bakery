@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d33cp3jgat4hf"]
+
+[ext_resource type="Script" uid="uid://d1klec5au4eih" path="res://top_view_test/top_view_grid.gd" id="1_c0fi7"]
+
+[node name="TopViewGrid" type="Area2D"]
+script = ExtResource("1_c0fi7")
