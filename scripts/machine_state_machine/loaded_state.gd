@@ -9,7 +9,7 @@ func update() -> MachineState:
 	if !parent_ref.is_clickable:
 		return null
 	
-	if Input.is_action_just_pressed("dragging"):
+	if Input.is_action_just_pressed("dragging") && !GameManager.building_mode:
 		var recipe = parent_ref.find_recipe_to_process()
 		if recipe:
 			parent_ref.recipe = recipe

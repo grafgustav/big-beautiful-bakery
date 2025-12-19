@@ -34,6 +34,10 @@ window/size/viewport_height=640
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[global_group]
+
+furniture=""
+
 [input]
 
 dragging={

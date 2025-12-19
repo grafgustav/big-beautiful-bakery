@@ -32,22 +32,13 @@ func _ready() -> void:
 	_init_grid()
 
 
-func _input(event: InputEvent) -> void:
-	if event && event.is_action_pressed("dragging") && GameManager.building_mode:
-		var mouse_pos = get_global_mouse_position()
-		var grid_pos = _map_pos_to_data_grid(mouse_pos)
-		print("clicked at gloabl_pos: ", mouse_pos, "; grid_pos: ", grid_pos)
-		if highlighted_cells.has(grid_pos):
-			remove_highlighted_cell(grid_pos)
-		else:
-			highlight_cell(grid_pos)
-
-
 func _draw() -> void:
 	if grid_drawn:
+		draw_set_transform_matrix(grid_transform)
 		_draw_grid()
 		_draw_highlighted_cells()
 		_draw_invalid_cells()
+		draw_set_transform_matrix(Transform2D.IDENTITY)
 
 
 # PUBLIC FUNCTIONS
@@ -100,6 +91,14 @@ func clear_highlighted_cells() -> void:
 	highlighted_cells.clear()
 	invalid_cells.clear()
 	queue_redraw()
+
+
+func activate_droppable() -> void:
+	monitorable = true
+
+
+func deactivate_droppable() -> void:
+	monitorable = false
 
 
 # PRIVATE FUNCTIONS

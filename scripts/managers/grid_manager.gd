@@ -26,6 +26,16 @@ func init_grid(grid_component: GridComponent) -> void:
 	print("Grids Init'ed")
 
 
+func activate_grids() -> void:
+	for grid in grids:
+		grid.activate_droppable()
+
+
+func deactivate_grids() -> void:
+	for grid in grids:
+		grid.deactivate_droppable()
+
+
 # PRIVATE FUNCTIONS
 func _connect_to_building_mode_switch(building_mode: bool) -> void:
 	print("Event consumed: building_mode_switched")

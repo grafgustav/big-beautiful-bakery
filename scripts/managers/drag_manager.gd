@@ -30,7 +30,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("dragging"):
 		init_dragging()
 	if Input.is_action_pressed("dragging"):
-		dragged_object_ref.move_to_pos(get_viewport().get_mouse_position(), true)
+		dragged_object_ref.move_to_pos(get_viewport().get_mouse_position(), false)
 		drag_cursor_moved.emit(dragged_object_ref)
 	if Input.is_action_just_released("dragging"):
 		_process_dropping()

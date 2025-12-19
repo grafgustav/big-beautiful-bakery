@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if is_extractable and event.is_action_pressed("dragging"):
+	if is_extractable and event.is_action_pressed("dragging") && !GameManager.building_mode:
 		_start_drag()
 
 

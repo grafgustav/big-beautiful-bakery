@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dojt8sa5f1s8i"]
+[gd_scene load_steps=13 format=4 uid="uid://dojt8sa5f1s8i"]
 
 [ext_resource type="TileSet" uid="uid://cykqtghw1ppcl" path="res://assets/everything.tres" id="1_eee51"]
 [ext_resource type="PackedScene" uid="uid://bd0qppj85fdij" path="res://components/grid_component.tscn" id="2_0d7s7"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="8_205qh"]
 [ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="9_vnap2"]
 [ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="10_0d7s7"]
-[ext_resource type="PackedScene" uid="uid://bporuw6mtvu54" path="res://scenes/items/flour.tscn" id="10_m8qb5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h0g3b"]
 size = Vector2(944.5, 691.792)
@@ -24,6 +23,16 @@ size = Vector2(944.5, 691.792)
 tile_map_data = PackedByteArray("AAD//wwAAAAHAAYAAAABAAgAAAAHAAYAAAADAAQAAAAHAAYAAAAFAAAAAAAHAAYAAAAHAPz/AAAHAAYAAAAIAPn/AAAHAAYAAAAKAPn/AAAJAAYAAAAMAP3/AAAJAAYAAAAOAAEAAAAJAAYAAAAJAAUAAAAHAAQAAAAHAAkAAAAHAAQAAAAFAA0AAAAHAAQAAAADABEAAAAHAAQAAAABABUAAAAHAAQAAAD//xkAAAAHAAQAAAD9/x0AAAAHAAQAAAD//yEAAAALAAQAAAABAB0AAAALAAQAAAADABkAAAALAAQAAAAFABUAAAALAAQAAAAHABEAAAALAAQAAAAJAA0AAAALAAQAAAALAAkAAAALAAQAAAANAA0AAAAHAAQAAAALABEAAAAHAAQAAAAJABUAAAAHAAQAAAAHABkAAAAHAAQAAAAFAB0AAAAHAAQAAAADACEAAAAHAAQAAAAPABEAAAALAAQAAAANABUAAAALAAQAAAALABkAAAALAAQAAAAJAB0AAAALAAQAAAAHACEAAAALAAQAAAALACEAAAAHAAQAAAANAB0AAAAHAAQAAAAPABkAAAAHAAQAAAA=")
 tile_set = ExtResource("1_eee51")
 
+[node name="GridComponent" parent="." instance=ExtResource("2_0d7s7")]
+grid_width = 10
+grid_height = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GridComponent"]
+position = Vector2(683, 405)
+rotation = -0.467748
+skew = -0.649262
+shape = SubResource("RectangleShape2D_h0g3b")
+
 [node name="Oven" parent="." instance=ExtResource("2_tc5dv")]
 position = Vector2(1016, 157)
 
@@ -35,17 +44,6 @@ position = Vector2(245, 391)
 
 [node name="Mixer" parent="." instance=ExtResource("5_23qty")]
 position = Vector2(560, 64)
-
-[node name="GridComponent" parent="." instance=ExtResource("2_0d7s7")]
-grid_width = 10
-grid_height = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GridComponent"]
-position = Vector2(683, 405)
-rotation = -0.467748
-scale = Vector2(1, 1)
-skew = -0.649262
-shape = SubResource("RectangleShape2D_h0g3b")
 
 [node name="Flourbox" parent="." instance=ExtResource("6_miq48")]
 position = Vector2(1065, 449)
@@ -74,16 +72,4 @@ position = Vector2(243, 183)
 position = Vector2(205, 219)
 
 [node name="WholeWheatFlour8" parent="." instance=ExtResource("9_vnap2")]
-position = Vector2(80, 286)
-
-[node name="Table3" parent="." instance=ExtResource("3_0d7s7")]
-position = Vector2(1782, 556)
-
-[node name="Mixer2" parent="." instance=ExtResource("5_23qty")]
-position = Vector2(1687, 383)
-
-[node name="Mixer3" parent="." instance=ExtResource("5_23qty")]
-position = Vector2(1792, 441)
-
-[node name="Flour" parent="." instance=ExtResource("10_m8qb5")]
-position = Vector2(1877, 213)
+position = Vector2(132, 310)

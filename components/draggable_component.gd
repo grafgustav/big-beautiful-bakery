@@ -94,6 +94,7 @@ func _on_mouse_exited() -> void:
 
 func _on_area_entered(body: Node2D) -> void:
 	if _has_body_droppable_component(body.get_parent()):
+		print("Hovering body ", body, " with ", self)
 		draggable_entered_droppable.emit(self, body)
 
 

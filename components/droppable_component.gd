@@ -23,7 +23,7 @@ func is_free_dropping() -> bool:
 
 
 func drop_ingredient(ingredient: IngredientData) -> bool:
-	if !ingredient || !parent_ref.has_method("drop_ingredient"):
+	if !ingredient || !parent_ref || !parent_ref.has_method("drop_ingredient"):
 		return true
 	else:
 		return parent_ref.drop_ingredient(ingredient)
