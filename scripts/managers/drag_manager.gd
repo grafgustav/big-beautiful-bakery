@@ -44,6 +44,10 @@ func init_dragging() -> void:
 	dragged_object_ref.set_initial_position()
 	dragged_object_ref.set_position_offset()
 	drop_candidates = shadow_drop_candidates.get(dragged_object_ref, [])
+	# TODO: what about already hovered Droppables, that we haven't detected before?
+	var init_areas = dragged_object_ref.get_overlapping_areas()
+	var filtered_areas = init_areas.filter(func(a): return a is DroppableComponent)
+	print("Filtered areas: ", filtered_areas)
 
 
 func init_extracted_draggable(draggable: DraggableComponent) -> void:
@@ -140,7 +144,8 @@ func _mouse_exited_draggable(draggable: DraggableComponent) -> void:
 
 
 func _area_entered_droppable(draggable: DraggableComponent, droppable: DroppableComponent) -> void:
-	# print("Droppable entered: ", droppable)
+	print("Droppable entered: ", droppable)
+	print("All droppables: ", drop_candidates.map(func(d): return d.get_parent()))
 	if draggable == dragged_object_ref:
 		drop_candidates.append(droppable)
 
@@ -152,6 +157,27 @@ func _area_exited_droppable(draggable: DraggableComponent, droppable: DroppableC
 
 # GRID SNAPPING
 func _get_grid_snap(droppable: DroppableComponent) -> Vector2:
+	if droppable is GridComponent:
+		return _get_snap_in_grid(droppable)
+	else:
+		return _get_snap_point_on_surface(droppable)
+
+
+func _get_snap_in_grid(droppable: DroppableComponent) -> Vector2:
+	var grid: GridComponent = droppable
+	# determine the snap-point in the grid (highlighted cell)
+	var highlighted_cells: Array[Vector2i] = grid.get_highlighted_cells()
+	# TODO: what to do, if there are more?
+	var first_cell: Vector2i = highlighted_cells.front()
+	var res = grid.get_global_pos_center_from_grid_cell(first_cell)
+	
+	# determine the y-offset we need for the object we are dropping
+	
+	# return the vector
+	return res
+
+
+func _get_snap_point_on_surface(droppable: DroppableComponent) -> Vector2:
 	var collision_shapes_to_collide_with : Array = droppable.find_children("*", "CollisionShape2D")
 	var own_collision_shape = dragged_object_ref.find_child("CollisionShape2D")
 	var max_collision_shape = _get_max_intersection_collision_shape(own_collision_shape, collision_shapes_to_collide_with)

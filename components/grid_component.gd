@@ -81,6 +81,10 @@ func highlight_cell_world_coords(vec: Vector2, width: int = 1, height: int = 1) 
 	queue_redraw()
 
 
+func get_highlighted_cells() -> Array[Vector2i]:
+	return highlighted_cells
+
+
 func remove_highlighted_cell(vec: Vector2i) -> void:
 	highlighted_cells.erase(vec)
 	invalid_cells.erase(vec)
@@ -99,6 +103,12 @@ func activate_droppable() -> void:
 
 func deactivate_droppable() -> void:
 	monitorable = false
+
+
+func get_global_pos_center_from_grid_cell(vec: Vector2i) -> Vector2:
+	var res = _map_data_grid_to_global_pos(vec)
+	res = res + grid_transform.basis_xform(grid_batch_size / 2)
+	return res
 
 
 # PRIVATE FUNCTIONS
@@ -145,6 +155,17 @@ func _map_pos_to_data_grid(vec: Vector2) -> Vector2i:
 	var new_y = vec.y / grid_batch_size.y
 	res.x = int(new_x)
 	res.y = int(new_y)
+	print("Translating ", vec, " to ", res)
+	return res
+
+
+func _map_data_grid_to_global_pos(vec: Vector2i) -> Vector2:
+	var res: Vector2 = Vector2()
+	var new_x = vec.x * grid_batch_size.x
+	var new_y = vec.y * grid_batch_size.y
+	res.x = int(new_x)
+	res.y = int(new_y)
+	res = grid_transform * res
 	print("Translating ", vec, " to ", res)
 	return res
 

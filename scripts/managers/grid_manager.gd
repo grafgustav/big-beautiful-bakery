@@ -56,13 +56,17 @@ func _hide_view_grid(grid: GridComponent) -> void:
 
 func _highlight_grid_cell(draggable: DraggableComponent) -> void:
 	if GameManager.building_mode:
-		# TODO: Check for placeable component
 		var placeable_component: PlaceableComponent = draggable.get_parent().find_child("PlaceableComponent")
 		var p_width: int = placeable_component.g_width if placeable_component else 1
 		var p_height: int = placeable_component.g_height if placeable_component else 1
 		print("Width: ", p_width, "; Height: ", p_height)
+		_draw_highlighted_cell(draggable.global_position, p_width, p_height)
+
+
+func _draw_highlighted_cell(pos: Vector2, p_width: int, p_height: int) -> void:
+		# TODO: Check for placeable component
 		for grid in grids:
-			grid.highlight_cell_world_coords(draggable.global_position, p_width, p_height)
+			grid.highlight_cell_world_coords(pos, p_width, p_height)
 
 
 func _clear_highlights() -> void:

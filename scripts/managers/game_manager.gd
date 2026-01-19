@@ -15,12 +15,14 @@ func toggle_building_mode() -> void:
 	if building_mode:
 		print("Building Mode switched on")
 		ItemManager.hide_all_ingredients()
+		ItemManager.deactivate_droppables_on_machines()
 		ItemManager.activate_draggable_on_machines()
 		GridManager.activate_grids()
 	else:
 		print("Building Mode switched off")
 		ItemManager.show_all_ingredients()
 		ItemManager.deactivate_draggable_on_machines()
+		ItemManager.activate_droppables_on_machines()
 		GridManager.deactivate_grids()
 	building_mode_switched.emit(building_mode)
 
