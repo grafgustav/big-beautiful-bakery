@@ -68,10 +68,12 @@ func is_dragging() -> bool:
 
 # PRIVATE FUNCTIONS
 func _process_dropping():
+	print("Drop candidates according to overlapping_bodies: ", dragged_object_ref.get_overlapping_areas())
 	print("Drop candidates: ", drop_candidates)
+	drop_candidates.append(physics_collider())
 	if drop_candidates.is_empty():
 		dragged_object_ref.snap_back_to_initial_position()
-		dragged_object_ref = null
+		_clean_up_after_drop()
 		return
 	
 	# choose a drop candidate and try dropping an ingredient
@@ -95,6 +97,25 @@ func _process_dropping():
 			pass
 	
 	_clean_up_after_drop(vanishing)
+
+
+## get the space of the scene and check for intersecting objects on collision 
+## layer 2. maybe make the collision layer a parameter and then have different
+## layers for draggable and droppable
+func physics_collider():
+	var space := dragged_object_ref.get_world_2d().direct_space_state
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = get_viewport().get_mouse_position()
+	query.collide_with_areas = true
+	query.collision_mask = 2
+	
+	var results := space.intersect_point(query)
+	results.sort_custom(
+		func(a,b):
+			return a.collider.z_index > b.collider.z_index
+	)
+	print("Physics collider results: ", results)
+	return results[0].collider
 
 
 func _clean_up_after_drop(vanishing: bool = false) -> void:

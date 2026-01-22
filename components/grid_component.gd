@@ -155,7 +155,7 @@ func _map_pos_to_data_grid(vec: Vector2) -> Vector2i:
 	var new_y = vec.y / grid_batch_size.y
 	res.x = int(new_x)
 	res.y = int(new_y)
-	print("Translating ", vec, " to ", res)
+	# print("Translating ", vec, " to ", res)
 	return res
 
 
@@ -166,7 +166,7 @@ func _map_data_grid_to_global_pos(vec: Vector2i) -> Vector2:
 	res.x = int(new_x)
 	res.y = int(new_y)
 	res = grid_transform * res
-	print("Translating ", vec, " to ", res)
+	# print("Translating ", vec, " to ", res)
 	return res
 
 

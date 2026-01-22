@@ -18,28 +18,20 @@ func toggle_building_mode() -> void:
 		ItemManager.deactivate_droppables_on_machines()
 		ItemManager.activate_draggable_on_machines()
 		GridManager.activate_grids()
+		InventoryManager.show_inventory()
 	else:
 		print("Building Mode switched off")
 		ItemManager.show_all_ingredients()
 		ItemManager.deactivate_draggable_on_machines()
 		ItemManager.activate_droppables_on_machines()
 		GridManager.deactivate_grids()
+		InventoryManager.hide_inventory()
 	building_mode_switched.emit(building_mode)
 
 
-# PRIVATE FUNCTIONS
-func _hide_all_ingredients() -> void:
-	print("Hiding all ingredients")
-	print("Parent: ", get_parent())
-	print("Siblings: ", get_parent().get_children())
-	print("Children: ", get_children())
-	
-	var ingredient_components = get_parent().find_children("*", "IngredientComponent")
-	print(ingredient_components.size()," Ingredients found")
-	for n in ingredient_components:
-		print("Hiding ", n)
-		n.get_parent().hide()
+func get_current_scene() -> Node:
+	return current_scene
 
 
-func _draw_building_grid() -> void:
-	GridManager.draw_view_grid()
+func set_current_scene(scene: Node) -> void:
+	current_scene = scene

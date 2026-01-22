@@ -28,11 +28,13 @@ func init_grid(grid_component: GridComponent) -> void:
 
 func activate_grids() -> void:
 	for grid in grids:
+		grid.process_mode = Node.PROCESS_MODE_ALWAYS
 		grid.activate_droppable()
 
 
 func deactivate_grids() -> void:
 	for grid in grids:
+		grid.process_mode = Node.PROCESS_MODE_DISABLED
 		grid.deactivate_droppable()
 
 

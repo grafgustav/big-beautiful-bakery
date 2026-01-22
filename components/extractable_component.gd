@@ -1,6 +1,8 @@
 class_name ExtractableComponent
 extends Area2D
 
+## Extractable is only for Ingredients!
+
 
 signal extracted
 

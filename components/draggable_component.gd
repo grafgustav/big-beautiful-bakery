@@ -81,6 +81,7 @@ func _has_body_droppable_component(body: Node2D) -> bool:
 
 # EVENT HANDLERS
 func _on_mouse_entered() -> void:
+	print("Mouse entered draggable")
 	mouse_entered_draggable.emit(self)
 	mouse_hovered = true
 	# parent_ref.scale = Vector2(1.1, 1.1)

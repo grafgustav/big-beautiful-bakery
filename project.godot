@@ -26,6 +26,7 @@ DialogManager="*res://scripts/managers/dialog_manager.gd"
 DragManager="*res://scripts/managers/drag_manager.gd"
 GridManager="*res://scripts/managers/grid_manager.gd"
 ItemManager="*res://scripts/managers/item_manager.gd"
+InventoryManager="*res://scripts/managers/inventory_manager.gd"
 
 [display]
 
@@ -33,7 +34,6 @@ window/size/viewport_width=1200
 window/size/viewport_height=640
 window/size/mode=2
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 window/stretch/scale=2.0
 
 [global_group]
@@ -50,5 +50,6 @@ dragging={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true

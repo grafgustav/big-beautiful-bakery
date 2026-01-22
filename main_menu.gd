@@ -1,5 +1,5 @@
 class_name MainMenu
-extends Control
+extends CanvasLayer
 
 
 signal bakery_scene_button_pressed

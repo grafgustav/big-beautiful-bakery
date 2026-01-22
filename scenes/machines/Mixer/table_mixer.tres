@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MachineData" load_steps=5 format=3 uid="uid://c0p4naha1nm60"]
+
+[ext_resource type="Script" uid="uid://d3ubdeg3y6r8w" path="res://model/machine_data.gd" id="1_7u1he"]
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_boejq"]
+[ext_resource type="PackedScene" uid="uid://dheuv2y4pngqv" path="res://scenes/machines/Mixer/table_mixer.tscn" id="1_giep8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj56d"]
+atlas = ExtResource("1_boejq")
+region = Rect2(144, 0, 48, 48)
+
+[resource]
+script = ExtResource("1_7u1he")
+name = "Table Mixer"
+icon = SubResource("AtlasTexture_gj56d")
+machine_scene = ExtResource("1_giep8")
+max_stack = 99
+metadata/_custom_type_script = "uid://d3ubdeg3y6r8w"

@@ -1,15 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://bngqfrrctxdml"]
+[gd_scene load_steps=7 format=3 uid="uid://bngqfrrctxdml"]
 
 [ext_resource type="Script" uid="uid://cngwjf6pm0315" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dojt8sa5f1s8i" path="res://scenes/levels/bakery.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://ckiwcoxw7ijeu" path="res://ui/main_menu.tscn" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cpeis6nj6gml3" path="res://scenes/levels/testscene.tscn" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://chogmqk7x3gut" path="res://scenes/levels/iso_test.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cs2lq8xtjevue" path="res://ui/inventory_overlay.tscn" id="6_7mycd"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ig7tw")
 bakery_packed_scene = ExtResource("2_1bvp3")
 main_menu_packed_scene = ExtResource("3_lquwl")
 test_packed_scene = ExtResource("4_7mycd")
+iso_test_packed_scene = ExtResource("5_lquwl")
+inventory_packed_scene = ExtResource("6_7mycd")
 
 [node name="World" type="Node" parent="."]
 unique_name_in_owner = true

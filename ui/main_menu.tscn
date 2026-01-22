@@ -4,56 +4,50 @@
 [ext_resource type="PackedScene" uid="uid://dojt8sa5f1s8i" path="res://scenes/levels/bakery.tscn" id="2_wk0pr"]
 [ext_resource type="PackedScene" uid="uid://cpeis6nj6gml3" path="res://scenes/levels/testscene.tscn" id="3_rmr83"]
 
-[node name="MainMenu" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_t7e0r")
 main_scene = ExtResource("2_wk0pr")
 test_scene = ExtResource("3_rmr83")
 
-[node name="BG" type="Node2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="BG"]
+[node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BG"]
-offset_left = 516.0
-offset_top = 238.0
-offset_right = 636.0
-offset_bottom = 409.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -85.5
+offset_right = 60.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MainSceneButton" type="Button" parent="BG/VBoxContainer"]
+[node name="MainSceneButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Main Scene"
 
-[node name="TestSceneButton" type="Button" parent="BG/VBoxContainer"]
+[node name="TestSceneButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Test Scene"
 
-[node name="ShopButton" type="Button" parent="BG/VBoxContainer"]
+[node name="ShopButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Shop"
 
-[node name="BuildingModeButton" type="Button" parent="BG/VBoxContainer"]
-layout_mode = 2
-text = "Building Mode"
-
-[node name="ExitButton" type="Button" parent="BG/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="BG/VBoxContainer/MainSceneButton" to="." method="_on_main_scene_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/TestSceneButton" to="." method="_on_test_scene_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/ShopButton" to="." method="_on_shop_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/BuildingModeButton" to="." method="_on_building_mode_button_pressed"]
-[connection signal="pressed" from="BG/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainSceneButton" to="." method="_on_main_scene_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TestSceneButton" to="." method="_on_test_scene_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -15,6 +15,8 @@ var gui_node: Node
 var bakery_scene: Node
 var main_menu_scene: Node
 var test_scene: Node
+var iso_test_scene: Node
+var inventory_scene: Node
 
 var build_mode: bool = false
 var ingredient_nodes: Array[Node] = []
@@ -25,41 +27,17 @@ var current_ui: Node
 @export var bakery_packed_scene: PackedScene
 @export var main_menu_packed_scene: PackedScene
 @export var test_packed_scene: PackedScene
+@export var iso_test_packed_scene: PackedScene
+@export var inventory_packed_scene: PackedScene
 
 
+# API FUNCTIONS
 func _ready() -> void:
 	world_node = %World
 	gui_node = %GUI
 	instantiate_scenes()
-	connect_to_events()
-	start_up_application()
-
-
-func instantiate_scenes() -> void:
-	print("Instantiating Scenes")
-	# instantiate the scenes only once
-	bakery_scene = bakery_packed_scene.instantiate()
-	add_scene_to_tree(bakery_scene, world_node)
-	main_menu_scene = main_menu_packed_scene.instantiate()
-	add_scene_to_tree(main_menu_scene, gui_node)
-	test_scene = test_packed_scene.instantiate()
-	add_scene_to_tree(test_scene, world_node)
-	hide_all_scenes()
-	print("All scenes instantiated and hidden")
-
-
-func add_scene_to_tree(scene: Node, par: Node) -> void:
-	par.add_child(scene)
-
-
-func hide_all_scenes() -> void:
-	# hides all scenes
-	bakery_scene.hide()
-	bakery_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	test_scene.hide()
-	test_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	main_menu_scene.hide()
-	main_menu_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	_connect_to_events()
+	_start_up_application()
 
 
 func _input(event):
@@ -69,16 +47,57 @@ func _input(event):
 		# on mobile we need a new thing obv
 
 
-func connect_to_events() -> void:
-	main_menu_scene.connect("bakery_scene_button_pressed", _change_to_bakery_scene)
-	main_menu_scene.connect("test_scene_button_pressed", _change_to_test_scene)
+# PUBLIC FUNCTIONS
+func instantiate_scenes() -> void:
+	print("Instantiating Scenes")
+	# instantiate the scenes only once
+	# WORLD
+	bakery_scene = bakery_packed_scene.instantiate()
+	_add_scene_to_tree(bakery_scene, world_node)
+	test_scene = test_packed_scene.instantiate()
+	_add_scene_to_tree(test_scene, world_node)
+	iso_test_scene = iso_test_packed_scene.instantiate()
+	_add_scene_to_tree(iso_test_scene, world_node)
+	# GUI
+	main_menu_scene = main_menu_packed_scene.instantiate()
+	_add_scene_to_tree(main_menu_scene, gui_node)
+	inventory_scene = inventory_packed_scene.instantiate()
+	_add_scene_to_tree(inventory_scene, gui_node)
+	hide_all_scenes()
+	print("All scenes instantiated and hidden")
 
 
-func start_up_application() -> void:
+func hide_all_scenes() -> void:
+	# hides all scenes
+	bakery_scene.hide()
+	bakery_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	test_scene.hide()
+	test_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	iso_test_scene.hide()
+	iso_test_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	main_menu_scene.hide()
+	main_menu_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	inventory_scene.hide()
+	inventory_scene.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+# PRIVATE FUNCTIONS
+func _start_up_application() -> void:
 	print("Starting up application")
 	# load player data from persistence
 	_change_to_main_menu_scene()
 	current_scene = main_menu_scene
+	GameManager.set_current_scene(current_scene)
+
+
+func _add_scene_to_tree(scene: Node, par: Node) -> void:
+	par.add_child(scene)
+
+
+func _connect_to_events() -> void:
+	main_menu_scene.connect("bakery_scene_button_pressed", _change_to_bakery_scene)
+	main_menu_scene.connect("test_scene_button_pressed", _change_to_iso_test_scene)
+	GameManager.connect("building_mode_switched", _change_building_mode)
 
 
 func _change_to_bakery_scene() -> void:
@@ -86,6 +105,7 @@ func _change_to_bakery_scene() -> void:
 	bakery_scene.show()
 	bakery_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 	current_scene = bakery_scene
+	GameManager.set_current_scene(current_scene)
 
 
 func _change_to_test_scene() -> void:
@@ -93,6 +113,15 @@ func _change_to_test_scene() -> void:
 	test_scene.show()
 	test_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 	current_scene = test_scene
+	GameManager.set_current_scene(current_scene)
+
+
+func _change_to_iso_test_scene() -> void:
+	hide_all_scenes()
+	iso_test_scene.show()
+	iso_test_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	current_scene = iso_test_scene
+	GameManager.set_current_scene(current_scene)
 
 
 func _change_to_main_menu_scene() -> void:
@@ -100,34 +129,21 @@ func _change_to_main_menu_scene() -> void:
 	main_menu_scene.show()
 	main_menu_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 	current_scene = main_menu_scene
+	GameManager.set_current_scene(current_scene)
 
 
-func toggle_build_mode() -> void:
-	print("Toggling build mode")
-	# toggle flag
-	build_mode = !build_mode
-	if build_mode:
-		print("Entering Build Mode")
-		ingredient_nodes = _get_ingredient_nodes()
-		_hide_ingredient_nodes()
+func _change_building_mode(mode: bool) -> void:
+	if mode:
+		_show_inventory_scene()
 	else:
-		print("Exiting Build Mode")
-		_show_ingredient_nodes()
+		_hide_inventory_scene()
 
 
-func _get_ingredient_nodes() -> Array[Node]:
-	# current_scene is root node
-	print("Current scene: ", current_scene)
-	var all_children = current_scene.get_children()
-	print("All children:")
-	for child in all_children:
-		print(child)
-	return []
+func _show_inventory_scene() -> void:
+	inventory_scene.show()
+	inventory_scene.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
-func _hide_ingredient_nodes() -> void:
-	pass
-
-
-func _show_ingredient_nodes() -> void:
-	pass
+func _hide_inventory_scene() -> void:
+	inventory_scene.hide()
+	inventory_scene.process_mode = Node.PROCESS_MODE_DISABLED

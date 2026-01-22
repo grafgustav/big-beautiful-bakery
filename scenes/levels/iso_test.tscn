@@ -30,6 +30,7 @@ tile_map_data = PackedByteArray("AAAAAAoABgACAAAAAAABAAgABgACAAAAAAACAAYABgACAAA
 tile_set = SubResource("TileSet_sksl7")
 
 [node name="GridComponent" parent="." instance=ExtResource("2_sksl7")]
+process_mode = 4
 monitorable = true
 grid_width = 15
 grid_height = 15
