@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://br1rb5hvti52b"]
+
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_hg2rm"]
+[ext_resource type="PackedScene" uid="uid://cved2gg3n0lhn" path="res://components/ExtractableComponent.tscn" id="2_hg2rm"]
+[ext_resource type="PackedScene" uid="uid://30lngnnp0lw1" path="res://components/DraggableComponent.tscn" id="2_xd2qg"]
+[ext_resource type="Resource" uid="uid://c4q7vt0mqv4qx" path="res://model/items/flour.tres" id="3_xd2qg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mnpr"]
+atlas = ExtResource("1_hg2rm")
+region = Rect2(248, 192, 32, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olid"]
+size = Vector2(29, 36)
+
+[node name="Flourbag" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_0mnpr")
+
+[node name="DraggableComponent" parent="." instance=ExtResource("2_xd2qg")]
+process_mode = 4
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(3, -1)
+shape = SubResource("RectangleShape2D_8olid")
+
+[node name="ExtractableComponent" parent="." instance=ExtResource("2_hg2rm")]
+position = Vector2(-10, 31)
+extractable_ingredient = ExtResource("3_xd2qg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ExtractableComponent"]
+position = Vector2(13, -32)
+shape = SubResource("RectangleShape2D_8olid")

@@ -77,7 +77,8 @@ func extract_item(item: InventoryItem) -> void:
 	_dragged_item.global_position = get_viewport().get_mouse_position()
 	
 	var drop_com := _dragged_item.find_child("DroppableComponent")
-	drop_com.process_mode = Node.PROCESS_MODE_DISABLED
+	if drop_com:
+		drop_com.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	var drag_comp := _dragged_item.find_child("DraggableComponent")
 	DragManager.init_extracted_draggable(drag_comp)
@@ -91,6 +92,12 @@ func extract_item(item: InventoryItem) -> void:
 func _create_sample_data() -> void:
 	var table_mixer_data = preload("res://scenes/machines/Mixer/table_mixer.tres")
 	add_item(table_mixer_data, 1)
+	
+	var salt_bag_data = preload("res://scenes/decorations/saltbag.tres")
+	add_item(salt_bag_data, 3)
+	
+	var flour_bag_data = preload("res://scenes/decorations/flourbag.tres")
+	add_item(flour_bag_data, 2)
 
 
 func _instantiate_from_model(model: InventoryItem) -> Node:

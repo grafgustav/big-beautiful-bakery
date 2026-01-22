@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MachineData" load_steps=5 format=3 uid="uid://gkxju5ck3r6w"]
+
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_8yvfl"]
+[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbag.tscn" id="2_8yvfl"]
+[ext_resource type="Script" uid="uid://d3ubdeg3y6r8w" path="res://model/machine_data.gd" id="3_7hrio"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i63oo"]
+atlas = ExtResource("1_8yvfl")
+region = Rect2(248, 96, 32, 40)
+
+[resource]
+script = ExtResource("3_7hrio")
+name = "Flourbag"
+icon = SubResource("AtlasTexture_i63oo")
+machine_scene = ExtResource("2_8yvfl")
+max_stack = 99
+metadata/_custom_type_script = "uid://d3ubdeg3y6r8w"

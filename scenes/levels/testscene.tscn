@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="6_wyavn"]
 [ext_resource type="PackedScene" uid="uid://bnc2ulmpid2yh" path="res://scenes/items/water.tscn" id="7_75udb"]
 [ext_resource type="PackedScene" uid="uid://bnby6prigmdk8" path="res://scenes/machines/Mixer/mixer.tscn" id="7_kgl7r"]
-[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbox.tscn" id="8_0hf50"]
+[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbag.tscn" id="8_0hf50"]
 [ext_resource type="PackedScene" uid="uid://w6bl0vp268s1" path="res://scenes/decorations/saltbox.tscn" id="9_75udb"]
 [ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="10_gy8k0"]
 [ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="11_gy8k0"]

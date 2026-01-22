@@ -77,7 +77,7 @@ func _process_dropping():
 		return
 	
 	# choose a drop candidate and try dropping an ingredient
-	var top_candidate: DroppableComponent = _get_top_node(drop_candidates)
+	var top_candidate: DroppableComponent = drop_candidates[0]
 	var _ingredient_dropped: bool = top_candidate.drop_ingredient(_get_ingredient(dragged_object_ref))
 	# TODO: What to do with the returned bool?
 	
@@ -113,6 +113,10 @@ func physics_collider():
 	results.sort_custom(
 		func(a,b):
 			return a.collider.z_index > b.collider.z_index
+	)
+	results = results.filter(
+		func(a):
+			return a.collider != dragged_object_ref
 	)
 	print("Physics collider results: ", results)
 	return results[0].collider

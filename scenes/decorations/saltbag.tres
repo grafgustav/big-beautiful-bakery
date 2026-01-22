@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MachineData" load_steps=5 format=3 uid="uid://chqhmnfhlvuo8"]
+
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_wx0du"]
+[ext_resource type="Script" uid="uid://d3ubdeg3y6r8w" path="res://model/machine_data.gd" id="1_xm2nq"]
+[ext_resource type="PackedScene" uid="uid://y2314ljpnqkf" path="res://scenes/decorations/saltbag.tscn" id="2_n1i5m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i63oo"]
+atlas = ExtResource("1_wx0du")
+region = Rect2(248, 0, 32, 40)
+
+[resource]
+script = ExtResource("1_xm2nq")
+name = "Saltbag"
+icon = SubResource("AtlasTexture_i63oo")
+machine_scene = ExtResource("2_n1i5m")
+max_stack = 99
+metadata/_custom_type_script = "uid://d3ubdeg3y6r8w"
