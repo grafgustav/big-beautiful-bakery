@@ -3,7 +3,8 @@ extends Node
 
 # this class is the TOP, the BABO, the JEFE
 # this Node is the entry point for the game
-# maybe here we initialize all the "autoloads" that we probably don't even need as Singletons, let's see
+# maybe here we initialize all the "autoloads" that we probably don't even need as Singletons, 
+# let's see
 # or maybe we add all possible scenes as child nodes and then hide() and show()
 # The child-nodes are interchangeable
 # Like this we can always have some sexy debug code about scene transitions in here
@@ -18,11 +19,11 @@ var bakery_scene: Node
 var test_scene: Node
 var iso_test_scene: Node
 var inventory_scene: Node
-
 # GUI
 var main_menu_scene: Node
 var debug_overlay_scene: Node
 var shop_scene: Node
+var confirmation_dialog_scene: Node
 
 var build_mode: bool = false
 var ingredient_nodes: Array[Node] = []
@@ -30,12 +31,17 @@ var ingredient_nodes: Array[Node] = []
 var current_scene: Node
 var current_ui: Node
 
+var confirmation_action: Callable
+
+# WORLD
 @export var bakery_packed_scene: PackedScene
-@export var main_menu_packed_scene: PackedScene
 @export var test_packed_scene: PackedScene
 @export var iso_test_packed_scene: PackedScene
+# GUI
+@export var main_menu_packed_scene: PackedScene
 @export var inventory_packed_scene: PackedScene
 @export var shop_packed_scene: PackedScene
+@export var confirmation_dialog_packed_scene: PackedScene
 
 @export var debug_overlay_packed_scene: PackedScene
 
@@ -69,6 +75,8 @@ func instantiate_scenes() -> void:
 	_add_scene_to_tree(debug_overlay_scene, gui_node)
 	shop_scene = shop_packed_scene.instantiate()
 	_add_scene_to_tree(shop_scene, gui_node)
+	confirmation_dialog_scene = confirmation_dialog_packed_scene.instantiate()
+	_add_scene_to_tree(confirmation_dialog_scene, gui_node)
 	hide_all_scenes()
 	print("All scenes instantiated and hidden")
 
@@ -89,6 +97,8 @@ func hide_all_scenes() -> void:
 	debug_overlay_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	shop_scene.hide()
 	shop_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	confirmation_dialog_scene.hide()
+	confirmation_dialog_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 # PRIVATE FUNCTIONS
@@ -108,8 +118,12 @@ func _connect_to_events() -> void:
 	main_menu_scene.connect("bakery_scene_button_pressed", _change_to_bakery_scene)
 	main_menu_scene.connect("test_scene_button_pressed", _change_to_iso_test_scene)
 	main_menu_scene.connect("shop_scene_button_pressed", _change_to_shop_scene)
+	
+	confirmation_dialog_scene.connect("cancelled", _hide_confirmation_dialog_scene)
+	confirmation_dialog_scene.connect("confirmed", _execute_confirmation_action)
+	
 	GameManager.connect("building_mode_switched", _change_building_mode)
-	GameManager.connect("exit_polled", _exit_scene)
+	GameManager.connect("exit_polled", _show_confirmation_dialog_scene)
 
 
 func _change_to_bakery_scene() -> void:
@@ -174,12 +188,23 @@ func _hide_inventory_scene() -> void:
 	inventory_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 
+func _show_confirmation_dialog_scene() -> void:
+	confirmation_dialog_scene.show()
+	confirmation_dialog_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+
+
+func _hide_confirmation_dialog_scene() -> void:
+	confirmation_dialog_scene.hide()
+	confirmation_dialog_scene.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _execute_confirmation_action() -> void:
+	_change_to_main_menu_scene()
+	_hide_confirmation_dialog_scene()
+
+
 func _change_building_mode(mode: bool) -> void:
 	if mode:
 		_show_inventory_scene()
 	else:
 		_hide_inventory_scene()
-
-
-func _exit_scene() -> void:
-	DialogManager.show_confirm_dialog(_change_to_main_menu_scene)

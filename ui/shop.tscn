@@ -1,46 +1,50 @@
-[gd_scene format=3 uid="uid://drnufjo4oile6"]
+[gd_scene load_steps=2 format=3 uid="uid://drnufjo4oile6"]
 
-[node name="Shop" type="Control"]
-layout_mode = 3
+[ext_resource type="Script" uid="uid://chtppgxsd0hv7" path="res://ui/shop.gd" id="1_foe6g"]
+
+[node name="Shop" type="CanvasLayer"]
+script = ExtResource("1_foe6g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RightControlBar" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="LeftItemList" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RightControlBar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/LeftItemList"]
 layout_mode = 2
 
-[node name="BuyButton" type="Button" parent="RightControlBar/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LeftItemList/VBoxContainer"]
+layout_mode = 2
+
+[node name="RightControlBar" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightControlBar"]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
 text = "BUY"
 
-[node name="NameLabel" type="Label" parent="RightControlBar/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="RightControlBar/VBoxContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="PriceLabel" type="Label" parent="RightControlBar/VBoxContainer"]
+[node name="PriceLabel" type="Label" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="ExitButton" type="Button" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 10
+text = "EXIT"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
+[connection signal="pressed" from="HBoxContainer/RightControlBar/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,5 +1,5 @@
 class_name ConfirmDialog
-extends Control
+extends CanvasLayer
 
 
 signal confirmed
