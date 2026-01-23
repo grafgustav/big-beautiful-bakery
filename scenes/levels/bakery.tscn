@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dojt8sa5f1s8i"]
+[gd_scene load_steps=12 format=4 uid="uid://dojt8sa5f1s8i"]
 
 [ext_resource type="TileSet" uid="uid://cykqtghw1ppcl" path="res://assets/everything.tres" id="1_eee51"]
 [ext_resource type="PackedScene" uid="uid://bd0qppj85fdij" path="res://components/grid_component.tscn" id="2_0d7s7"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://w6bl0vp268s1" path="res://scenes/decorations/saltbox.tscn" id="7_x25g8"]
 [ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="8_205qh"]
 [ext_resource type="PackedScene" uid="uid://cbu6sfhnb0x8j" path="res://scenes/items/whole_wheat_flour.tscn" id="9_vnap2"]
-[ext_resource type="PackedScene" uid="uid://domowe0ekukcp" path="res://scenes/debug/debug_overlay.tscn" id="10_0d7s7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h0g3b"]
 size = Vector2(944.5, 691.792)
@@ -53,8 +52,6 @@ position = Vector2(909, 514)
 
 [node name="Waterbox" parent="." instance=ExtResource("8_205qh")]
 position = Vector2(742, 576)
-
-[node name="DebugOverlay" parent="." instance=ExtResource("10_0d7s7")]
 
 [node name="WholeWheatFlour" parent="." instance=ExtResource("9_vnap2")]
 position = Vector2(143, 252)

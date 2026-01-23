@@ -86,7 +86,7 @@ script = ExtResource("1_h31x3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(4, -12)
+position = Vector2(1, -12)
 sprite_frames = SubResource("SpriteFrames_kr600")
 animation = &"idle"
 
@@ -107,7 +107,7 @@ shape = SubResource("CircleShape2D_4q38i")
 process_mode = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
-position = Vector2(4, -20)
+position = Vector2(1, -21)
 shape = SubResource("RectangleShape2D_bvmju")
 
 [node name="MixerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
