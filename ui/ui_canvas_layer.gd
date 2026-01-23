@@ -17,3 +17,8 @@ func _process(_delta):
 func _on_bau_button_pressed() -> void:
 	print("Switching to BAUMODUS!")
 	GameManager.toggle_building_mode()
+
+
+func _on_exit_button_pressed() -> void:
+	print("Exiting")
+	GameManager.poll_exit()

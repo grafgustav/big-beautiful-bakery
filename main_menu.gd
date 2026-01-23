@@ -4,10 +4,7 @@ extends CanvasLayer
 
 signal bakery_scene_button_pressed
 signal test_scene_button_pressed
-
-
-@export var main_scene: PackedScene
-@export var test_scene: PackedScene
+signal shop_scene_button_pressed
 
 
 func _on_main_scene_button_pressed() -> void:
@@ -21,7 +18,8 @@ func _on_test_scene_button_pressed() -> void:
 
 
 func _on_shop_button_pressed() -> void:
-	pass # Replace with function body.
+	print("emitting signal shop")
+	shop_scene_button_pressed.emit()
 
 
 func _on_building_mode_button_pressed() -> void:

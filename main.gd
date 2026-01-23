@@ -22,6 +22,7 @@ var inventory_scene: Node
 # GUI
 var main_menu_scene: Node
 var debug_overlay_scene: Node
+var shop_scene: Node
 
 var build_mode: bool = false
 var ingredient_nodes: Array[Node] = []
@@ -34,6 +35,7 @@ var current_ui: Node
 @export var test_packed_scene: PackedScene
 @export var iso_test_packed_scene: PackedScene
 @export var inventory_packed_scene: PackedScene
+@export var shop_packed_scene: PackedScene
 
 @export var debug_overlay_packed_scene: PackedScene
 
@@ -45,13 +47,6 @@ func _ready() -> void:
 	instantiate_scenes()
 	_connect_to_events()
 	_start_up_application()
-
-
-func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		DialogManager.show_confirm_dialog(_change_to_main_menu_scene)
-		# for now we use this to switch back to main menu
-		# on mobile we need a new thing obv
 
 
 # PUBLIC FUNCTIONS
@@ -72,6 +67,8 @@ func instantiate_scenes() -> void:
 	_add_scene_to_tree(inventory_scene, gui_node)
 	debug_overlay_scene = debug_overlay_packed_scene.instantiate()
 	_add_scene_to_tree(debug_overlay_scene, gui_node)
+	shop_scene = shop_packed_scene.instantiate()
+	_add_scene_to_tree(shop_scene, gui_node)
 	hide_all_scenes()
 	print("All scenes instantiated and hidden")
 
@@ -90,6 +87,8 @@ func hide_all_scenes() -> void:
 	inventory_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	debug_overlay_scene.hide()
 	debug_overlay_scene.process_mode = Node.PROCESS_MODE_DISABLED
+	shop_scene.hide()
+	shop_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 
 # PRIVATE FUNCTIONS
@@ -108,7 +107,9 @@ func _add_scene_to_tree(scene: Node, par: Node) -> void:
 func _connect_to_events() -> void:
 	main_menu_scene.connect("bakery_scene_button_pressed", _change_to_bakery_scene)
 	main_menu_scene.connect("test_scene_button_pressed", _change_to_iso_test_scene)
+	main_menu_scene.connect("shop_scene_button_pressed", _change_to_shop_scene)
 	GameManager.connect("building_mode_switched", _change_building_mode)
+	GameManager.connect("exit_polled", _exit_scene)
 
 
 func _change_to_bakery_scene() -> void:
@@ -145,6 +146,14 @@ func _change_to_main_menu_scene() -> void:
 	_hide_debug_overlay()
 
 
+func _change_to_shop_scene() -> void:
+	hide_all_scenes()
+	shop_scene.show()
+	shop_scene.process_mode = Node.PROCESS_MODE_ALWAYS
+	current_scene = shop_scene
+	GameManager.set_current_scene(current_scene)
+
+
 func _show_debug_overlay() -> void:
 	debug_overlay_scene.show()
 	debug_overlay_scene.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -155,13 +164,6 @@ func _hide_debug_overlay() -> void:
 	debug_overlay_scene.process_mode = Node.PROCESS_MODE_DISABLED
 
 
-func _change_building_mode(mode: bool) -> void:
-	if mode:
-		_show_inventory_scene()
-	else:
-		_hide_inventory_scene()
-
-
 func _show_inventory_scene() -> void:
 	inventory_scene.show()
 	inventory_scene.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -170,3 +172,14 @@ func _show_inventory_scene() -> void:
 func _hide_inventory_scene() -> void:
 	inventory_scene.hide()
 	inventory_scene.process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func _change_building_mode(mode: bool) -> void:
+	if mode:
+		_show_inventory_scene()
+	else:
+		_hide_inventory_scene()
+
+
+func _exit_scene() -> void:
+	DialogManager.show_confirm_dialog(_change_to_main_menu_scene)

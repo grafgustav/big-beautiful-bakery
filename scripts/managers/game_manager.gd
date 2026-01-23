@@ -4,6 +4,7 @@ extends Node
 # switches between menu and game levels
 
 signal building_mode_switched(building_mode: bool)
+signal exit_polled
 
 var current_scene: Node
 var building_mode: bool = false
@@ -35,3 +36,7 @@ func get_current_scene() -> Node:
 
 func set_current_scene(scene: Node) -> void:
 	current_scene = scene
+
+
+func poll_exit() -> void:
+	exit_polled.emit()
