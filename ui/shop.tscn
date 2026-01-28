@@ -1,23 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://drnufjo4oile6"]
+[gd_scene load_steps=2 format=3 uid="uid://drnufjo4oile6"]
 
 [ext_resource type="Script" uid="uid://chtppgxsd0hv7" path="res://ui/shop.gd" id="1_foe6g"]
-[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="2_2v8nf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1slnd"]
-atlas = ExtResource("2_2v8nf")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e4u7y"]
-atlas = ExtResource("2_2v8nf")
-region = Rect2(152, 8, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t603m"]
-atlas = ExtResource("2_2v8nf")
-region = Rect2(192, 0, 48, 40)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2v8nf"]
-atlas = ExtResource("2_2v8nf")
-region = Rect2(200, 8, 32, 24)
 
 [node name="Shop" type="CanvasLayer"]
 script = ExtResource("1_foe6g")
@@ -38,22 +21,12 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/LeftItemList/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="MixerButton" type="TextureButton" parent="HBoxContainer/LeftItemList/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = SubResource("AtlasTexture_1slnd")
-texture_pressed = SubResource("AtlasTexture_e4u7y")
-
-[node name="OfenButton" type="TextureButton" parent="HBoxContainer/LeftItemList/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = SubResource("AtlasTexture_t603m")
-texture_pressed = SubResource("AtlasTexture_2v8nf")
 
 [node name="RightControlBar" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightControlBar"]
@@ -68,14 +41,15 @@ layout_mode = 2
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
+fit_content = true
 
 [node name="PriceLabel" type="Label" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 10
 
 [node name="ExitButton" type="Button" parent="HBoxContainer/RightControlBar/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 text = "EXIT"
 
-[connection signal="toggled" from="HBoxContainer/LeftItemList/VBoxContainer/HBoxContainer/MixerButton" to="." method="_on_mixer_button_toggled"]
 [connection signal="pressed" from="HBoxContainer/RightControlBar/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

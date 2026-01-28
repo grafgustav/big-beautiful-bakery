@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=3 uid="uid://vw65nea5b52f"]
+
+[ext_resource type="Script" uid="uid://yjerjgk5gsvt" path="res://scenes/machines/Mixer/mixer.gd" id="1_kr2og"]
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="2_0nhcm"]
+[ext_resource type="PackedScene" uid="uid://crqxl6j3dk0ap" path="res://components/DroppableComponent.tscn" id="3_jlw0e"]
+[ext_resource type="PackedScene" uid="uid://30lngnnp0lw1" path="res://components/DraggableComponent.tscn" id="4_wxcsx"]
+[ext_resource type="Script" uid="uid://cyxhycxs5spi8" path="res://scripts/machine_state_machine/machine_state_machine.gd" id="5_gsaoh"]
+[ext_resource type="Script" uid="uid://b48gvvneiwu31" path="res://scripts/machine_state_machine/idle_state.gd" id="6_5m62o"]
+[ext_resource type="Script" uid="uid://bmqeq8ppsqwsk" path="res://scripts/machine_state_machine/loaded_state.gd" id="7_w8ht0"]
+[ext_resource type="Script" uid="uid://t4novlykm3a3" path="res://scripts/machine_state_machine/processing_state.gd" id="8_vok20"]
+[ext_resource type="Script" uid="uid://bu76qa3k63cww" path="res://scripts/machine_state_machine/finished_state.gd" id="9_61b32"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr2og"]
+atlas = ExtResource("2_0nhcm")
+region = Rect2(192, 192, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nhcm"]
+atlas = ExtResource("2_0nhcm")
+region = Rect2(192, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsaoh"]
+atlas = ExtResource("2_0nhcm")
+region = Rect2(192, 96, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlw0e"]
+atlas = ExtResource("2_0nhcm")
+region = Rect2(192, 0, 48, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxcsx"]
+atlas = ExtResource("2_0nhcm")
+region = Rect2(192, 96, 48, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kr600"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr2og")
+}],
+"loop": true,
+"name": &"baking",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nhcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsaoh")
+}],
+"loop": true,
+"name": &"finished",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlw0e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxcsx")
+}],
+"loop": true,
+"name": &"loaded",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4q38i"]
+radius = 25.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvmju"]
+size = Vector2(50, 72)
+
+[node name="TableOven" type="Node2D" groups=["furniture"]]
+script = ExtResource("1_kr2og")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -12)
+sprite_frames = SubResource("SpriteFrames_kr600")
+animation = &"finished"
+frame = 1
+frame_progress = 0.646379
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+position = Vector2(3, -33)
+shape = SubResource("CircleShape2D_4q38i")
+
+[node name="DroppableComponent" parent="." instance=ExtResource("3_jlw0e")]
+dropping_type = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DroppableComponent"]
+position = Vector2(3, -33)
+shape = SubResource("CircleShape2D_4q38i")
+
+[node name="DraggableComponent" parent="." instance=ExtResource("4_wxcsx")]
+process_mode = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DraggableComponent"]
+position = Vector2(1, -21)
+shape = SubResource("RectangleShape2D_bvmju")
+
+[node name="OvenStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+unique_name_in_owner = true
+script = ExtResource("5_gsaoh")
+starting_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="OvenStateMachine" node_paths=PackedStringArray("loadedState")]
+script = ExtResource("6_5m62o")
+loadedState = NodePath("../LoadedState")
+animation = "idle"
+
+[node name="LoadedState" type="Node" parent="OvenStateMachine" node_paths=PackedStringArray("processing_state")]
+script = ExtResource("7_w8ht0")
+processing_state = NodePath("../BakingState")
+animation = "loaded"
+
+[node name="BakingState" type="Node" parent="OvenStateMachine" node_paths=PackedStringArray("finishedState")]
+script = ExtResource("8_vok20")
+finishedState = NodePath("../FinishedState")
+animation = "baking"
+
+[node name="FinishedState" type="Node" parent="OvenStateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("9_61b32")
+idle_state = NodePath("../IdleState")
+animation = "finished"
+
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_click_area_mouse_exited"]

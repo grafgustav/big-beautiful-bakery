@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://csjjvalekjcuk"]
+
+[ext_resource type="PackedScene" uid="uid://bh4b4djn7mixc" path="res://ui/Buttons/custom_icon_button.tscn" id="1_xh3g7"]
+[ext_resource type="Script" uid="uid://p7cbrgna28me" path="res://ui/Buttons/shop_button.gd" id="2_0wkmi"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_0wkmi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wkmi"]
+
+[node name="ShopButton" instance=ExtResource("1_xh3g7")]
+toggle_mode = true
+button_group = SubResource("ButtonGroup_0wkmi")
+script = ExtResource("2_0wkmi")
+
+[node name="Icon" parent="." index="1"]
+texture = SubResource("AtlasTexture_0wkmi")

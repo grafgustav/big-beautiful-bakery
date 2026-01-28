@@ -4,7 +4,7 @@ extends CustomIconButton
 
 signal inventory_button_pressed(item: InventoryItem)
 
-@export var item: InventoryItem
+var item: InventoryItem
 
 
 var amount: int:
