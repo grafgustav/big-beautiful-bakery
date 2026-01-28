@@ -17,11 +17,19 @@ func deregister_ingredient(ingredient: IngredientComponent) -> void:
 
 
 func register_machine(machine: Node2D) -> void:
+	print("Registering machine: ", machine)
 	machine_list.append(machine)
+	var draggable: DraggableComponent = machine.find_child("DraggableComponent")
+	if draggable:
+		draggable_list.append(draggable)
+		draggable.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func deregister_machine(machine: Node2D) -> void:
 	machine_list.erase(machine)
+	var draggable: DraggableComponent = machine.find_child("DraggableComponent")
+	if draggable:
+		draggable_list.erase(draggable)
 
 
 func hide_all_ingredients() -> void:
@@ -37,13 +45,8 @@ func show_all_ingredients() -> void:
 
 
 func activate_draggable_on_machines() -> void:
-	var furniture_list: Array[Node] = get_tree().get_nodes_in_group("furniture")
-	print("Furnitures: ", furniture_list)
-	for machine in furniture_list:
-		var draggable: DraggableComponent = machine.find_child("DraggableComponent")
-		if draggable:
-			draggable_list.append(draggable)
-			draggable.process_mode = Node.PROCESS_MODE_ALWAYS
+	for draggable in draggable_list:
+		draggable.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func deactivate_draggable_on_machines() -> void:

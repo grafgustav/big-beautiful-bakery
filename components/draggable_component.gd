@@ -2,12 +2,6 @@ class_name DraggableComponent
 extends Area2D
 
 
-signal mouse_entered_draggable(draggable: DraggableComponent)
-signal mouse_exited_draggable(draggable: DraggableComponent)
-signal draggable_entered_droppable(draggable: DraggableComponent, droppable: DroppableComponent)
-signal draggable_exited_droppable(draggable: DraggableComponent, droppable: DroppableComponent)
-
-
 var parent_ref : Node2D
 var position_offset : Vector2
 var initial_position : Vector2
@@ -17,16 +11,9 @@ var mouse_hovered: bool = false
 
 # NODE API OVERRIDES
 func _ready() -> void:
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-	area_entered.connect(_on_area_entered)
-	area_exited.connect(_on_area_exited)
-	
 	var parent = self.get_parent()
 	if parent && parent is Node2D:
 		parent_ref = parent
-	
-	DragManager.register_draggable(self)
 
 
 # PUBLIC FUNCTIONS
@@ -72,33 +59,3 @@ func _get_ingredient() -> IngredientData:
 	else:
 		push_error("Parent does not contain an Ingredient Component")
 		return null
-
-
-func _has_body_droppable_component(body: Node2D) -> bool:
-	var child = body.find_child("DroppableComponent")
-	return child != null
-
-
-# EVENT HANDLERS
-func _on_mouse_entered() -> void:
-	print("Mouse entered draggable")
-	mouse_entered_draggable.emit(self)
-	mouse_hovered = true
-	# parent_ref.scale = Vector2(1.1, 1.1)
-
-
-func _on_mouse_exited() -> void:
-	mouse_exited_draggable.emit(self)
-	mouse_hovered = false
-	parent_ref.scale = Vector2(1, 1)
-
-
-func _on_area_entered(body: Node2D) -> void:
-	if _has_body_droppable_component(body.get_parent()):
-		print("Hovering body ", body, " with ", self)
-		draggable_entered_droppable.emit(self, body)
-
-
-func _on_area_exited(body: Node2D) -> void:
-	if _has_body_droppable_component(body.get_parent()):
-		draggable_exited_droppable.emit(self, body)

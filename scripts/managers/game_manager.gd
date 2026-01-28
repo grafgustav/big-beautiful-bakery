@@ -34,6 +34,18 @@ func get_current_scene() -> Node:
 	return current_scene
 
 
+func get_current_physics_space() -> PhysicsDirectSpaceState2D:
+	if current_scene is Node2D:
+		return current_scene.get_world_2d().direct_space_state
+	return null
+
+
+func is_ui_scene() -> bool:
+	if current_scene is CanvasLayer:
+		return true
+	return false
+
+
 func set_current_scene(scene: Node) -> void:
 	current_scene = scene
 

@@ -11,24 +11,18 @@ extends Node
 signal drag_cursor_moved(draggable: DraggableComponent)
 signal drag_stopped
 
-var drag_candidates: Array = []
-var drop_candidates: Array = []
-
-# to retain hovered draggable-droppable relations Draggable -> Array[Droppables]
-var shadow_drop_candidates: Dictionary[DraggableComponent, Array] = {}
-
 var dragged_object_ref: DraggableComponent
 
 
 # NODE API
 func _physics_process(_delta: float) -> void:
-	# do nothing if no candidate
-	if drag_candidates.is_empty():
+	if GameManager.is_ui_scene():
 		return
-	
 	# execute actions depending on user input
 	if Input.is_action_just_pressed("dragging"):
 		init_dragging()
+	if !dragged_object_ref:
+		return
 	if Input.is_action_pressed("dragging"):
 		dragged_object_ref.move_to_pos(get_viewport().get_mouse_position(), false)
 		drag_cursor_moved.emit(dragged_object_ref)
@@ -39,27 +33,20 @@ func _physics_process(_delta: float) -> void:
 
 # PUBLIC FUNCTIONS
 func init_dragging() -> void:
+	print("Trying to drag")
 	if !dragged_object_ref:
-		dragged_object_ref = _get_top_node(drag_candidates)
+		dragged_object_ref = physics_collider_draggable()
+	if !dragged_object_ref:
+		# return in case there is no collision with a draggable object
+		return
+	print("Started dragging: ", dragged_object_ref)
 	dragged_object_ref.set_initial_position()
 	dragged_object_ref.set_position_offset()
-	drop_candidates = shadow_drop_candidates.get(dragged_object_ref, [])
-	# TODO: what about already hovered Droppables, that we haven't detected before?
-	var init_areas = dragged_object_ref.get_overlapping_areas()
-	var filtered_areas = init_areas.filter(func(a): return a is DroppableComponent)
-	print("Filtered areas: ", filtered_areas)
 
 
 func init_extracted_draggable(draggable: DraggableComponent) -> void:
-	drag_candidates.append(draggable)
 	dragged_object_ref = draggable
-
-
-func register_draggable(draggable: DraggableComponent) -> void:
-	draggable.connect("mouse_entered_draggable", _mouse_entered_draggable)
-	draggable.connect("mouse_exited_draggable", _mouse_exited_draggable)
-	draggable.connect("draggable_entered_droppable", _area_entered_droppable)
-	draggable.connect("draggable_exited_droppable", _area_exited_droppable)
+	dragged_object_ref.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func is_dragging() -> bool:
@@ -68,18 +55,16 @@ func is_dragging() -> bool:
 
 # PRIVATE FUNCTIONS
 func _process_dropping():
-	print("Drop candidates according to overlapping_bodies: ", dragged_object_ref.get_overlapping_areas())
-	print("Drop candidates: ", drop_candidates)
-	drop_candidates.append(physics_collider())
-	if drop_candidates.is_empty():
+	# choose a drop candidate and try dropping an ingredient
+	var top_candidate: DroppableComponent = physics_collider_droppable()
+	if !top_candidate:
 		dragged_object_ref.snap_back_to_initial_position()
 		_clean_up_after_drop()
 		return
 	
-	# choose a drop candidate and try dropping an ingredient
-	var top_candidate: DroppableComponent = drop_candidates[0]
-	var _ingredient_dropped: bool = top_candidate.drop_ingredient(_get_ingredient(dragged_object_ref))
-	# TODO: What to do with the returned bool?
+	if top_candidate.has_method("drop_ingredient"):
+		var _ingredient_dropped: bool = top_candidate.drop_ingredient(_get_ingredient(dragged_object_ref))
+		# TODO: What to do with the returned bool?
 	
 	var vanishing: bool = false
 	
@@ -87,8 +72,6 @@ func _process_dropping():
 		Types.DroppableTypes.FREEDROP:
 			dragged_object_ref.tween_to_pos(get_viewport().get_mouse_position(), false)
 		Types.DroppableTypes.VANISHING:
-			shadow_drop_candidates.erase(dragged_object_ref)
-			drop_candidates.erase(top_candidate)
 			dragged_object_ref.vanish()
 			vanishing = true
 		Types.DroppableTypes.GRIDSNAP:
@@ -102,7 +85,11 @@ func _process_dropping():
 ## get the space of the scene and check for intersecting objects on collision 
 ## layer 2. maybe make the collision layer a parameter and then have different
 ## layers for draggable and droppable
-func physics_collider():
+## TODO: Basically ALWAYS drop on the first droppable we find.
+## So this function should just return the top droppable of all colliders
+## if it's null, we handle this in another function above
+func physics_collider_droppable() -> DroppableComponent:
+	print("Physics collider func for obj: ", dragged_object_ref)
 	var space := dragged_object_ref.get_world_2d().direct_space_state
 	var query := PhysicsPointQueryParameters2D.new()
 	query.position = get_viewport().get_mouse_position()
@@ -116,20 +103,43 @@ func physics_collider():
 	)
 	results = results.filter(
 		func(a):
-			return a.collider != dragged_object_ref
+			return a.collider is DroppableComponent
 	)
 	print("Physics collider results: ", results)
-	return results[0].collider
+	print("Returning: ", results.front())
+	if results.is_empty():
+		return null
+	else:
+		return results.front().collider
+
+
+func physics_collider_draggable() -> DraggableComponent:
+	print("Physics collider func for obj: ", dragged_object_ref)
+	var space := GameManager.get_current_physics_space()
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = get_viewport().get_mouse_position()
+	query.collide_with_areas = true
+	query.collision_mask = 2
+	
+	var results := space.intersect_point(query)
+	results.sort_custom(
+		func(a,b):
+			return a.collider.z_index > b.collider.z_index
+	)
+	results = results.filter(
+		func(a):
+			return a.collider is DraggableComponent
+	)
+	print("Physics collider results: ", results)
+	if results.is_empty():
+		return null
+	else:
+		print("Returning: ", results.front())
+		return results.front().collider
 
 
 func _clean_up_after_drop(vanishing: bool = false) -> void:
-	# cleaning up the droppable_candidates
-	if !vanishing:
-		shadow_drop_candidates[dragged_object_ref] = drop_candidates.duplicate()
-	drop_candidates.clear()
-	
 	# cleaning up draggable ref
-	drag_candidates.erase(dragged_object_ref)
 	dragged_object_ref = null
 
 
@@ -148,36 +158,6 @@ func _sort_by_z_index(a: Node2D, b: Node2D) -> bool:
 func _get_top_node(nodes: Array) -> Node2D:
 	nodes.sort_custom(_sort_by_z_index)
 	return nodes.front()
-
-
-func _reset_candidates() -> void:
-	# reset all candidates and check again, if any are being hovered right now
-	drag_candidates = drag_candidates.filter(
-		func(c: DraggableComponent): return is_instance_valid(c) and c.mouse_hovered
-	)
-
-
-# EVENT HANDLER
-func _mouse_entered_draggable(draggable: DraggableComponent) -> void:
-	if !dragged_object_ref:
-		drag_candidates.append(draggable)
-
-
-func _mouse_exited_draggable(draggable: DraggableComponent) -> void:
-	if !dragged_object_ref:
-		drag_candidates.erase(draggable)
-
-
-func _area_entered_droppable(draggable: DraggableComponent, droppable: DroppableComponent) -> void:
-	print("Droppable entered: ", droppable)
-	print("All droppables: ", drop_candidates.map(func(d): return d.get_parent()))
-	if draggable == dragged_object_ref:
-		drop_candidates.append(droppable)
-
-
-func _area_exited_droppable(draggable: DraggableComponent, droppable: DroppableComponent) -> void:
-	if draggable == dragged_object_ref:
-		drop_candidates.erase(droppable)
 
 
 # GRID SNAPPING

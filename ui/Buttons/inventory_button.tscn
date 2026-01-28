@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmk3etdm8m15s"]
+
+[ext_resource type="PackedScene" uid="uid://bh4b4djn7mixc" path="res://ui/Buttons/CustomIconButton.tscn" id="1_pld7n"]
+[ext_resource type="Script" uid="uid://bq4epfhcqc0vl" path="res://ui/Buttons/inventory_button.gd" id="2_5xjch"]
+
+[node name="InventoryButton" instance=ExtResource("1_pld7n")]
+script = ExtResource("2_5xjch")
+item = null

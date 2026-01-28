@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh4b4djn7mixc"]
+[gd_scene load_steps=4 format=3 uid="uid://bh4b4djn7mixc"]
 
-[ext_resource type="Script" uid="uid://qrof0n3q57wo" path="res://ui/inventory_button.gd" id="1_5g6wh"]
-[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="2_bxxlm"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bxxlm"]
+[ext_resource type="Script" uid="uid://qrof0n3q57wo" path="res://ui/Buttons/custom_icon_button.gd" id="1_v0xc3"]
+[ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="2_gccok"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ber4"]
-atlas = ExtResource("2_bxxlm")
+atlas = ExtResource("2_gccok")
 region = Rect2(288, 0, 48, 48)
 
-[node name="InventoryButton" type="TextureButton"]
+[node name="CustomIconButton" type="Button"]
 custom_minimum_size = Vector2(48, 48)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 6
-script = ExtResource("1_5g6wh")
+script = ExtResource("1_v0xc3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -35,14 +33,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_bxxlm")
 expand_mode = 2
 stretch_mode = 4
 
 [node name="Border" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = SubResource("AtlasTexture_0ber4")
 
 [node name="Label" type="Label" parent="."]

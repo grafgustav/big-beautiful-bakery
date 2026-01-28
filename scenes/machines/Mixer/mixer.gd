@@ -10,11 +10,13 @@ var recipe : RecipeData = null
 
 var machine_type: Types.MachineTypes = Types.MachineTypes.MIXING
 
+
 func _ready() -> void:
 	animation_player = %AnimatedSprite2D
 	state_machine = %MixerStateMachine
 	state_machine.init(self, animation_player)
 	ingredient_list = IngredientsList.new()
+	ItemManager.register_machine(self)
 
 
 func _process(_delta: float) -> void:

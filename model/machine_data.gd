@@ -6,3 +6,4 @@ extends Resource
 @export var icon: Texture2D
 @export var machine_scene: PackedScene
 @export var max_stack: int = 99 # TODO: Define number that makes sense
+@export var description: String

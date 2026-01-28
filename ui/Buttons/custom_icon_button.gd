@@ -1,25 +1,20 @@
-class_name InventoryButton
-extends TextureButton
+class_name CustomIconButton
+extends Button
 
 
-signal inventory_button_pressed(list_id: int)
+## This button class is used to represent an item from base class @BaseItem
 
-var icon: Texture2D:
+var custom_icon: Texture2D:
 	set(value):
-		icon = value
+		custom_icon = value
 		if is_node_ready():
 			icon_node.texture = value
 
-var text: String:
+var custom_text: String:
 	set(value):
-		text = value
+		custom_text = value
 		if is_node_ready():
 			label_node.text = value
-
-var list_id: int = -1
-
-@export var pressed_scale := Vector2(0.92, 0.92)
-@export var scale_speed := 15.0
 
 @onready var icon_node: TextureRect = $Icon
 @onready var label_node: Label = $Label
@@ -27,17 +22,13 @@ var list_id: int = -1
 
 
 func _ready():
-	# Disable TextureButton textures – we draw everything ourselves
-	texture_normal = null
-	texture_pressed = null
-	texture_hover = null
-	texture_disabled = null
+	# set default icon and text to non-values
+	icon = null
+	text = ""
 
-	icon_node.texture = icon
-	label_node.text = text
+	icon_node.texture = custom_icon
+	label_node.text = custom_text
 	
-	button_down.connect(_on_pressed)
-
 	# Layout defaults
 	icon_node.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon_node.anchor_left = 0
@@ -51,8 +42,9 @@ func _ready():
 	label_node.offset_bottom = -4
 	label_node.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label_node.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	
+	connect("button_down", _handle_button_pressed)
 
 
-func _on_pressed() -> void:
-	print("Inventory button pressed")
-	inventory_button_pressed.emit(list_id)
+func _handle_button_pressed() -> void:
+	pass

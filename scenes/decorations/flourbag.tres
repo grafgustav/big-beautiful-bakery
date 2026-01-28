@@ -14,4 +14,5 @@ name = "Flourbag"
 icon = SubResource("AtlasTexture_i63oo")
 machine_scene = ExtResource("2_8yvfl")
 max_stack = 99
+description = ""
 metadata/_custom_type_script = "uid://d3ubdeg3y6r8w"

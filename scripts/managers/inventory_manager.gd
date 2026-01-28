@@ -34,21 +34,18 @@ func get_inventory_count() -> int:
 	return _inventory.size()
 
 
-func add_item(data: MachineData, amount: int = 1) -> void:
+func add_item(data: BaseItem, amount: int = 1) -> void:
 	for item in _inventory:
-		if item.data == data && item.quantity <= item.data.max_stack:
+		if item.data == data:
 			item.quantity += amount
 			return
-	
-	var new_item := InventoryItem.new()
-	new_item.data = data
+	var new_item := InventoryItem.from_base_item(data)
 	new_item.quantity = amount
 	_inventory.append(new_item)
-	
 	inventory_changed.emit()
 
 
-func remove_item(item: InventoryItem) -> void:
+func remove_item(item: BaseItem) -> void:
 	_inventory.erase(item)
 	inventory_changed.emit()
 
@@ -83,25 +80,18 @@ func extract_item(item: InventoryItem) -> void:
 	var drag_comp := _dragged_item.find_child("DraggableComponent")
 	DragManager.init_extracted_draggable(drag_comp)
 	
-	print("Drag Comp extracted with collision: ", drag_comp.collision_layer, " &mask: ", drag_comp.collision_mask)
-	
 	_decrease_item_quantity(item)
 
 
 # PRIVATE FUNCTIONS
 func _create_sample_data() -> void:
-	var table_mixer_data = preload("res://scenes/machines/Mixer/table_mixer.tres")
-	add_item(table_mixer_data, 1)
-	
-	var salt_bag_data = preload("res://scenes/decorations/saltbag.tres")
-	add_item(salt_bag_data, 3)
-	
-	var flour_bag_data = preload("res://scenes/decorations/flourbag.tres")
-	add_item(flour_bag_data, 2)
+	var item := load("res://scenes/machines/Mixer/table_mixer.tres")
+	add_item(item, 2)
+	pass
 
 
 func _instantiate_from_model(model: InventoryItem) -> Node:
-	var scene := model.data.machine_scene
+	var scene := model.scene
 	return scene.instantiate()
 
 
