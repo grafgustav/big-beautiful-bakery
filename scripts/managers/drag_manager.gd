@@ -76,7 +76,6 @@ func _process_dropping():
 			vanishing = true
 		Types.DroppableTypes.GRIDSNAP:
 			dragged_object_ref.tween_to_pos(_get_grid_snap(top_candidate), false)
-			dragged_object_ref.z_index = dragged_object_ref.global_position.y
 		_:
 			pass
 	
@@ -170,8 +169,8 @@ func _get_snap_in_grid(droppable: DroppableComponent) -> Vector2:
 	var grid: GridComponent = droppable
 	# determine the snap-point in the grid (highlighted cell)
 	var highlighted_cells: Array[Vector2i] = grid.get_highlighted_cells()
-	# TODO: what to do, if there are more?
 	var first_cell: Vector2i = highlighted_cells.front()
+	# if there is a collision, hightlighted cells is empty
 	var res = grid.get_global_pos_center_from_grid_cell(first_cell)
 	
 	# determine the y-offset we need for the object we are dropping

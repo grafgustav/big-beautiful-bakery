@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://chogmqk7x3gut"]
+[gd_scene load_steps=10 format=4 uid="uid://chogmqk7x3gut"]
 
 [ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_h6b1y"]
 [ext_resource type="PackedScene" uid="uid://bd0qppj85fdij" path="res://components/grid_component.tscn" id="2_sksl7"]
-[ext_resource type="PackedScene" uid="uid://dheuv2y4pngqv" path="res://scenes/machines/Mixer/table_mixer.tscn" id="2_vdkh4"]
+[ext_resource type="PackedScene" uid="uid://dheuv2y4pngqv" path="res://scenes/machines/mixer/table_mixer.tscn" id="2_vdkh4"]
+[ext_resource type="PackedScene" uid="uid://br1rb5hvti52b" path="res://scenes/decorations/flourbag.tscn" id="4_i84x0"]
+[ext_resource type="PackedScene" uid="uid://btke7iqrm77qj" path="res://scenes/decorations/waterbox.tscn" id="5_kkfsv"]
+[ext_resource type="PackedScene" uid="uid://y2314ljpnqkf" path="res://scenes/decorations/saltbag.tscn" id="6_ec11g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vdkh4"]
 texture = ExtResource("1_h6b1y")
@@ -43,3 +46,12 @@ shape = SubResource("RectangleShape2D_bnw7q")
 
 [node name="TableMixer" parent="." instance=ExtResource("2_vdkh4")]
 position = Vector2(212, 80)
+
+[node name="Flourbag" parent="." instance=ExtResource("4_i84x0")]
+position = Vector2(489, 200)
+
+[node name="Waterbox" parent="." instance=ExtResource("5_kkfsv")]
+position = Vector2(619, 128)
+
+[node name="Saltbag" parent="." instance=ExtResource("6_ec11g")]
+position = Vector2(496, 245)

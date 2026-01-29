@@ -15,15 +15,13 @@ var gui_node: Node
 
 # SCENES
 # WORLD
-var bakery_scene: Node
-var test_scene: Node
 var iso_test_scene: Node
-var inventory_scene: Node
 # GUI
 var main_menu_scene: Node
 var debug_overlay_scene: Node
 var shop_scene: Node
 var confirmation_dialog_scene: Node
+var inventory_scene: Node
 
 var build_mode: bool = false
 var ingredient_nodes: Array[Node] = []
@@ -34,8 +32,6 @@ var current_ui: Node
 var confirmation_action: Callable
 
 # WORLD
-@export var bakery_packed_scene: PackedScene
-@export var test_packed_scene: PackedScene
 @export var iso_test_packed_scene: PackedScene
 # GUI
 @export var main_menu_packed_scene: PackedScene
@@ -61,10 +57,6 @@ func instantiate_scenes() -> void:
 	print("Instantiating Scenes")
 	# instantiate the scenes only once
 	# WORLD
-	bakery_scene = bakery_packed_scene.instantiate()
-	_add_scene_to_tree(bakery_scene, world_node)
-	test_scene = test_packed_scene.instantiate()
-	_add_scene_to_tree(test_scene, world_node)
 	iso_test_scene = iso_test_packed_scene.instantiate()
 	_add_scene_to_tree(iso_test_scene, world_node)
 	# GUI
@@ -83,10 +75,6 @@ func instantiate_scenes() -> void:
 
 func hide_all_scenes() -> void:
 	# hides all scenes
-	bakery_scene.hide()
-	bakery_scene.process_mode = Node.PROCESS_MODE_DISABLED
-	test_scene.hide()
-	test_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	iso_test_scene.hide()
 	iso_test_scene.process_mode = Node.PROCESS_MODE_DISABLED
 	main_menu_scene.hide()
@@ -115,7 +103,6 @@ func _add_scene_to_tree(scene: Node, par: Node) -> void:
 
 
 func _connect_to_events() -> void:
-	main_menu_scene.connect("bakery_scene_button_pressed", _change_to_bakery_scene)
 	main_menu_scene.connect("test_scene_button_pressed", _change_to_iso_test_scene)
 	main_menu_scene.connect("shop_scene_button_pressed", _change_to_shop_scene)
 	
@@ -124,22 +111,6 @@ func _connect_to_events() -> void:
 	
 	GameManager.connect("building_mode_switched", _change_building_mode)
 	GameManager.connect("exit_polled", _show_confirmation_dialog_scene)
-
-
-func _change_to_bakery_scene() -> void:
-	hide_all_scenes()
-	bakery_scene.show()
-	bakery_scene.process_mode = Node.PROCESS_MODE_ALWAYS
-	current_scene = bakery_scene
-	GameManager.set_current_scene(current_scene)
-
-
-func _change_to_test_scene() -> void:
-	hide_all_scenes()
-	test_scene.show()
-	test_scene.process_mode = Node.PROCESS_MODE_ALWAYS
-	current_scene = test_scene
-	GameManager.set_current_scene(current_scene)
 
 
 func _change_to_iso_test_scene() -> void:

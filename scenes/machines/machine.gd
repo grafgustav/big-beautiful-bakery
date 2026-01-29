@@ -1,21 +1,20 @@
-class_name Oven
 extends Node2D
 
 
-var animation_player : AnimatedSprite2D
-var state_machine : MachineStateMachine
+@export var state_machine : MachineStateMachine
+@export var animation_player : AnimatedSprite2D
+@export var machine_type: Types.MachineTypes
+
 var ingredient_list : IngredientsList
 var is_clickable : bool = false
 var recipe : RecipeData = null
 
-var machine_type: Types.MachineTypes = Types.MachineTypes.BAKING
 
 
 func _ready() -> void:
-	animation_player = %AnimatedSprite2D
-	state_machine = %BakingStateMachine
 	state_machine.init(self, animation_player)
 	ingredient_list = IngredientsList.new()
+	ItemManager.register_machine(self)
 
 
 func _process(_delta: float) -> void:

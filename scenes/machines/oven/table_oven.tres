@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BaseItem" load_steps=5 format=3 uid="uid://d0t2mrilw5ojf"]
 
 [ext_resource type="Texture2D" uid="uid://yi1mi7q5q5ru" path="res://assets/aseprite/iso_bakery_v001.png" id="1_ts7cg"]
-[ext_resource type="PackedScene" uid="uid://vw65nea5b52f" path="res://scenes/machines/Mixer/table_oven.tscn" id="2_ts7cg"]
+[ext_resource type="PackedScene" uid="uid://vw65nea5b52f" path="res://scenes/machines/oven/table_oven.tscn" id="2_ts7cg"]
 [ext_resource type="Script" uid="uid://cbptwn8y0sk4s" path="res://scripts/base_item.gd" id="3_lsmgf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wbu8s"]

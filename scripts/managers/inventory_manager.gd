@@ -86,10 +86,10 @@ func extract_item(item: InventoryItem) -> void:
 
 # PRIVATE FUNCTIONS
 func _create_sample_data() -> void:
-	var item := load("res://scenes/machines/Mixer/table_mixer.tres")
+	var item := load("res://scenes/machines/mixer/table_mixer.tres")
 	add_item(item, 2)
 	
-	var oitem := load("res://scenes/machines/Mixer/table_oven.tres")
+	var oitem := load("res://scenes/machines/oven/table_oven.tres")
 	add_item(oitem, 2)
 
 

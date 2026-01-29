@@ -74,7 +74,7 @@ func highlight_cell_world_coords(vec: Vector2, width: int = 1, height: int = 1) 
 	for w in width:
 		for h in height:
 			var new_vec = Vector2i(translated_vector.x + w, translated_vector.y + h)
-			if _is_inside_grid(new_vec):
+			if _is_inside_grid(new_vec) && _is_empty_cell(new_vec):
 				highlighted_cells.append(new_vec)
 			else:
 				invalid_cells.append(new_vec)
@@ -240,5 +240,11 @@ func _draw_invalid_cells() -> void:
 ## checks if vec is inside grid borders
 func _is_inside_grid(vec: Vector2i) -> bool:
 	if vec.x >= 0 && vec.y >= 0 && vec.x < grid_width && vec.y < grid_height:
+		return true
+	return false
+
+
+func _is_empty_cell(vec: Vector2i) -> bool:
+	if data_grid[vec.y][vec.x] == 0:
 		return true
 	return false

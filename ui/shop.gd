@@ -16,9 +16,9 @@ var shop_button_scene := preload("res://ui/Buttons/shop_button.tscn")
 
 func _ready() -> void:
 	# TODO: Load everything from a central register of items (ItemManager?)
-	var table_mixer := load("res://scenes/machines/Mixer/table_mixer.tres")
+	var table_mixer := load("res://scenes/machines/mixer/table_mixer.tres")
 	var shop_table_mixer: ShopItem = ShopItem.from_base_item(table_mixer)
-	var table_oven := load("res://scenes/machines/Mixer/table_oven.tres")
+	var table_oven := load("res://scenes/machines/oven/table_oven.tres")
 	var shop_table_oven: ShopItem = ShopItem.from_base_item(table_oven)
 	
 	var example_list = [shop_table_mixer, shop_table_oven]
