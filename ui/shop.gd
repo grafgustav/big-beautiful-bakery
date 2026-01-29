@@ -57,8 +57,10 @@ func _handle_item_clicked(toggled: bool, item: ShopItem) -> void:
 	print("Toggled: ", toggled)
 	if toggled:
 		show_item_info(item)
+		selected_item = item
 	else:
 		hide_item_info()
+		selected_item = null
 
 
 func show_item_info(item: ShopItem) -> void:
@@ -83,4 +85,13 @@ func hide_item_info() -> void:
 	
 	var price_label: Label = right_panel.find_child("PriceLabel")
 	price_label.text = ""
-	
+
+
+func _on_buy_button_pressed() -> void:
+	print("Trying to buy item: ", selected_item)
+	if PlayerManager.can_spend_money(selected_item.price):
+		var base_item: BaseItem = ShopItem.to_base_item(selected_item)
+		InventoryManager.add_item(base_item)
+		PlayerManager.spend_money(selected_item.price)
+	else:
+		print("Player is broke")

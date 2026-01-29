@@ -52,4 +52,5 @@ layout_mode = 2
 size_flags_vertical = 10
 text = "EXIT"
 
+[connection signal="pressed" from="HBoxContainer/RightControlBar/VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/RightControlBar/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

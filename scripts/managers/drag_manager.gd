@@ -76,6 +76,7 @@ func _process_dropping():
 			vanishing = true
 		Types.DroppableTypes.GRIDSNAP:
 			dragged_object_ref.tween_to_pos(_get_grid_snap(top_candidate), false)
+			dragged_object_ref.z_index = dragged_object_ref.global_position.y
 		_:
 			pass
 	

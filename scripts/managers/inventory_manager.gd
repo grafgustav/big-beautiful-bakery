@@ -36,7 +36,7 @@ func get_inventory_count() -> int:
 
 func add_item(data: BaseItem, amount: int = 1) -> void:
 	for item in _inventory:
-		if item.data == data:
+		if item._id == data._id:
 			item.quantity += amount
 			return
 	var new_item := InventoryItem.from_base_item(data)
@@ -81,13 +81,16 @@ func extract_item(item: InventoryItem) -> void:
 	DragManager.init_extracted_draggable(drag_comp)
 	
 	_decrease_item_quantity(item)
+	inventory_changed.emit()
 
 
 # PRIVATE FUNCTIONS
 func _create_sample_data() -> void:
 	var item := load("res://scenes/machines/Mixer/table_mixer.tres")
 	add_item(item, 2)
-	pass
+	
+	var oitem := load("res://scenes/machines/Mixer/table_oven.tres")
+	add_item(oitem, 2)
 
 
 func _instantiate_from_model(model: InventoryItem) -> Node:

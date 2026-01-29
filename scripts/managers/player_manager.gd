@@ -5,7 +5,7 @@ extends Node
 # including money, exerience, available recipes, etc
 # TODO: Look into persistence
 var xp: int = 0
-var money: int = 0
+var money: float = 350
 
 
 # methods to connect the PlayerManager to objects when spawning
@@ -26,13 +26,13 @@ func spend_xp(amount: int):
 	xp -= amount
 
 
-func earn_money(amount: int):
+func earn_money(amount: float):
 	money += amount
 
 
-func spend_money(amount: int):
+func spend_money(amount: float):
 	money -= amount
 
 
-func can_spend_money(amount: int) -> bool:
+func can_spend_money(amount: float) -> bool:
 	return money >= amount
