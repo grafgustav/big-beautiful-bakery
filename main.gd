@@ -51,6 +51,7 @@ func _ready() -> void:
 	world_node = %World
 	gui_node = %GUI
 	instantiate_scenes()
+	hide_all_scenes()
 	_connect_to_events()
 	_start_up_application()
 
@@ -77,7 +78,6 @@ func instantiate_scenes() -> void:
 	_add_scene_to_tree(shop_scene, gui_node)
 	confirmation_dialog_scene = confirmation_dialog_packed_scene.instantiate()
 	_add_scene_to_tree(confirmation_dialog_scene, gui_node)
-	hide_all_scenes()
 	print("All scenes instantiated and hidden")
 
 

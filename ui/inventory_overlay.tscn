@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs2lq8xtjevue"]
+[gd_scene load_steps=2 format=3 uid="uid://cs2lq8xtjevue"]
 
 [ext_resource type="Script" uid="uid://dhu2r25ssgeiv" path="res://ui/inventory_overlay.gd" id="1_i8gpm"]
-[ext_resource type="PackedScene" uid="uid://bmk3etdm8m15s" path="res://ui/Buttons/inventory_button.tscn" id="2_yf137"]
 
 [node name="InventoryOverlay" type="CanvasLayer"]
 script = ExtResource("1_i8gpm")
@@ -18,7 +17,4 @@ grow_vertical = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="InventoryButton" parent="PanelContainer/HBoxContainer" instance=ExtResource("2_yf137")]
 layout_mode = 2

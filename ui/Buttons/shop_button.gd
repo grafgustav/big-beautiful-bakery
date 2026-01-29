@@ -12,6 +12,6 @@ func _ready() -> void:
 	connect("toggled", _handle_button_toggled)
 
 
-func _handle_button_toggled(toggled: bool) -> void:
+func _handle_button_toggled(toggled_on: bool) -> void:
 	print("Handling button event for item: ", item)
-	shop_button_pressed.emit(toggled, item)
+	shop_button_pressed.emit(toggled_on, item)

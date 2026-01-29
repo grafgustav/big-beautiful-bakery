@@ -86,9 +86,6 @@ func _process_dropping():
 ## get the space of the scene and check for intersecting objects on collision 
 ## layer 2. maybe make the collision layer a parameter and then have different
 ## layers for draggable and droppable
-## TODO: Basically ALWAYS drop on the first droppable we find.
-## So this function should just return the top droppable of all colliders
-## if it's null, we handle this in another function above
 func physics_collider_droppable() -> DroppableComponent:
 	print("Physics collider func for obj: ", dragged_object_ref)
 	var space := dragged_object_ref.get_world_2d().direct_space_state
